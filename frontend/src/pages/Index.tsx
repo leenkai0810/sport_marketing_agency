@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -7,14 +8,22 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
 // Luxury icons from react-icons
-import { RiInstagramFill, RiTiktokFill, RiMailSendLine, RiPhoneFill, RiMapPin2Fill, RiCheckboxCircleFill, RiMenu3Line, RiCloseLine } from 'react-icons/ri';
+import { RiInstagramFill, RiTiktokFill, RiMailSendLine, RiMapPin2Fill, RiCheckboxCircleFill, RiMenu3Line, RiCloseLine, RiGlobalLine } from 'react-icons/ri';
 import { HiOutlineTrendingUp, HiOutlineFilm, HiOutlineUserGroup, HiOutlineSparkles, HiOutlineCreditCard } from 'react-icons/hi';
 import { HiTrophy } from 'react-icons/hi2';
 import { BsTwitterX } from 'react-icons/bs';
 import { FaCcVisa, FaCcMastercard, FaCcPaypal, FaStripe } from 'react-icons/fa';
 // Animation library
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+
+// Language configuration
+const languages = [
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
+];
 
 // Animation variants
 const fadeInUp = {
@@ -59,11 +68,20 @@ const staggerItem = {
 };
 
 export default function Index() {
+  const { t, i18n } = useTranslation();
   const [isRegistering, setIsRegistering] = useState(false);
   const [showInfoRequest, setShowInfoRequest] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+
+  const currentLanguage = languages.find(l => l.code === i18n.language) || languages[0];
+
+  const changeLanguage = (langCode: string) => {
+    i18n.changeLanguage(langCode);
+    setIsLanguageMenuOpen(false);
+  };
 
   const [formData, setFormData] = useState({
     full_name: '',
@@ -85,8 +103,8 @@ export default function Index() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    toast.success('Registration Successful!', {
-      description: 'Your athlete profile has been created. Now request pricing information.',
+    toast.success(t('toasts.registrationSuccess'), {
+      description: t('toasts.registrationDesc'),
     });
 
     setShowInfoRequest(true);
@@ -107,8 +125,8 @@ export default function Index() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    toast.success('Request Submitted!', {
-      description: "We'll send you detailed pricing information. Ready to subscribe?",
+    toast.success(t('toasts.requestSuccess'), {
+      description: t('toasts.requestDesc'),
     });
 
     setInfoRequestData({ message: '' });
@@ -122,8 +140,8 @@ export default function Index() {
     // Simulate payment processing
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    toast.success('Payment Feature', {
-      description: 'Payment integration requires backend setup. Contact us for more info.',
+    toast.success(t('toasts.paymentTitle'), {
+      description: t('toasts.paymentDesc'),
     });
 
     setIsProcessingPayment(false);
@@ -162,39 +180,70 @@ export default function Index() {
                 onClick={() => scrollToSection('about')}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
               >
-                About
+                {t('nav.about')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('services')}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
               >
-                Services
+                {t('nav.services')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('pricing')}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
               >
-                Pricing
+                {t('nav.pricing')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
               </button>
               <button 
                 onClick={() => scrollToSection('registration')}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
               >
-                Contact
+                {t('nav.contact')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
               </button>
             </div>
 
-            {/* CTA Button & Mobile Menu */}
+            {/* Language Selector, CTA Button & Mobile Menu */}
             <div className="flex items-center gap-4">
+              {/* Language Selector */}
+              <div className="relative">
+                <button
+                  onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/10"
+                >
+                  <RiGlobalLine className="w-4 h-4" />
+                  <span className="hidden sm:inline">{currentLanguage.flag} {currentLanguage.name}</span>
+                  <span className="sm:hidden">{currentLanguage.flag}</span>
+                </button>
+                
+                {isLanguageMenuOpen && (
+                  <div className="absolute right-0 top-full mt-2 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl overflow-hidden z-50 min-w-[150px]">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => changeLanguage(lang.code)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors ${
+                          i18n.language === lang.code 
+                            ? 'bg-red-600 text-white' 
+                            : 'text-gray-300 hover:bg-zinc-800 hover:text-white'
+                        }`}
+                      >
+                        <span>{lang.flag}</span>
+                        <span>{lang.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <Button 
                 onClick={scrollToRegistration}
                 className="hidden md:flex bg-red-600 hover:bg-red-700 text-white font-semibold text-sm px-6 py-2 rounded-lg transition-all duration-300"
               >
-                Get Started
+                {t('nav.getStarted')}
               </Button>
               
               {/* Mobile Menu Button */}
@@ -215,31 +264,31 @@ export default function Index() {
                   onClick={() => scrollToSection('about')}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors text-left py-2"
                 >
-                  About
+                  {t('nav.about')}
                 </button>
                 <button 
                   onClick={() => scrollToSection('services')}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors text-left py-2"
                 >
-                  Services
+                  {t('nav.services')}
                 </button>
                 <button 
                   onClick={() => scrollToSection('pricing')}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors text-left py-2"
                 >
-                  Pricing
+                  {t('nav.pricing')}
                 </button>
                 <button 
                   onClick={() => scrollToSection('registration')}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors text-left py-2"
                 >
-                  Contact
+                  {t('nav.contact')}
                 </button>
                 <Button 
                   onClick={scrollToRegistration}
                   className="bg-red-600 hover:bg-red-700 text-white font-semibold text-sm px-6 py-2 rounded-lg mt-2"
                 >
-                  Get Started
+                  {t('nav.getStarted')}
                 </Button>
               </div>
             </div>
@@ -268,7 +317,7 @@ export default function Index() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
-            ELEVATE YOUR <span className="text-red-600">ATHLETIC CAREER</span>
+            {t('hero.title1')} <span className="text-red-600">{t('hero.title2')}</span>
           </motion.h1>
           <motion.p 
             className="text-xl md:text-2xl mb-8 text-gray-300 font-light max-w-3xl mx-auto"
@@ -276,7 +325,7 @@ export default function Index() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            Professional social media management and video editing that transforms talented athletes into recognized sports stars
+            {t('hero.subtitle')}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -288,7 +337,7 @@ export default function Index() {
               size="lg" 
               className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-12 py-6 rounded-lg transform hover:scale-105 transition-all duration-300 shadow-2xl"
             >
-              START YOUR JOURNEY
+              {t('hero.cta')}
             </Button>
           </motion.div>
           
@@ -299,7 +348,7 @@ export default function Index() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <span className="text-sm font-medium">Follow Us:</span>
+            <span className="text-sm font-medium">{t('hero.followUs')}</span>
             <a 
               href="https://instagram.com" 
               target="_blank" 
@@ -332,7 +381,7 @@ export default function Index() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <h2 className="text-5xl font-black mb-6">WHO WE ARE</h2>
+            <h2 className="text-5xl font-black mb-6">{t('about.title')}</h2>
             <motion.div 
               className="w-24 h-1 bg-red-600 mx-auto mb-8"
               initial={{ width: 0 }}
@@ -341,7 +390,7 @@ export default function Index() {
               transition={{ duration: 0.8, delay: 0.3 }}
             />
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Established in 2025, we're a cutting-edge sports marketing agency with an impeccable team of professionals dedicated to one mission: <span className="text-red-600 font-bold">making talented athletes visible to the world</span>.
+              {t('about.description')} <span className="text-red-600 font-bold">{t('about.highlight')}</span>.
             </p>
           </motion.div>
 
@@ -369,27 +418,27 @@ export default function Index() {
               <motion.div className="flex items-start gap-4" variants={staggerItem}>
                 <HiOutlineSparkles className="w-8 h-8 text-red-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">Our Mission</h3>
+                  <h3 className="text-2xl font-bold mb-2">{t('about.mission')}</h3>
                   <p className="text-gray-400">
-                    We connect talented athletes with professional teams and sports brands by creating compelling social media presence that showcases their true potential.
+                    {t('about.missionDesc')}
                   </p>
                 </div>
               </motion.div>
               <motion.div className="flex items-start gap-4" variants={staggerItem}>
                 <HiOutlineUserGroup className="w-8 h-8 text-red-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">Expert Team</h3>
+                  <h3 className="text-2xl font-bold mb-2">{t('about.team')}</h3>
                   <p className="text-gray-400">
-                    Our professional video editors and social media managers have years of experience in sports marketing and athlete branding.
+                    {t('about.teamDesc')}
                   </p>
                 </div>
               </motion.div>
               <motion.div className="flex items-start gap-4" variants={staggerItem}>
                 <HiTrophy className="w-8 h-8 text-red-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">All Sports Welcome</h3>
+                  <h3 className="text-2xl font-bold mb-2">{t('about.sports')}</h3>
                   <p className="text-gray-400">
-                    From soccer to swimming, basketball to boxing - we specialize in promoting athletes across every sport, with a special focus on soccer.
+                    {t('about.sportsDesc')}
                   </p>
                 </div>
               </motion.div>
@@ -408,7 +457,7 @@ export default function Index() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <h2 className="text-5xl font-black mb-6">OUR SERVICES</h2>
+            <h2 className="text-5xl font-black mb-6">{t('services.title')}</h2>
             <motion.div 
               className="w-24 h-1 bg-red-600 mx-auto mb-8"
               initial={{ width: 0 }}
@@ -417,7 +466,7 @@ export default function Index() {
               transition={{ duration: 0.8, delay: 0.3 }}
             />
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Complete social media management package designed to maximize your athletic visibility
+              {t('services.subtitle')}
             </p>
           </motion.div>
 
@@ -442,9 +491,9 @@ export default function Index() {
                   <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-red-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <RiInstagramFill className="w-8 h-8 text-white" />
                   </div>
-                  <CardTitle className="text-2xl font-bold text-white mb-3 group-hover:text-red-50 transition-colors duration-300">Social Media Management</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-white mb-3 group-hover:text-red-50 transition-colors duration-300">{t('services.social')}</CardTitle>
                   <CardDescription className="text-gray-400 text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300 flex-grow">
-                    Professional management of your Instagram and TikTok accounts with strategic content planning and posting schedules
+                    {t('services.socialDesc')}
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -463,9 +512,9 @@ export default function Index() {
                   <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-red-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <HiOutlineFilm className="w-8 h-8 text-white" />
                   </div>
-                  <CardTitle className="text-2xl font-bold text-white mb-3 group-hover:text-red-50 transition-colors duration-300">Professional Video Editing</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-white mb-3 group-hover:text-red-50 transition-colors duration-300">{t('services.video')}</CardTitle>
                   <CardDescription className="text-gray-400 text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300 flex-grow">
-                    Expert editing team transforms your raw footage into compelling highlight reels that capture your athletic excellence
+                    {t('services.videoDesc')}
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -484,9 +533,9 @@ export default function Index() {
                   <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-red-600/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
                     <HiOutlineTrendingUp className="w-8 h-8 text-white" />
                   </div>
-                  <CardTitle className="text-2xl font-bold text-white mb-3 group-hover:text-red-50 transition-colors duration-300">Brand Exposure</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-white mb-3 group-hover:text-red-50 transition-colors duration-300">{t('services.brand')}</CardTitle>
                   <CardDescription className="text-gray-400 text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300 flex-grow">
-                    Strategic connections with professional teams and sports brands looking for talented athletes like you
+                    {t('services.brandDesc')}
                   </CardDescription>
                 </CardHeader>
               </Card>
@@ -505,7 +554,7 @@ export default function Index() {
               alt="Social media growth visualization" 
               className="w-full rounded-lg mb-6"
             />
-            <h3 className="text-3xl font-bold mb-4 text-center">How It Works</h3>
+            <h3 className="text-3xl font-bold mb-4 text-center">{t('services.howItWorks')}</h3>
             <motion.div 
               className="grid md:grid-cols-3 gap-6 text-center"
               initial="hidden"
@@ -515,15 +564,15 @@ export default function Index() {
             >
               <motion.div variants={staggerItem}>
                 <div className="text-4xl font-black text-red-600 mb-2">01</div>
-                <p className="text-lg">Create your TikTok and Instagram accounts with your athletic content</p>
+                <p className="text-lg">{t('services.step1')}</p>
               </motion.div>
               <motion.div variants={staggerItem}>
                 <div className="text-4xl font-black text-red-600 mb-2">02</div>
-                <p className="text-lg">Our team manages, edits, and optimizes your content professionally</p>
+                <p className="text-lg">{t('services.step2')}</p>
               </motion.div>
               <motion.div variants={staggerItem}>
                 <div className="text-4xl font-black text-red-600 mb-2">03</div>
-                <p className="text-lg">Watch your visibility grow as teams and brands discover your talent</p>
+                <p className="text-lg">{t('services.step3')}</p>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -540,7 +589,7 @@ export default function Index() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <h2 className="text-5xl font-black mb-6">ATHLETES IN ACTION</h2>
+            <h2 className="text-5xl font-black mb-6">{t('athletes.title')}</h2>
             <motion.div 
               className="w-24 h-1 bg-red-600 mx-auto mb-8"
               initial={{ width: 0 }}
@@ -549,7 +598,7 @@ export default function Index() {
               transition={{ duration: 0.8, delay: 0.3 }}
             />
             <p className="text-xl text-gray-300">
-              We work with talented athletes across all sports disciplines
+              {t('athletes.subtitle')}
             </p>
           </motion.div>
 
@@ -583,8 +632,8 @@ export default function Index() {
                 {/* Content */}
                 <div className="absolute inset-0 flex items-end p-6 z-10">
                   <div className="transform group-hover:translate-y-0 translate-y-2 transition-transform duration-500">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-red-50 transition-colors duration-300">Soccer Excellence</h3>
-                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">Professional football talent</p>
+                    <h3 className="text-2xl font-bold text-white group-hover:text-red-50 transition-colors duration-300">{t('athletes.soccer')}</h3>
+                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">{t('athletes.soccerDesc')}</p>
                     <div className="h-0.5 w-0 bg-red-500 group-hover:w-full transition-all duration-500 mt-2"></div>
                   </div>
                 </div>
@@ -617,8 +666,8 @@ export default function Index() {
                 {/* Content */}
                 <div className="absolute inset-0 flex items-end p-6 z-10">
                   <div className="transform group-hover:translate-y-0 translate-y-2 transition-transform duration-500">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-red-50 transition-colors duration-300">Basketball Power</h3>
-                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">Elite court performance</p>
+                    <h3 className="text-2xl font-bold text-white group-hover:text-red-50 transition-colors duration-300">{t('athletes.basketball')}</h3>
+                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">{t('athletes.basketballDesc')}</p>
                     <div className="h-0.5 w-0 bg-red-500 group-hover:w-full transition-all duration-500 mt-2"></div>
                   </div>
                 </div>
@@ -651,8 +700,8 @@ export default function Index() {
                 {/* Content */}
                 <div className="absolute inset-0 flex items-end p-6 z-10">
                   <div className="transform group-hover:translate-y-0 translate-y-2 transition-transform duration-500">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-red-50 transition-colors duration-300">All Sports</h3>
-                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">Every discipline welcome</p>
+                    <h3 className="text-2xl font-bold text-white group-hover:text-red-50 transition-colors duration-300">{t('athletes.allSports')}</h3>
+                    <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">{t('athletes.allSportsDesc')}</p>
                     <div className="h-0.5 w-0 bg-red-500 group-hover:w-full transition-all duration-500 mt-2"></div>
                   </div>
                 </div>
@@ -676,10 +725,10 @@ export default function Index() {
             variants={fadeInUp}
           >
             <h2 className="text-5xl font-black mb-4">
-              Choose Your <span className="text-red-600">Success Plan</span>
+              {t('pricing.title1')} <span className="text-red-600">{t('pricing.title2')}</span>
             </h2>
             <p className="text-gray-400 text-base max-w-2xl mx-auto mt-6">
-              Flexible monthly plans designed to fit every athlete's needs and budget. Cancel anytime, no long-term commitments.
+              {t('pricing.subtitle')}
             </p>
           </motion.div>
 
@@ -714,9 +763,9 @@ export default function Index() {
                 <div className="absolute bottom-3 right-3 w-6 h-6 border-b border-r border-slate-600/50 group-hover:border-slate-400/80 transition-all duration-500 rounded-br-lg"></div>
                 
               <div className="relative text-center mb-8">
-                <div className="inline-block px-3 py-1 bg-slate-700/50 rounded-full text-xs text-slate-300 mb-4">STARTER</div>
-                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-slate-100 transition-colors duration-300">Starter</h3>
-                <p className="text-sm text-gray-400 mb-6">Perfect for emerging athletes</p>
+                <div className="inline-block px-3 py-1 bg-slate-700/50 rounded-full text-xs text-slate-300 mb-4">{t('pricing.starterTag')}</div>
+                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-slate-100 transition-colors duration-300">{t('pricing.starter')}</h3>
+                <p className="text-sm text-gray-400 mb-6">{t('pricing.starterDesc')}</p>
                 <div className="mb-8">
                   <span className="text-4xl font-black text-white">$99</span>
                   <span className="text-gray-400 text-sm">/month</span>
@@ -769,7 +818,7 @@ export default function Index() {
               {/* Badge - positioned outside overflow container */}
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
                 <span className="bg-gradient-to-r from-red-600 to-red-500 text-white text-xs font-bold px-5 py-2 rounded-full shadow-md shadow-red-600/30 whitespace-nowrap">
-                  MOST POPULAR
+                  {t('pricing.popular')}
                 </span>
               </div>
               {/* Subtle border glow effect */}
@@ -788,8 +837,8 @@ export default function Index() {
                 <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-red-500/20 to-transparent rounded-tl-full"></div>
               
               <div className="relative text-center mb-8">
-                <h3 className="text-xl font-bold mb-2 text-white">Pro</h3>
-                <p className="text-sm text-gray-400 mb-6">For athletes ready to go pro</p>
+                <h3 className="text-xl font-bold mb-2 text-white">{t('pricing.pro')}</h3>
+                <p className="text-sm text-gray-400 mb-6">{t('pricing.proDesc')}</p>
                 <div className="mb-8">
                   <span className="text-4xl font-black text-red-500">$249</span>
                   <span className="text-gray-400 text-sm">/month</span>
@@ -872,9 +921,9 @@ export default function Index() {
                 <div className="absolute bottom-3 right-3 w-6 h-6 border-b border-r border-amber-600/50 group-hover:border-amber-400/80 transition-all duration-500 rounded-br-lg"></div>
                 
               <div className="relative text-center mb-8">
-                <div className="inline-block px-3 py-1 bg-gradient-to-r from-amber-600/30 to-yellow-600/30 rounded-full text-xs text-amber-300 mb-4 border border-amber-500/30">PREMIUM</div>
-                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-50 transition-colors duration-300">Elite</h3>
-                <p className="text-sm text-gray-400 mb-6">Maximum reach and visibility</p>
+                <div className="inline-block px-3 py-1 bg-gradient-to-r from-amber-600/30 to-yellow-600/30 rounded-full text-xs text-amber-300 mb-4 border border-amber-500/30">{t('pricing.premium')}</div>
+                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-50 transition-colors duration-300">{t('pricing.elite')}</h3>
+                <p className="text-sm text-gray-400 mb-6">{t('pricing.eliteDesc')}</p>
                 <div className="mb-8">
                   <span className="text-4xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">$499</span>
                   <span className="text-gray-400 text-sm">/month</span>
@@ -938,7 +987,7 @@ export default function Index() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <p className="text-gray-500 text-sm mb-6">Trusted payment processing</p>
+            <p className="text-gray-500 text-sm mb-6">{t('pricing.trustPayment')}</p>
             <div className="flex items-center justify-center gap-8">
               <motion.div 
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300"
@@ -979,7 +1028,7 @@ export default function Index() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <h2 className="text-5xl font-black mb-6">JOIN OUR ROSTER</h2>
+            <h2 className="text-5xl font-black mb-6">{t('registration.title')}</h2>
             <motion.div 
               className="w-24 h-1 bg-red-600 mx-auto mb-8"
               initial={{ width: 0 }}
@@ -988,7 +1037,7 @@ export default function Index() {
               transition={{ duration: 0.8, delay: 0.3 }}
             />
             <p className="text-xl text-gray-300">
-              Register now to start your journey to athletic recognition
+              {t('registration.subtitle')}
             </p>
           </motion.div>
 
@@ -997,16 +1046,16 @@ export default function Index() {
               {/* Registration Form */}
               <Card className="bg-zinc-900 border-zinc-800">
                 <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-white">Athlete Registration</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-white">{t('registration.athleteReg')}</CardTitle>
                   <CardDescription className="text-sm text-gray-400">
-                    Fill out your information to get started with our professional services
+                    {t('registration.athleteRegDesc')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleRegistration} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="full_name" className="text-sm font-medium text-gray-200">Full Name *</Label>
+                        <Label htmlFor="full_name" className="text-sm font-medium text-gray-200">{t('registration.fullName')}</Label>
                         <Input
                           id="full_name"
                           value={formData.full_name}
@@ -1018,7 +1067,7 @@ export default function Index() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="email" className="text-sm font-medium text-gray-200">Email *</Label>
+                        <Label htmlFor="email" className="text-sm font-medium text-gray-200">{t('registration.email')}</Label>
                         <Input
                           id="email"
                           type="email"
@@ -1045,24 +1094,24 @@ export default function Index() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="sport_type" className="text-sm font-medium text-gray-200">Primary Sport *</Label>
+                        <Label htmlFor="sport_type" className="text-sm font-medium text-gray-200">{t('registration.sport')}</Label>
                         <Select
                           value={formData.sport_type}
                           onValueChange={(value) => setFormData({ ...formData, sport_type: value })}
                         >
                           <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white h-10">
-                            <SelectValue placeholder="Select your sport" />
+                            <SelectValue placeholder={t('registration.selectSport')} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="soccer">Soccer</SelectItem>
-                            <SelectItem value="basketball">Basketball</SelectItem>
-                            <SelectItem value="tennis">Tennis</SelectItem>
-                            <SelectItem value="swimming">Swimming</SelectItem>
-                            <SelectItem value="track">Track & Field</SelectItem>
-                            <SelectItem value="boxing">Boxing</SelectItem>
-                            <SelectItem value="volleyball">Volleyball</SelectItem>
-                            <SelectItem value="baseball">Baseball</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
+                            <SelectItem value="soccer">{t('sports.soccer')}</SelectItem>
+                            <SelectItem value="basketball">{t('sports.basketball')}</SelectItem>
+                            <SelectItem value="tennis">{t('sports.tennis')}</SelectItem>
+                            <SelectItem value="swimming">{t('sports.swimming')}</SelectItem>
+                            <SelectItem value="track">{t('sports.track')}</SelectItem>
+                            <SelectItem value="boxing">{t('sports.boxing')}</SelectItem>
+                            <SelectItem value="volleyball">{t('sports.volleyball')}</SelectItem>
+                            <SelectItem value="baseball">{t('sports.baseball')}</SelectItem>
+                            <SelectItem value="other">{t('sports.other')}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -1070,7 +1119,7 @@ export default function Index() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="instagram_handle" className="text-sm font-medium text-gray-200">Instagram Handle</Label>
+                        <Label htmlFor="instagram_handle" className="text-sm font-medium text-gray-200">{t('registration.instagram')}</Label>
                         <Input
                           id="instagram_handle"
                           value={formData.instagram_handle}
@@ -1081,7 +1130,7 @@ export default function Index() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="tiktok_handle" className="text-sm font-medium text-gray-200">TikTok Handle</Label>
+                        <Label htmlFor="tiktok_handle" className="text-sm font-medium text-gray-200">{t('registration.tiktok')}</Label>
                         <Input
                           id="tiktok_handle"
                           value={formData.tiktok_handle}
@@ -1097,7 +1146,7 @@ export default function Index() {
                       disabled={isRegistering}
                       className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-base py-5 mt-2"
                     >
-                      {isRegistering ? 'Registering...' : 'REGISTER NOW'}
+                      {isRegistering ? t('registration.registering') : t('registration.register')}
                     </Button>
                   </form>
                 </CardContent>
@@ -1106,9 +1155,9 @@ export default function Index() {
               {/* Contact Information */}
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Contact Information</h3>
+                  <h3 className="text-2xl font-bold text-white mb-2">{t('registration.contactInfo')}</h3>
                   <p className="text-sm text-gray-400">
-                    Reach out to us through any of these channels. We're here to help you take your athletic career to the next level.
+                    {t('registration.contactDesc')}
                   </p>
                 </div>
 
@@ -1119,25 +1168,11 @@ export default function Index() {
                       <RiMailSendLine className="w-5 h-5 text-red-600" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white mb-1">Email Us</h4>
-                      <a href="mailto:info@elitesports.agency" className="text-gray-400 hover:text-red-600 transition-colors text-sm">
-                        info@elitesports.agency
+                      <h4 className="font-semibold text-white mb-1">{t('registration.emailUs')}</h4>
+                      <a href="mailto:contacto@globalmediasports.es" className="text-gray-400 hover:text-red-600 transition-colors text-sm">
+                        contacto@globalmediasports.es
                       </a>
-                      <p className="text-xs text-gray-500 mt-1">We reply within 24 hours</p>
-                    </div>
-                  </div>
-
-                  {/* Phone */}
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <RiPhoneFill className="w-5 h-5 text-red-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white mb-1">Call Us</h4>
-                      <a href="tel:+18005554567" className="text-gray-400 hover:text-red-600 transition-colors text-sm">
-                        +1 (800) 555-4567
-                      </a>
-                      <p className="text-xs text-gray-500 mt-1">Mon-Fri, 9am-6pm EST</p>
+                      <p className="text-xs text-gray-500 mt-1">{t('registration.replyTime')}</p>
                     </div>
                   </div>
 
@@ -1147,15 +1182,15 @@ export default function Index() {
                       <RiMapPin2Fill className="w-5 h-5 text-red-600" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white mb-1">Location</h4>
-                      <p className="text-gray-400 text-sm">Los Angeles, California</p>
-                      <p className="text-xs text-gray-500 mt-1">United States</p>
+                      <h4 className="font-semibold text-white mb-1">{t('registration.location')}</h4>
+                      <p className="text-gray-400 text-sm">Barcelona</p>
+                      <p className="text-xs text-gray-500 mt-1">España</p>
                     </div>
                   </div>
 
                   {/* Divider */}
                   <div className="border-t border-zinc-800 pt-6">
-                    <h4 className="font-semibold text-white mb-4">Follow Us</h4>
+                    <h4 className="font-semibold text-white mb-4">{t('registration.followUs')}</h4>
                     <div className="flex items-center gap-3">
                       <a 
                         href="https://instagram.com" 
@@ -1291,20 +1326,20 @@ export default function Index() {
       {/* Contact/CTA Section */}
       <section className="py-24 px-6 bg-zinc-950">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl font-black mb-6">READY TO GO PRO?</h2>
+          <h2 className="text-5xl font-black mb-6">{t('cta.title')}</h2>
           <div className="w-24 h-1 bg-red-600 mx-auto mb-8"></div>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-            Join the elite athletes who trust us to manage their social media presence and connect them with professional opportunities
+            {t('cta.subtitle')}
           </p>
           <Button 
             onClick={scrollToRegistration}
             size="lg" 
             className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-12 py-6 rounded-lg transform hover:scale-105 transition-all duration-300"
           >
-            GET STARTED TODAY
+            {t('cta.button')}
           </Button>
           <p className="mt-8 text-gray-400">
-            Questions? Contact us at <a href="mailto:info@elitesportsagency.com" className="text-red-600 hover:underline">info@elitesportsagency.com</a>
+            {t('cta.questions')} <a href="mailto:contacto@globalmediasports.es" className="text-red-600 hover:underline">contacto@globalmediasports.es</a>
           </p>
         </div>
       </section>
@@ -1323,7 +1358,7 @@ export default function Index() {
                 <span className="text-xl font-bold text-white">ESPORTS</span>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                Elevating athletic careers through professional social media management. We help talented athletes get discovered by teams and brands worldwide.
+                {t('footer.description')}
               </p>
               <div className="flex items-center gap-3">
                 <a 
@@ -1355,76 +1390,68 @@ export default function Index() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-white font-semibold mb-6">Quick Links</h4>
+              <h4 className="text-white font-semibold mb-6">{t('footer.quickLinks')}</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">About Us</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.aboutUs')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Our Services</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.ourServices')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Pricing Plans</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.pricingPlans')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Success Stories</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.successStories')}</a>
                 </li>
                 <li>
-                  <a href="#registration" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Contact Us</a>
+                  <a href="#registration" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.contactUs')}</a>
                 </li>
               </ul>
             </div>
 
             {/* Sports We Cover */}
             <div>
-              <h4 className="text-white font-semibold mb-6">Sports We Cover</h4>
+              <h4 className="text-white font-semibold mb-6">{t('footer.sportsCover')}</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Soccer (Primary Focus)</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.soccerFocus')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Basketball</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.basketball')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Tennis</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.tennis')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Swimming</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.swimming')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">Track & Field</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.trackField')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">All Other Sports</a>
+                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.otherSports')}</a>
                 </li>
               </ul>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-white font-semibold mb-6">Contact Us</h4>
+              <h4 className="text-white font-semibold mb-6">{t('footer.contactUs')}</h4>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <RiMailSendLine className="w-4 h-4 text-red-600 flex-shrink-0 mt-1" />
                   <div>
-                    <a href="mailto:contact@esports.agency" className="text-gray-400 text-sm hover:text-red-600 transition-colors">
-                      contact@esports.agency
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <RiPhoneFill className="w-4 h-4 text-red-600 flex-shrink-0 mt-1" />
-                  <div>
-                    <a href="tel:+18005554567" className="text-gray-400 text-sm hover:text-red-600 transition-colors">
-                      +1 (555) 123-4567
+                    <a href="mailto:contacto@globalmediasports.es" className="text-gray-400 text-sm hover:text-red-600 transition-colors">
+                      contacto@globalmediasports.es
                     </a>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <RiMapPin2Fill className="w-4 h-4 text-red-600 flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-gray-400 text-sm">Los Angeles, CA</p>
-                    <p className="text-gray-500 text-xs">United States</p>
+                    <p className="text-gray-400 text-sm">Barcelona</p>
+                    <p className="text-gray-500 text-xs">España</p>
                   </div>
                 </li>
               </ul>
@@ -1437,14 +1464,14 @@ export default function Index() {
           <div className="max-w-6xl mx-auto px-6 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-gray-500 text-sm">
-                © 2025 ESPORTS Agency. All rights reserved.
+                {t('footer.rights')}
               </p>
               <div className="flex items-center gap-6">
                 <a href="#" className="text-gray-500 text-sm hover:text-red-600 transition-colors">
-                  Privacy Policy
+                  {t('footer.privacy')}
                 </a>
                 <a href="#" className="text-gray-500 text-sm hover:text-red-600 transition-colors">
-                  Terms of Service
+                  {t('footer.terms')}
                 </a>
               </div>
             </div>

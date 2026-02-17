@@ -1,0 +1,181 @@
+{
+  "nav": {
+    "about": "Nosotros",
+    "services": "Servicios",
+    "pricing": "Precios",
+    "contact": "Contacto",
+    "getStarted": "Comenzar"
+  },
+  "hero": {
+    "title1": "ELEVA TU",
+    "title2": "CARRERA DEPORTIVA",
+    "subtitle": "Gestión profesional de redes sociales y edición de video que transforma atletas talentosos en estrellas del deporte reconocidas",
+    "cta": "COMIENZA TU CAMINO",
+    "followUs": "Síguenos:"
+  },
+  "about": {
+    "title": "QUIÉNES SOMOS",
+    "description": "Fundada en 2025, somos una agencia de marketing deportivo de vanguardia con un equipo impecable de profesionales dedicados a una misión:",
+    "highlight": "hacer visibles a los atletas talentosos en todo el mundo",
+    "mission": "Nuestra Misión",
+    "missionDesc": "Conectamos atletas talentosos con equipos profesionales y marcas deportivas creando una presencia en redes sociales convincente que muestra su verdadero potencial.",
+    "team": "Equipo Experto",
+    "teamDesc": "Nuestros editores de video profesionales y gestores de redes sociales tienen años de experiencia en marketing deportivo y branding de atletas.",
+    "sports": "Todos los Deportes",
+    "sportsDesc": "Desde fútbol hasta natación, baloncesto hasta boxeo - nos especializamos en promover atletas de todos los deportes, con un enfoque especial en fútbol."
+  },
+  "services": {
+    "title": "NUESTROS SERVICIOS",
+    "subtitle": "Paquete completo de gestión de redes sociales diseñado para maximizar tu visibilidad atlética",
+    "social": "Gestión de Redes Sociales",
+    "socialDesc": "Gestión profesional de tus cuentas de Instagram y TikTok con planificación estratégica de contenido y horarios de publicación",
+    "video": "Edición de Video Profesional",
+    "videoDesc": "Equipo de edición experto que transforma tu material en bruto en reels destacados que capturan tu excelencia atlética",
+    "brand": "Exposición de Marca",
+    "brandDesc": "Conexiones estratégicas con equipos profesionales y marcas deportivas que buscan atletas talentosos como tú",
+    "howItWorks": "Cómo Funciona",
+    "step1": "Crea tus cuentas de TikTok e Instagram con tu contenido atlético",
+    "step2": "Nuestro equipo gestiona, edita y optimiza tu contenido profesionalmente",
+    "step3": "Observa cómo crece tu visibilidad mientras equipos y marcas descubren tu talento"
+  },
+  "athletes": {
+    "title": "ATLETAS EN ACCIÓN",
+    "subtitle": "Trabajamos con atletas talentosos de todas las disciplinas deportivas",
+    "soccer": "Excelencia en Fútbol",
+    "soccerDesc": "Talento profesional de fútbol",
+    "basketball": "Potencia en Baloncesto",
+    "basketballDesc": "Rendimiento de élite en cancha",
+    "allSports": "Todos los Deportes",
+    "allSportsDesc": "Todas las disciplinas bienvenidas"
+  },
+  "pricing": {
+    "title1": "Elige Tu",
+    "title2": "Plan de Éxito",
+    "subtitle": "Planes mensuales flexibles diseñados para las necesidades y presupuesto de cada atleta. Cancela cuando quieras, sin compromisos a largo plazo.",
+    "starter": "Inicial",
+    "starterTag": "INICIAL",
+    "starterDesc": "Perfecto para atletas emergentes",
+    "pro": "Pro",
+    "proDesc": "Para atletas listos para ser profesionales",
+    "elite": "Élite",
+    "eliteDesc": "Máximo alcance y visibilidad",
+    "month": "/mes",
+    "popular": "MÁS POPULAR",
+    "premium": "PREMIUM",
+    "trustPayment": "Procesamiento de pago confiable",
+    "starterFeatures": {
+      "setup": "Configuración de cuentas TikTok e Instagram",
+      "videos": "2 videos editados profesionalmente/mes",
+      "strategy": "Estrategia de contenido básica",
+      "report": "Informe de rendimiento mensual",
+      "support": "Soporte por email"
+    },
+    "proFeatures": {
+      "everything": "Todo lo del plan Inicial",
+      "videos": "5 videos editados profesionalmente/mes",
+      "strategy": "Estrategia de contenido avanzada",
+      "partnerships": "Alcance a socios de marca",
+      "reports": "Informes de rendimiento semanales",
+      "priority": "Soporte prioritario",
+      "thumbnails": "Miniaturas y gráficos personalizados",
+      "trends": "Análisis y recomendaciones de tendencias"
+    },
+    "eliteFeatures": {
+      "everything": "Todo lo del plan Pro",
+      "unlimited": "Ediciones de video ilimitadas",
+      "manager": "Gestor de cuenta dedicado",
+      "connections": "Conexiones directas con equipos/marcas",
+      "daily": "Publicación de contenido diaria",
+      "support247": "Soporte prioritario 24/7",
+      "sponsorship": "Negociación de patrocinios",
+      "media": "Sesiones de formación mediática",
+      "press": "Distribución de notas de prensa"
+    }
+  },
+  "registration": {
+    "title": "ÚNETE A NUESTRO EQUIPO",
+    "subtitle": "Regístrate ahora para comenzar tu camino hacia el reconocimiento atlético",
+    "athleteReg": "Registro de Atleta",
+    "athleteRegDesc": "Completa tu información para comenzar con nuestros servicios profesionales",
+    "fullName": "Nombre Completo *",
+    "email": "Correo Electrónico *",
+    "sport": "Deporte Principal *",
+    "selectSport": "Selecciona tu deporte",
+    "instagram": "Usuario de Instagram",
+    "tiktok": "Usuario de TikTok",
+    "register": "REGISTRARSE AHORA",
+    "registering": "Registrando...",
+    "contactInfo": "Información de Contacto",
+    "contactDesc": "Contáctanos a través de cualquiera de estos canales. Estamos aquí para ayudarte a llevar tu carrera atlética al siguiente nivel.",
+    "emailUs": "Escríbenos",
+    "replyTime": "Respondemos en 24 horas",
+    "location": "Ubicación",
+    "followUs": "Síguenos",
+    "infoRequest": {
+      "title": "Solicitar Información de Precios",
+      "subtitle": "Cuéntanos sobre tus necesidades y te enviaremos información detallada de precios y servicios",
+      "message": "Tu Mensaje *",
+      "placeholder": "Cuéntanos sobre tus objetivos, presencia actual en redes sociales y lo que buscas...",
+      "submit": "SOLICITAR INFORMACIÓN",
+      "back": "Volver al Registro"
+    },
+    "payment": {
+      "title": "Suscríbete Ahora",
+      "subtitle": "Comienza tu viaje como atleta profesional con nuestra suscripción mensual",
+      "monthly": "Suscripción Mensual",
+      "perMonth": "por mes",
+      "feature1": "Gestión profesional de Instagram y TikTok",
+      "feature2": "Edición de video experta y creación de contenido",
+      "feature3": "Conexiones estratégicas con marcas y equipos",
+      "feature4": "Informes de rendimiento mensuales",
+      "feature5": "Gestor de cuenta dedicado",
+      "proceed": "PROCEDER AL PAGO",
+      "processing": "Procesando...",
+      "back": "Volver"
+    }
+  },
+  "cta": {
+    "title": "¿LISTO PARA SER PROFESIONAL?",
+    "subtitle": "Únete a los atletas de élite que confían en nosotros para gestionar su presencia en redes sociales y conectarlos con oportunidades profesionales",
+    "button": "COMIENZA HOY",
+    "questions": "¿Preguntas? Contáctanos en"
+  },
+  "footer": {
+    "description": "Elevando carreras atléticas a través de la gestión profesional de redes sociales. Ayudamos a atletas talentosos a ser descubiertos por equipos y marcas de todo el mundo.",
+    "quickLinks": "Enlaces Rápidos",
+    "aboutUs": "Sobre Nosotros",
+    "ourServices": "Nuestros Servicios",
+    "pricingPlans": "Planes de Precios",
+    "successStories": "Casos de Éxito",
+    "contactUs": "Contáctanos",
+    "sportsCover": "Deportes que Cubrimos",
+    "soccerFocus": "Fútbol (Enfoque Principal)",
+    "basketball": "Baloncesto",
+    "tennis": "Tenis",
+    "swimming": "Natación",
+    "trackField": "Atletismo",
+    "otherSports": "Todos los Demás Deportes",
+    "rights": "© 2025 ESPORTS Agency. Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
+  },
+  "sports": {
+    "soccer": "Fútbol",
+    "basketball": "Baloncesto",
+    "tennis": "Tenis",
+    "swimming": "Natación",
+    "track": "Atletismo",
+    "boxing": "Boxeo",
+    "volleyball": "Voleibol",
+    "baseball": "Béisbol",
+    "other": "Otro"
+  },
+  "toasts": {
+    "registrationSuccess": "¡Registro Exitoso!",
+    "registrationDesc": "Tu perfil de atleta ha sido creado. Ahora solicita información de precios.",
+    "requestSuccess": "¡Solicitud Enviada!",
+    "requestDesc": "Te enviaremos información detallada de precios. ¿Listo para suscribirte?",
+    "paymentTitle": "Función de Pago",
+    "paymentDesc": "La integración de pago requiere configuración de backend. Contáctanos para más información."
+  }
+}

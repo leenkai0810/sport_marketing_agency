@@ -1,0 +1,181 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "title1": "ELEVATE YOUR",
+    "title2": "ATHLETIC CAREER",
+    "subtitle": "Professional social media management and video editing that transforms talented athletes into recognized sports stars",
+    "cta": "START YOUR JOURNEY",
+    "followUs": "Follow Us:"
+  },
+  "about": {
+    "title": "WHO WE ARE",
+    "description": "Established in 2025, we're a cutting-edge sports marketing agency with an impeccable team of professionals dedicated to one mission:",
+    "highlight": "making talented athletes visible to the world",
+    "mission": "Our Mission",
+    "missionDesc": "We connect talented athletes with professional teams and sports brands by creating compelling social media presence that showcases their true potential.",
+    "team": "Expert Team",
+    "teamDesc": "Our professional video editors and social media managers have years of experience in sports marketing and athlete branding.",
+    "sports": "All Sports Welcome",
+    "sportsDesc": "From soccer to swimming, basketball to boxing - we specialize in promoting athletes across every sport, with a special focus on soccer."
+  },
+  "services": {
+    "title": "OUR SERVICES",
+    "subtitle": "Complete social media management package designed to maximize your athletic visibility",
+    "social": "Social Media Management",
+    "socialDesc": "Professional management of your Instagram and TikTok accounts with strategic content planning and posting schedules",
+    "video": "Professional Video Editing",
+    "videoDesc": "Expert editing team transforms your raw footage into compelling highlight reels that capture your athletic excellence",
+    "brand": "Brand Exposure",
+    "brandDesc": "Strategic connections with professional teams and sports brands looking for talented athletes like you",
+    "howItWorks": "How It Works",
+    "step1": "Create your TikTok and Instagram accounts with your athletic content",
+    "step2": "Our team manages, edits, and optimizes your content professionally",
+    "step3": "Watch your visibility grow as teams and brands discover your talent"
+  },
+  "athletes": {
+    "title": "ATHLETES IN ACTION",
+    "subtitle": "We work with talented athletes across all sports disciplines",
+    "soccer": "Soccer Excellence",
+    "soccerDesc": "Professional football talent",
+    "basketball": "Basketball Power",
+    "basketballDesc": "Elite court performance",
+    "allSports": "All Sports",
+    "allSportsDesc": "Every discipline welcome"
+  },
+  "pricing": {
+    "title1": "Choose Your",
+    "title2": "Success Plan",
+    "subtitle": "Flexible monthly plans designed to fit every athlete's needs and budget. Cancel anytime, no long-term commitments.",
+    "starter": "Starter",
+    "starterTag": "STARTER",
+    "starterDesc": "Perfect for emerging athletes",
+    "pro": "Pro",
+    "proDesc": "For athletes ready to go pro",
+    "elite": "Elite",
+    "eliteDesc": "Maximum reach and visibility",
+    "month": "/month",
+    "popular": "MOST POPULAR",
+    "premium": "PREMIUM",
+    "trustPayment": "Trusted payment processing",
+    "starterFeatures": {
+      "setup": "TikTok & Instagram account setup",
+      "videos": "2 professional edited videos/month",
+      "strategy": "Basic content strategy",
+      "report": "Monthly performance report",
+      "support": "Email support"
+    },
+    "proFeatures": {
+      "everything": "Everything in Starter",
+      "videos": "5 professional edited videos/month",
+      "strategy": "Advanced content strategy",
+      "partnerships": "Brand partnership outreach",
+      "reports": "Weekly performance reports",
+      "priority": "Priority support",
+      "thumbnails": "Custom thumbnails & graphics",
+      "trends": "Trend analysis & recommendations"
+    },
+    "eliteFeatures": {
+      "everything": "Everything in Pro",
+      "unlimited": "Unlimited video edits",
+      "manager": "Dedicated account manager",
+      "connections": "Direct team/brand connections",
+      "daily": "Daily content posting",
+      "support247": "24/7 priority support",
+      "sponsorship": "Sponsorship negotiation",
+      "media": "Media training sessions",
+      "press": "Press release distribution"
+    }
+  },
+  "registration": {
+    "title": "JOIN OUR ROSTER",
+    "subtitle": "Register now to start your journey to athletic recognition",
+    "athleteReg": "Athlete Registration",
+    "athleteRegDesc": "Fill out your information to get started with our professional services",
+    "fullName": "Full Name *",
+    "email": "Email *",
+    "sport": "Primary Sport *",
+    "selectSport": "Select your sport",
+    "instagram": "Instagram Handle",
+    "tiktok": "TikTok Handle",
+    "register": "REGISTER NOW",
+    "registering": "Registering...",
+    "contactInfo": "Contact Information",
+    "contactDesc": "Reach out to us through any of these channels. We're here to help you take your athletic career to the next level.",
+    "emailUs": "Email Us",
+    "replyTime": "We reply within 24 hours",
+    "location": "Location",
+    "followUs": "Follow Us",
+    "infoRequest": {
+      "title": "Request Pricing Information",
+      "subtitle": "Tell us about your needs and we'll send you detailed pricing and service information",
+      "message": "Your Message *",
+      "placeholder": "Tell us about your goals, current social media presence, and what you're looking for...",
+      "submit": "REQUEST INFORMATION",
+      "back": "Back to Registration"
+    },
+    "payment": {
+      "title": "Subscribe Now",
+      "subtitle": "Start your professional athlete journey with our monthly subscription",
+      "monthly": "Monthly Subscription",
+      "perMonth": "per month",
+      "feature1": "Professional Instagram & TikTok management",
+      "feature2": "Expert video editing and content creation",
+      "feature3": "Strategic brand and team connections",
+      "feature4": "Monthly performance reports",
+      "feature5": "Dedicated account manager",
+      "proceed": "PROCEED TO PAYMENT",
+      "processing": "Processing...",
+      "back": "Back"
+    }
+  },
+  "cta": {
+    "title": "READY TO GO PRO?",
+    "subtitle": "Join the elite athletes who trust us to manage their social media presence and connect them with professional opportunities",
+    "button": "GET STARTED TODAY",
+    "questions": "Questions? Contact us at"
+  },
+  "footer": {
+    "description": "Elevating athletic careers through professional social media management. We help talented athletes get discovered by teams and brands worldwide.",
+    "quickLinks": "Quick Links",
+    "aboutUs": "About Us",
+    "ourServices": "Our Services",
+    "pricingPlans": "Pricing Plans",
+    "successStories": "Success Stories",
+    "contactUs": "Contact Us",
+    "sportsCover": "Sports We Cover",
+    "soccerFocus": "Soccer (Primary Focus)",
+    "basketball": "Basketball",
+    "tennis": "Tennis",
+    "swimming": "Swimming",
+    "trackField": "Track & Field",
+    "otherSports": "All Other Sports",
+    "rights": "© 2025 ESPORTS Agency. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "sports": {
+    "soccer": "Soccer",
+    "basketball": "Basketball",
+    "tennis": "Tennis",
+    "swimming": "Swimming",
+    "track": "Track & Field",
+    "boxing": "Boxing",
+    "volleyball": "Volleyball",
+    "baseball": "Baseball",
+    "other": "Other"
+  },
+  "toasts": {
+    "registrationSuccess": "Registration Successful!",
+    "registrationDesc": "Your athlete profile has been created. Now request pricing information.",
+    "requestSuccess": "Request Submitted!",
+    "requestDesc": "We'll send you detailed pricing information. Ready to subscribe?",
+    "paymentTitle": "Payment Feature",
+    "paymentDesc": "Payment integration requires backend setup. Contact us for more info."
+  }
+}
