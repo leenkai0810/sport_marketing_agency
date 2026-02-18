@@ -48,7 +48,7 @@ export default function PaymentSuccess() {
           </div>
           <CardTitle className="text-4xl text-white mb-2">Payment Successful!</CardTitle>
           <CardDescription className="text-lg text-gray-300">
-            Welcome to Elite Sports Agency
+            Welcome to Global Media Sports
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">

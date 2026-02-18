@@ -1,4 +1,4 @@
-# Elite Sports Agency - Frontend
+# Global Media Sports - Frontend
 
 A modern sports marketing agency landing page built with React, TypeScript, and Tailwind CSS.
 
