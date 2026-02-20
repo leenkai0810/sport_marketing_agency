@@ -1,0 +1,27 @@
+{
+  "auth": {
+    "required": "Authentication required.",
+    "invalid_token": "Invalid or expired token.",
+    "user_exists": "User already exists.",
+    "registered": "User registered successfully.",
+    "invalid_credentials": "Invalid credentials.",
+    "login_success": "Login successful."
+  },
+  "video": {
+    "unauthorized": "Unauthorized.",
+    "no_url": "No video URL provided.",
+    "user_not_found": "User not found.",
+    "subscription_required": "Please subscribe to a premium plan before you can upload videos.",
+    "upload_success": "Video uploaded successfully.",
+    "internal_error": "Internal server error."
+  },
+  "subscription": {
+    "no_session": "No session ID provided.",
+    "active": "Subscription activated successfully."
+  },
+  "admin": {
+    "unauthorized": "Unauthorized. Admin role required.",
+    "video_not_found": "Video not found.",
+    "status_updated": "Video status updated successfully."
+  }
+}

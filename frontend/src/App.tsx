@@ -8,6 +8,14 @@ import i18n from "./i18n";
 import Index from "./pages/Index";
 import AuthCallback from "./pages/AuthCallback";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import Contract from "./pages/Contract";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Legal from "./pages/Legal";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +35,14 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/contract" element={<Contract />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/legal" element={<Legal />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
             </Routes>

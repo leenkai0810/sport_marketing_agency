@@ -1,0 +1,27 @@
+{
+    "auth": {
+        "required": "Autenticação obrigatória.",
+        "invalid_token": "Token inválido ou expirado.",
+        "user_exists": "Usuário já existe.",
+        "registered": "Usuário registrado com sucesso.",
+        "invalid_credentials": "Credenciais inválidas.",
+        "login_success": "Login efetuado com sucesso."
+    },
+    "video": {
+        "unauthorized": "Não autorizado.",
+        "no_url": "Nenhuma URL de vídeo fornecida.",
+        "user_not_found": "Usuário não encontrado.",
+        "subscription_required": "Por favor, assine um plano premium antes de poder enviar vídeos.",
+        "upload_success": "Vídeo enviado com sucesso.",
+        "internal_error": "Erro interno do servidor."
+    },
+    "subscription": {
+        "no_session": "Nenhum ID de sessão fornecido.",
+        "active": "Assinatura ativada com sucesso."
+    },
+    "admin": {
+        "unauthorized": "Não autorizado. Função de administrador necessária.",
+        "video_not_found": "Vídeo não encontrado.",
+        "status_updated": "Status do vídeo atualizado com sucesso."
+    }
+}

@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum SubscriptionStatus {
+  INACTIVE
+  ACTIVE
+  CANCELED
+}
+
+enum VideoStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id                 String             @id @default(uuid())
+  email              String             @unique
+  password           String
+  name               String?
+  role               Role               @default(USER)
+  subscriptionStatus SubscriptionStatus @default(INACTIVE)
+  contractAccepted   Boolean            @default(false)
+  contractAcceptedAt DateTime?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  videos        Video[]
+  subscriptions Subscription[]
+}
+
+model Video {
+  id        String      @id @default(uuid())
+  caption   String?
+  platform  String // Instagram, TikTok, Facebook
+  url       String // File path or Cloud URL
+  status    VideoStatus @default(PENDING)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Subscription {
+  id               String             @id @default(uuid())
+  stripeId         String             @unique
+  status           SubscriptionStatus
+  currentPeriodEnd DateTime
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}

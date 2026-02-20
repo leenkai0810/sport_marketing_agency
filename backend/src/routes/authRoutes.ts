@@ -1,0 +1,17 @@
+import express from 'express';
+import rateLimit from 'express-rate-limit';
+import { register, login } from '../controllers/authController';
+
+const router = express.Router();
+
+// Basic rate limiting for auth routes: max 20 requests per 15 minutes per IP
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 20,
+    message: { message: 'Too many requests from this IP, please try again after 15 minutes' }
+});
+
+router.post('/register', authLimiter, register);
+router.post('/login', authLimiter, login);
+
+export default router;

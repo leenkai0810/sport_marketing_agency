@@ -1,0 +1,27 @@
+{
+    "auth": {
+        "required": "Authentification requise.",
+        "invalid_token": "Jeton invalide ou expiré.",
+        "user_exists": "L'utilisateur existe déjà.",
+        "registered": "Utilisateur enregistré avec succès.",
+        "invalid_credentials": "Identifiants invalides.",
+        "login_success": "Connexion réussie."
+    },
+    "video": {
+        "unauthorized": "Non autorisé.",
+        "no_url": "Aucune URL de vidéo fournie.",
+        "user_not_found": "Utilisateur non trouvé.",
+        "subscription_required": "Veuillez vous abonner à un forfait premium avant de pouvoir télécharger des vidéos.",
+        "upload_success": "Vidéo téléchargée avec succès.",
+        "internal_error": "Erreur interne du serveur."
+    },
+    "subscription": {
+        "no_session": "Aucun identifiant de session fourni.",
+        "active": "Abonnement activé avec succès."
+    },
+    "admin": {
+        "unauthorized": "Non autorisé. Rôle d'administrateur requis.",
+        "video_not_found": "Vidéo non trouvée.",
+        "status_updated": "Statut de la vidéo mis à jour avec succès."
+    }
+}

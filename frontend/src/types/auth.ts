@@ -1,0 +1,33 @@
+import { z } from 'zod';
+
+export const registerSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6),
+    name: z.string().min(2),
+    termsAccepted: z.boolean().refine((val) => val === true, {
+        message: 'You must accept the terms and conditions',
+    }),
+});
+
+export type RegisterData = z.infer<typeof registerSchema>;
+
+export const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6),
+});
+
+export type LoginData = z.infer<typeof loginSchema>;
+
+export interface User {
+    id: string;
+    email: string;
+    name: string | null;
+    role: 'USER' | 'ADMIN';
+}
+
+export interface AuthResponse {
+    token?: string;
+    user?: User;
+    message?: string;
+    userId?: string;
+}
