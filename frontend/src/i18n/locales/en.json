@@ -234,7 +234,9 @@
     "uploading": "Uploading...",
     "submitReview": "Submit for Review",
     "profileDetails": "Profile Details",
-    "manageAccount": "Manage your account information."
+    "manageAccount": "Manage your account information.",
+    "premiumRequired": "Premium Required",
+    "premiumRequiredDesc": "Video uploads are available for premium members only. Upgrade your plan to start submitting your sports highlights."
   },
   "admin": {
     "fetchFailed": "Failed to fetch data",

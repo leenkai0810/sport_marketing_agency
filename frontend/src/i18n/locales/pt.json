@@ -234,7 +234,9 @@
     "uploading": "Carregando...",
     "submitReview": "Enviar para Análise",
     "profileDetails": "Detalhes do Perfil",
-    "manageAccount": "Gerencie as informações da sua conta."
+    "manageAccount": "Gerencie as informações da sua conta.",
+    "premiumRequired": "Premium Necessário",
+    "premiumRequiredDesc": "Os uploads de vídeo estão disponíveis apenas para membros premium. Atualize seu plano para começar a enviar seus destaques esportivos."
   },
   "admin": {
     "fetchFailed": "Falha ao buscar dados",

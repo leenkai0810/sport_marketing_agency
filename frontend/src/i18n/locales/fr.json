@@ -234,7 +234,9 @@
     "uploading": "Téléchargement en cours...",
     "submitReview": "Soumettre pour examen",
     "profileDetails": "Détails du profil",
-    "manageAccount": "Gérez les informations de votre compte."
+    "manageAccount": "Gérez les informations de votre compte.",
+    "premiumRequired": "Premium Requis",
+    "premiumRequiredDesc": "Les téléchargements de vidéos sont disponibles uniquement pour les membres premium. Mettez à niveau votre plan pour commencer à soumettre vos moments forts sportifs."
   },
   "admin": {
     "fetchFailed": "Échec de récupération des données",

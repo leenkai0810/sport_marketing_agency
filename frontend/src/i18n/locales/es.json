@@ -234,7 +234,9 @@
     "uploading": "Subiendo...",
     "submitReview": "Enviar para revisión",
     "profileDetails": "Detalles del perfil",
-    "manageAccount": "Administra la información de tu cuenta."
+    "manageAccount": "Administra la información de tu cuenta.",
+    "premiumRequired": "Se Requiere Premium",
+    "premiumRequiredDesc": "Las subidas de video están disponibles solo para miembros premium. Actualiza tu plan para comenzar a enviar tus destacados deportivos."
   },
   "admin": {
     "fetchFailed": "Error al obtener datos",

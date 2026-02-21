@@ -234,7 +234,9 @@
     "uploading": "Hochladen...",
     "submitReview": "Zur Überprüfung einreichen",
     "profileDetails": "Profildetails",
-    "manageAccount": "Verwalten Sie Ihre Kontoinformationen."
+    "manageAccount": "Verwalten Sie Ihre Kontoinformationen.",
+    "premiumRequired": "Premium Erforderlich",
+    "premiumRequiredDesc": "Video-Uploads sind nur für Premium-Mitglieder verfügbar. Aktualisieren Sie Ihren Plan, um Ihre Sport-Highlights einzureichen."
   },
   "admin": {
     "fetchFailed": "Fehler beim Abrufen der Daten",
