@@ -20,12 +20,7 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
             return res.status(404).json({ message: (req as any).t('video.user_not_found') });
         }
 
-        const userEmail = user.email; // In a real app, fetch from DB if not in token
-
-        // Simple fixed price for MVP - e.g., $10/month
-        // You should replace this with a real Price ID from your Stripe Dashboard
-        // Hardcoded price for MVP
-        // const priceId = process.env.STRIPE_PRICE_ID;
+        const userEmail = user.email;
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -66,8 +61,33 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
     }
 };
 
+// Helper: activate subscription in DB
+async function activateSubscription(userId: string, stripeSubscriptionId: string, currentPeriodEnd: Date) {
+    // Upsert Subscription record
+    await prisma.subscription.upsert({
+        where: { stripeId: stripeSubscriptionId },
+        update: {
+            status: 'ACTIVE',
+            currentPeriodEnd,
+        },
+        create: {
+            stripeId: stripeSubscriptionId,
+            status: 'ACTIVE',
+            currentPeriodEnd,
+            userId,
+        },
+    });
+
+    // Update User status
+    await prisma.user.update({
+        where: { id: userId },
+        data: { subscriptionStatus: 'ACTIVE' },
+    });
+
+    console.log(`User ${userId} subscription activated (Stripe sub: ${stripeSubscriptionId})`);
+}
+
 // Webhook handler
-// Note: Webhook signature verification is critical for production
 export const handleWebhook = async (req: Request, res: Response) => {
     const sig = req.headers['stripe-signature'];
     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -84,7 +104,6 @@ export const handleWebhook = async (req: Request, res: Response) => {
     let event;
 
     try {
-        // req.body is a raw Buffer because of express.raw() in subscriptionRoutes.ts
         event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
     } catch (err: any) {
         console.error(`Webhook Error: ${err.message}`);
@@ -96,21 +115,78 @@ export const handleWebhook = async (req: Request, res: Response) => {
         case 'checkout.session.completed': {
             const session = event.data.object as any;
             const userId = session.metadata?.userId;
+            const stripeSubscriptionId = session.subscription;
 
-            if (userId) {
-                await prisma.user.update({
-                    where: { id: userId },
-                    data: { subscriptionStatus: 'ACTIVE' },
+            if (userId && stripeSubscriptionId) {
+                try {
+                    // Fetch the subscription from Stripe to get currentPeriodEnd
+                    const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+                    const currentPeriodEnd = new Date((stripeSub as any).current_period_end * 1000);
+
+                    await activateSubscription(userId, stripeSubscriptionId, currentPeriodEnd);
+                } catch (dbError) {
+                    console.error('Failed to activate subscription in webhook:', dbError);
+                }
+            } else {
+                console.warn('Webhook: Missing userId or subscriptionId in session', {
+                    userId,
+                    stripeSubscriptionId,
+                    sessionId: session.id,
                 });
-                console.log(`User ${userId} subscription activated`);
             }
             break;
         }
 
-        // Add other event handlers (invoice.payment_failed, etc.)
         default:
             console.log(`Unhandled event type ${event.type}`);
     }
 
     res.send();
 };
+
+// Verify session endpoint (fallback for when webhook is delayed)
+export const verifySession = async (req: AuthRequest, res: Response) => {
+    try {
+        const userId = req.user?.userId;
+        const { sessionId } = req.body;
+
+        if (!userId) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
+        if (!sessionId) {
+            return res.status(400).json({ message: 'No session ID provided' });
+        }
+
+        // Retrieve the checkout session from Stripe
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+        // Verify the session belongs to this user
+        if (session.metadata?.userId !== userId) {
+            return res.status(403).json({ message: 'Session does not belong to this user' });
+        }
+
+        // Check if payment was successful
+        if (session.payment_status !== 'paid') {
+            return res.status(400).json({ message: 'Payment not completed', status: session.payment_status });
+        }
+
+        const stripeSubscriptionId = session.subscription as string;
+
+        if (!stripeSubscriptionId) {
+            return res.status(400).json({ message: 'No subscription found in session' });
+        }
+
+        // Fetch the subscription from Stripe
+        const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+        const currentPeriodEnd = new Date((stripeSub as any).current_period_end * 1000);
+
+        await activateSubscription(userId, stripeSubscriptionId, currentPeriodEnd);
+
+        res.json({ message: 'Subscription activated successfully', status: 'ACTIVE' });
+    } catch (error: any) {
+        console.error('Verify session error:', error);
+        res.status(500).json({ message: 'Failed to verify session' });
+    }
+};
+
