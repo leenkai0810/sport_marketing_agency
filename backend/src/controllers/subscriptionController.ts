@@ -62,7 +62,22 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
 };
 
 // Helper: activate subscription in DB
-async function activateSubscription(userId: string, stripeSubscriptionId: string, currentPeriodEnd: Date) {
+async function activateSubscription(userId: string, stripeSubscriptionId: string, stripeSub: any) {
+    // Try multiple possible field names for the period end date
+    const periodEndRaw = stripeSub.current_period_end
+        || stripeSub.currentPeriodEnd
+        || stripeSub.items?.data?.[0]?.current_period_end;
+
+    let currentPeriodEnd: Date;
+    if (periodEndRaw && !isNaN(Number(periodEndRaw))) {
+        // Stripe returns Unix timestamp in seconds
+        currentPeriodEnd = new Date(Number(periodEndRaw) * 1000);
+    } else {
+        // Fallback: 30 days from now
+        console.warn('Could not extract current_period_end from Stripe subscription, using 30-day fallback. Stripe sub keys:', Object.keys(stripeSub));
+        currentPeriodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+    }
+
     // Upsert Subscription record
     await prisma.subscription.upsert({
         where: { stripeId: stripeSubscriptionId },
@@ -84,7 +99,7 @@ async function activateSubscription(userId: string, stripeSubscriptionId: string
         data: { subscriptionStatus: 'ACTIVE' },
     });
 
-    console.log(`User ${userId} subscription activated (Stripe sub: ${stripeSubscriptionId})`);
+    console.log(`User ${userId} subscription activated (Stripe sub: ${stripeSubscriptionId}, periodEnd: ${currentPeriodEnd.toISOString()})`);
 }
 
 // Webhook handler
@@ -119,11 +134,9 @@ export const handleWebhook = async (req: Request, res: Response) => {
 
             if (userId && stripeSubscriptionId) {
                 try {
-                    // Fetch the subscription from Stripe to get currentPeriodEnd
+                    // Fetch the subscription from Stripe
                     const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
-                    const currentPeriodEnd = new Date((stripeSub as any).current_period_end * 1000);
-
-                    await activateSubscription(userId, stripeSubscriptionId, currentPeriodEnd);
+                    await activateSubscription(userId, stripeSubscriptionId, stripeSub);
                 } catch (dbError) {
                     console.error('Failed to activate subscription in webhook:', dbError);
                 }
@@ -179,9 +192,7 @@ export const verifySession = async (req: AuthRequest, res: Response) => {
 
         // Fetch the subscription from Stripe
         const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
-        const currentPeriodEnd = new Date((stripeSub as any).current_period_end * 1000);
-
-        await activateSubscription(userId, stripeSubscriptionId, currentPeriodEnd);
+        await activateSubscription(userId, stripeSubscriptionId, stripeSub);
 
         res.json({ message: 'Subscription activated successfully', status: 'ACTIVE' });
     } catch (error: any) {
