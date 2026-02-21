@@ -29,7 +29,7 @@ export const getAllUsers = async (req: AuthRequest, res: Response) => {
         res.json(users);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };
 
@@ -54,7 +54,7 @@ export const getAllVideos = async (req: AuthRequest, res: Response) => {
         res.json(videos);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };
 
@@ -68,7 +68,7 @@ export const updateVideoStatus = async (req: AuthRequest, res: Response) => {
         const { status } = req.body;
 
         if (!['PENDING', 'APPROVED', 'REJECTED'].includes(status)) {
-            return res.status(400).json({ message: 'Invalid status' });
+            return res.status(400).json({ message: req.t('admin.invalid_status', 'Invalid status') });
         }
 
         const video = await prisma.video.update({
@@ -79,6 +79,6 @@ export const updateVideoStatus = async (req: AuthRequest, res: Response) => {
         res.json(video);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };

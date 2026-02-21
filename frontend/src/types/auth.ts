@@ -4,6 +4,10 @@ export const registerSchema = z.object({
     email: z.string().email(),
     password: z.string().min(6),
     name: z.string().min(2),
+    phone: z.string().optional(),
+    sport: z.string().min(1, 'Please select your primary sport'),
+    instagram: z.string().optional(),
+    tiktok: z.string().optional(),
     termsAccepted: z.boolean().refine((val) => val === true, {
         message: 'You must accept the terms and conditions',
     }),
@@ -23,6 +27,11 @@ export interface User {
     email: string;
     name: string | null;
     role: 'USER' | 'ADMIN';
+    subscriptionStatus?: string;
+    phone?: string | null;
+    sport?: string | null;
+    instagram?: string | null;
+    tiktok?: string | null;
 }
 
 export interface AuthResponse {

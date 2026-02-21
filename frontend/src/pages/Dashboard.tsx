@@ -110,9 +110,9 @@ const Dashboard = () => {
         }
     };
 
-    const handleSubscribe = async () => {
+    const handleSubscribe = async (plan: string = 'starter') => {
         try {
-            const response = await subscriptionApi.createCheckoutSession();
+            const response = await subscriptionApi.createCheckoutSession(plan);
             if (response.url) window.location.href = response.url;
         } catch (error) {
             console.error('Failed to start subscription', error);
@@ -293,6 +293,115 @@ const Dashboard = () => {
                                 </motion.div>
                             )}
                         </div>
+
+                        {/* ── Pricing Plans (non-premium only) ── */}
+                        {!isPremium && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                            >
+                                <h3 className="text-xl font-bold mb-2">{t('dashboard.choosePlan', 'Choose Your Plan')}</h3>
+                                <p className="text-gray-500 text-sm mb-6">{t('dashboard.choosePlanDesc', 'Upgrade to unlock professional content creation and brand exposure.')}</p>
+                                <div className="grid gap-6 md:grid-cols-3">
+
+                                    {/* Starter */}
+                                    <motion.div
+                                        whileHover={{ y: -4 }}
+                                        className="relative group bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col"
+                                    >
+                                        <div className="absolute -inset-[1px] bg-gradient-to-b from-zinc-700/40 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <div className="relative flex flex-col flex-1">
+                                            <div className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-800 text-gray-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4">Starter</div>
+                                            <div className="mb-1">
+                                                <span className="text-4xl font-black text-white">$99</span>
+                                                <span className="text-gray-500 text-sm ml-1">/month</span>
+                                            </div>
+                                            <p className="text-gray-400 text-sm mb-5">{t('pricing.starterDesc', 'Perfect for rising athletes')}</p>
+                                            <ul className="space-y-2.5 mb-6 flex-1">
+                                                {[t('pricing.s1', 'TikTok & Instagram account setup'), t('pricing.s2', '2 professional edited videos/month'), t('pricing.s3', 'Basic content strategy'), t('pricing.s4', 'Monthly performance report'), t('pricing.s5', 'Email support')].map((f, i) => (
+                                                    <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                                                        <span className="text-red-500 mt-0.5">✓</span>{f}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <Button
+                                                onClick={() => handleSubscribe('starter')}
+                                                variant="outline"
+                                                className="w-full border-zinc-600 text-white hover:bg-zinc-800 hover:border-zinc-500 font-bold"
+                                            >
+                                                {t('pricing.getStarted', 'Get Started')}
+                                            </Button>
+                                        </div>
+                                    </motion.div>
+
+                                    {/* Pro */}
+                                    <motion.div
+                                        whileHover={{ y: -4 }}
+                                        className="relative group rounded-2xl flex flex-col"
+                                    >
+                                        <div className="absolute -inset-[2px] bg-gradient-to-b from-red-600 via-red-600/60 to-transparent rounded-2xl" />
+                                        <div className="relative bg-zinc-900 rounded-2xl p-6 flex flex-col flex-1">
+                                            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                                                <span className="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">{t('pricing.mostPopular', 'Most Popular')}</span>
+                                            </div>
+                                            <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4 mt-2">Pro</div>
+                                            <div className="mb-1">
+                                                <span className="text-4xl font-black text-red-500">$249</span>
+                                                <span className="text-gray-500 text-sm ml-1">/month</span>
+                                            </div>
+                                            <p className="text-gray-400 text-sm mb-5">{t('pricing.proDesc', 'For athletes who want to go pro')}</p>
+                                            <ul className="space-y-2.5 mb-6 flex-1">
+                                                {[t('pricing.p0', 'Everything in Starter'), t('pricing.p1', '5 professional edited videos/month'), t('pricing.p2', 'Advanced content strategy'), t('pricing.p3', 'Brand partnership outreach'), t('pricing.p4', 'Weekly performance reports'), t('pricing.p5', 'Priority support'), t('pricing.p6', 'Custom thumbnails & graphics'), t('pricing.p7', 'Trend analysis & recommendations')].map((f, i) => (
+                                                    <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                                                        <span className="text-red-500 mt-0.5">✓</span>{f}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <Button
+                                                onClick={() => handleSubscribe('pro')}
+                                                className="w-full bg-red-600 hover:bg-red-700 text-white font-black tracking-wider uppercase py-5"
+                                            >
+                                                {t('pricing.getStarted', 'Get Started')}
+                                            </Button>
+                                        </div>
+                                    </motion.div>
+
+                                    {/* Elite */}
+                                    <motion.div
+                                        whileHover={{ y: -4 }}
+                                        className="relative group rounded-2xl flex flex-col"
+                                    >
+                                        <div className="absolute -inset-[1px] bg-gradient-to-b from-yellow-500/40 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col flex-1">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <div className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-wider">Elite</div>
+                                                <span className="text-yellow-400 text-lg">★</span>
+                                            </div>
+                                            <div className="mb-1">
+                                                <span className="text-4xl font-black text-yellow-400">$499</span>
+                                                <span className="text-gray-500 text-sm ml-1">/month</span>
+                                            </div>
+                                            <p className="text-gray-400 text-sm mb-5">{t('pricing.eliteDesc', 'Maximum reach and visibility')}</p>
+                                            <ul className="space-y-2.5 mb-6 flex-1">
+                                                {[t('pricing.e0', 'Everything in Pro'), t('pricing.e1', 'Unlimited video edits'), t('pricing.e2', 'Dedicated account manager'), t('pricing.e3', 'Direct team/brand connections'), t('pricing.e4', 'Daily content posting'), t('pricing.e5', '24/7 priority support'), t('pricing.e6', 'Sponsorship negotiation'), t('pricing.e7', 'Media training sessions'), t('pricing.e8', 'Press release distribution')].map((f, i) => (
+                                                    <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
+                                                        <span className="text-yellow-400 mt-0.5">✓</span>{f}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <Button
+                                                onClick={() => handleSubscribe('elite')}
+                                                className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-black tracking-wider uppercase py-5"
+                                            >
+                                                {t('pricing.getStarted', 'Get Started')}
+                                            </Button>
+                                        </div>
+                                    </motion.div>
+
+                                </div>
+                            </motion.div>
+                        )}
                     </TabsContent>
 
                     {/* ── Upload Tab ── */}

@@ -22,6 +22,28 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
 
         const userEmail = user.email;
 
+        // Plan config
+        const PLANS: Record<string, { name: string; description: string; amount: number }> = {
+            starter: {
+                name: 'Global Media Sports — Starter',
+                description: 'TikTok & Instagram account setup, 2 professional edited videos/month, Basic content strategy, Monthly performance report, Email support',
+                amount: 9900, // $99
+            },
+            pro: {
+                name: 'Global Media Sports — Pro',
+                description: 'Everything in Starter + 5 professional edited videos/month, Advanced content strategy, Brand partnership outreach, Weekly performance reports, Priority support',
+                amount: 24900, // $249
+            },
+            elite: {
+                name: 'Global Media Sports — Elite',
+                description: 'Everything in Pro + Unlimited video edits, Dedicated account manager, Direct team/brand connections, Daily content posting, 24/7 priority support',
+                amount: 49900, // $499
+            },
+        };
+
+        const planKey = (req.body.plan || 'starter').toLowerCase();
+        const plan = PLANS[planKey] || PLANS.starter;
+
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: [
@@ -29,10 +51,10 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
                     price_data: {
                         currency: 'usd',
                         product_data: {
-                            name: 'Global Media Sports Premium',
-                            description: 'Unlock exclusive features: 2 Pro Videos/mo, Strategy & Reporting',
+                            name: plan.name,
+                            description: plan.description,
                         },
-                        unit_amount: 1000,
+                        unit_amount: plan.amount,
                         recurring: {
                             interval: 'month',
                         },
@@ -46,10 +68,11 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
             customer_email: userEmail,
             metadata: {
                 userId: userId || '',
+                plan: planKey,
             },
             custom_text: {
                 submit: {
-                    message: "Join Global Media Sports Premium",
+                    message: `Join Global Media Sports ${plan.name.split('—')[1]?.trim() || 'Premium'}`,
                 },
             },
         });
@@ -57,7 +80,7 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
         res.json({ url: session.url });
     } catch (error) {
         console.error('Stripe checkout error:', error);
-        res.status(500).json({ message: 'Failed to create checkout session' });
+        res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };
 
@@ -109,7 +132,7 @@ export const handleWebhook = async (req: Request, res: Response) => {
 
     if (!endpointSecret) {
         console.error('CRITICAL: STRIPE_WEBHOOK_SECRET environment variable is missing.');
-        return res.status(500).json({ message: 'Webhook secret is not configured' });
+        return res.status(500).json({ message: req.t('auth.internal_error') });
     }
 
     if (!sig) {
@@ -164,11 +187,11 @@ export const verifySession = async (req: AuthRequest, res: Response) => {
         const { sessionId } = req.body;
 
         if (!userId) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ message: req.t('video.unauthorized') });
         }
 
         if (!sessionId) {
-            return res.status(400).json({ message: 'No session ID provided' });
+            return res.status(400).json({ message: req.t('subscription.no_session') });
         }
 
         // Retrieve the checkout session from Stripe
@@ -176,18 +199,18 @@ export const verifySession = async (req: AuthRequest, res: Response) => {
 
         // Verify the session belongs to this user
         if (session.metadata?.userId !== userId) {
-            return res.status(403).json({ message: 'Session does not belong to this user' });
+            return res.status(403).json({ message: req.t('auth.invalid_token') });
         }
 
         // Check if payment was successful
         if (session.payment_status !== 'paid') {
-            return res.status(400).json({ message: 'Payment not completed', status: session.payment_status });
+            return res.status(400).json({ message: req.t('auth.internal_error'), status: session.payment_status });
         }
 
         const stripeSubscriptionId = session.subscription as string;
 
         if (!stripeSubscriptionId) {
-            return res.status(400).json({ message: 'No subscription found in session' });
+            return res.status(400).json({ message: req.t('auth.invalid_token') });
         }
 
         // Fetch the subscription from Stripe
@@ -197,7 +220,7 @@ export const verifySession = async (req: AuthRequest, res: Response) => {
         res.json({ message: 'Subscription activated successfully', status: 'ACTIVE' });
     } catch (error: any) {
         console.error('Verify session error:', error);
-        res.status(500).json({ message: 'Failed to verify session' });
+        res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };
 

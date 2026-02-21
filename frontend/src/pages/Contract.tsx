@@ -7,26 +7,28 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Contract = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [accepted, setAccepted] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const handleAccept = async () => {
         if (!accepted) {
-            toast.error('You must accept the contract to proceed.');
+            toast.error(t('contract.acceptRequired', 'You must accept the contract to proceed.'));
             return;
         }
 
         setIsLoading(true);
         try {
             await userApi.acceptContract();
-            toast.success('Contract accepted successfully.');
+            toast.success(t('contract.accepted', 'Contract accepted successfully.'));
             navigate('/dashboard');
         } catch (error) {
             console.error(error);
-            toast.error('Failed to accept contract.');
+            toast.error(t('contract.acceptFailed', 'Failed to accept contract.'));
         } finally {
             setIsLoading(false);
         }

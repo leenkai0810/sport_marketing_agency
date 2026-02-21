@@ -42,7 +42,7 @@ export const uploadVideo = async (req: AuthRequest, res: Response) => {
     res.status(201).json({ message: (req as any).t('video.upload_success'), video });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: req.t('auth.internal_error') });
   }
 };
 
@@ -62,6 +62,6 @@ export const getUserVideos = async (req: AuthRequest, res: Response) => {
     res.json(videos);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: req.t('auth.internal_error') });
   }
 };

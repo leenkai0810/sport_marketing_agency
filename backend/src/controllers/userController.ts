@@ -12,7 +12,7 @@ export const acceptContract = async (req: AuthRequest, res: Response) => {
         const userId = req.user?.userId;
 
         if (!userId) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ message: req.t('video.unauthorized') });
         }
 
         await prisma.user.update({
@@ -26,7 +26,7 @@ export const acceptContract = async (req: AuthRequest, res: Response) => {
         res.json({ message: 'Contract accepted successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };
 
@@ -35,7 +35,7 @@ export const getContractStatus = async (req: AuthRequest, res: Response) => {
         const userId = req.user?.userId;
 
         if (!userId) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ message: req.t('video.unauthorized') });
         }
 
         const user = await prisma.user.findUnique({
@@ -46,14 +46,14 @@ export const getContractStatus = async (req: AuthRequest, res: Response) => {
         res.json(user);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };
 export const getMe = async (req: AuthRequest, res: Response) => {
     try {
         const userId = req.user?.userId;
         if (!userId) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ message: req.t('video.unauthorized') });
         }
         const user = await prisma.user.findUnique({
             where: { id: userId },
@@ -67,11 +67,11 @@ export const getMe = async (req: AuthRequest, res: Response) => {
             },
         });
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: req.t('video.user_not_found') });
         }
         res.json(user);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };
