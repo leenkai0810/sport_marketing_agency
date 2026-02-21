@@ -227,47 +227,60 @@ const Dashboard = () => {
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <form onSubmit={handleUpload} className="space-y-6 max-w-xl">
-                                <div className="space-y-2">
-                                    <Label htmlFor="platform">{t('dashboard.platform', 'Platform')}</Label>
-                                    <Select value={platform} onValueChange={setPlatform}>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder={t('dashboard.selectPlatform', 'Select platform')} />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="Instagram">Instagram</SelectItem>
-                                            <SelectItem value="TikTok">TikTok</SelectItem>
-                                            <SelectItem value="Facebook">Facebook</SelectItem>
-                                        </SelectContent>
-                                    </Select>
+                            {user.subscriptionStatus !== 'ACTIVE' && user.role !== 'ADMIN' ? (
+                                <div className="flex flex-col items-center justify-center py-16 space-y-4 text-center max-w-sm mx-auto">
+                                    <div className="text-5xl">🔒</div>
+                                    <h3 className="text-xl font-semibold">{t('dashboard.premiumRequired', 'Premium Required')}</h3>
+                                    <p className="text-gray-500 text-sm">
+                                        {t('dashboard.premiumRequiredDesc', 'Video uploads are available for premium members only. Upgrade your plan to start submitting your sports highlights.')}
+                                    </p>
+                                    <Button onClick={handleSubscribe} className="mt-2 w-full">
+                                        {t('dashboard.upgradeBtn', 'Upgrade to Premium')}
+                                    </Button>
                                 </div>
+                            ) : (
+                                <form onSubmit={handleUpload} className="space-y-6 max-w-xl">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="platform">{t('dashboard.platform', 'Platform')}</Label>
+                                        <Select value={platform} onValueChange={setPlatform}>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder={t('dashboard.selectPlatform', 'Select platform')} />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="Instagram">Instagram</SelectItem>
+                                                <SelectItem value="TikTok">TikTok</SelectItem>
+                                                <SelectItem value="Facebook">Facebook</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="caption">{t('dashboard.caption', 'Caption/Description')}</Label>
-                                    <Input
-                                        id="caption"
-                                        placeholder={t('dashboard.descHighlight', 'Describe your highlight...')}
-                                        value={caption}
-                                        onChange={(e) => setCaption(e.target.value)}
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label>{t('dashboard.videoFile', 'Video File')}</Label>
-                                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 flex justify-center bg-white">
-                                        <Widget
-                                            publicKey={import.meta.env.VITE_UPLOADCARE_PUBLIC_KEY || ''}
-                                            onChange={(info) => setUploadedUrl(info.cdnUrl)}
-                                            ref={widgetApi}
-                                            clearable
+                                    <div className="space-y-2">
+                                        <Label htmlFor="caption">{t('dashboard.caption', 'Caption/Description')}</Label>
+                                        <Input
+                                            id="caption"
+                                            placeholder={t('dashboard.descHighlight', 'Describe your highlight...')}
+                                            value={caption}
+                                            onChange={(e) => setCaption(e.target.value)}
                                         />
                                     </div>
-                                </div>
 
-                                <Button type="submit" disabled={isUploading}>
-                                    {isUploading ? t('dashboard.uploading', 'Uploading...') : t('dashboard.submitReview', 'Submit for Review')}
-                                </Button>
-                            </form>
+                                    <div className="space-y-2">
+                                        <Label>{t('dashboard.videoFile', 'Video File')}</Label>
+                                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 flex justify-center bg-white">
+                                            <Widget
+                                                publicKey={import.meta.env.VITE_UPLOADCARE_PUBLIC_KEY || ''}
+                                                onChange={(info) => setUploadedUrl(info.cdnUrl)}
+                                                ref={widgetApi}
+                                                clearable
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <Button type="submit" disabled={isUploading}>
+                                        {isUploading ? t('dashboard.uploading', 'Uploading...') : t('dashboard.submitReview', 'Submit for Review')}
+                                    </Button>
+                                </form>
+                            )}
                         </CardContent>
                     </Card>
                 </TabsContent>
