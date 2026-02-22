@@ -20,6 +20,7 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { motion } from 'framer-motion';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase';
+import { FaInstagram, FaTiktok } from 'react-icons/fa';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -179,10 +180,13 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <div className="mt-8 flex items-center justify-center gap-4 text-gray-500 text-xs">
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors">📸 Instagram</a>
-                        <span>·</span>
-                        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors">🎵 TikTok</a>
+                    <div className="mt-8 flex items-center justify-center gap-6">
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-500 hover:bg-zinc-800 transition-all duration-300 group">
+                            <FaInstagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        </a>
+                        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-500 hover:bg-zinc-800 transition-all duration-300 group">
+                            <FaTiktok className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        </a>
                     </div>
                 </motion.div>
             </div>

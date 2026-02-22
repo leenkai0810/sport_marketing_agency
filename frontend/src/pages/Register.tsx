@@ -101,14 +101,17 @@ const Register = () => {
         setIsGoogleLoading(true);
         try {
             const result = await signInWithPopup(auth, googleProvider);
-            const idToken = await result.user.getIdToken();
-            const response = await authApi.googleLogin(idToken);
-            if (response.token && response.user) {
-                localStorage.setItem('token', response.token);
-                localStorage.setItem('user', JSON.stringify(response.user));
-                toast.success(t('auth.googleSignInSuccess', 'Signed in with Google!'));
-                navigate('/dashboard');
-            }
+            const user = result.user;
+
+            // Populate the form with Google data
+            form.setValue('email', user.email || '');
+            form.setValue('name', user.displayName || '');
+
+            // Set a dummy password since they are using Google
+            // (The backend won't use this if we adjust it, but the schema requires it)
+            form.setValue('password', 'google-auth-placeholder');
+
+            toast.success(t('auth.googleDataLoaded', 'Google data loaded! Please complete the rest of the form.'));
         } catch (error: any) {
             console.error('Google register error:', error);
             toast.error(t('auth.googleFailed', 'Google sign-in failed. Please try again.'));
@@ -214,7 +217,7 @@ const Register = () => {
                                                     </FormControl>
                                                     <SelectContent className="bg-zinc-800 border-zinc-700">
                                                         {SPORTS.map(s => (
-                                                            <SelectItem key={s.value} value={s.value} className="text-white hover:bg-zinc-700 focus:bg-zinc-700">{s.label}</SelectItem>
+                                                            <SelectItem key={s.value} value={s.value} className="text-white hover:bg-zinc-700 hover:text-white focus:bg-zinc-700 focus:text-white data-[highlighted]:bg-zinc-700 data-[highlighted]:text-white">{s.label}</SelectItem>
                                                         ))}
                                                     </SelectContent>
                                                 </Select>
@@ -227,14 +230,14 @@ const Register = () => {
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <FormField control={form.control} name="phone" render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.phone', 'Phone Number')}</FormLabel>
+                                                <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.phone', 'Phone Number')} <span className="text-red-500">*</span></FormLabel>
                                                 <FormControl><Input type="tel" placeholder="+1 (555) 000-0000" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
                                                 <FormMessage className="text-red-400 text-xs" />
                                             </FormItem>
                                         )} />
                                         <FormField control={form.control} name="instagram" render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.instagram', 'Instagram Handle')}</FormLabel>
+                                                <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.instagram', 'Instagram Handle')} <span className="text-red-500">*</span></FormLabel>
                                                 <FormControl><Input placeholder="@yourhandle" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
                                                 <FormMessage className="text-red-400 text-xs" />
                                             </FormItem>
@@ -244,7 +247,7 @@ const Register = () => {
                                     {/* Row 4: TikTok */}
                                     <FormField control={form.control} name="tiktok" render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.tiktok', 'TikTok Handle')}</FormLabel>
+                                            <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.tiktok', 'TikTok Handle')} <span className="text-red-500">*</span></FormLabel>
                                             <FormControl><Input placeholder="@yourhandle" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
                                             <FormMessage className="text-red-400 text-xs" />
                                         </FormItem>

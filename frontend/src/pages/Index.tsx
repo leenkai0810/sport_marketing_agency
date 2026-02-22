@@ -15,6 +15,7 @@ import { BsTwitterX } from 'react-icons/bs';
 import { FaCcVisa, FaCcMastercard, FaCcPaypal, FaStripe } from 'react-icons/fa';
 // Animation library
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 // Language configuration
 const languages = [
@@ -69,6 +70,7 @@ const staggerItem = {
 
 export default function Index() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [isRegistering, setIsRegistering] = useState(false);
   const [showInfoRequest, setShowInfoRequest] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
@@ -174,28 +176,28 @@ export default function Index() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              <button 
+              <button
                 onClick={() => scrollToSection('about')}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
               >
                 {t('nav.about')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('services')}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
               >
                 {t('nav.services')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('pricing')}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
               >
                 {t('nav.pricing')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('registration')}
                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
               >
@@ -216,18 +218,17 @@ export default function Index() {
                   <span className="hidden sm:inline">{currentLanguage.flag} {currentLanguage.name}</span>
                   <span className="sm:hidden">{currentLanguage.flag}</span>
                 </button>
-                
+
                 {isLanguageMenuOpen && (
                   <div className="absolute right-0 top-full mt-2 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl overflow-hidden z-50 min-w-[150px]">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors ${
-                          i18n.language === lang.code 
-                            ? 'bg-red-600 text-white' 
-                            : 'text-gray-300 hover:bg-zinc-800 hover:text-white'
-                        }`}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors ${i18n.language === lang.code
+                          ? 'bg-red-600 text-white'
+                          : 'text-gray-300 hover:bg-zinc-800 hover:text-white'
+                          }`}
                       >
                         <span>{lang.flag}</span>
                         <span>{lang.name}</span>
@@ -237,13 +238,13 @@ export default function Index() {
                 )}
               </div>
 
-              <Button 
-                onClick={scrollToRegistration}
+              <Button
+                onClick={() => navigate('/register')}
                 className="hidden md:flex bg-red-600 hover:bg-red-700 text-white font-semibold text-sm px-6 py-2 rounded-lg transition-all duration-300"
               >
                 {t('nav.getStarted')}
               </Button>
-              
+
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -258,32 +259,32 @@ export default function Index() {
           {isMobileMenuOpen && (
             <div className="md:hidden py-4 border-t border-zinc-800/50">
               <div className="flex flex-col gap-4">
-                <button 
+                <button
                   onClick={() => scrollToSection('about')}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors text-left py-2"
                 >
                   {t('nav.about')}
                 </button>
-                <button 
+                <button
                   onClick={() => scrollToSection('services')}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors text-left py-2"
                 >
                   {t('nav.services')}
                 </button>
-                <button 
+                <button
                   onClick={() => scrollToSection('pricing')}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors text-left py-2"
                 >
                   {t('nav.pricing')}
                 </button>
-                <button 
+                <button
                   onClick={() => scrollToSection('registration')}
                   className="text-sm font-medium text-gray-300 hover:text-white transition-colors text-left py-2"
                 >
                   {t('nav.contact')}
                 </button>
-                <Button 
-                  onClick={scrollToRegistration}
+                <Button
+                  onClick={() => navigate('/register')}
                   className="bg-red-600 hover:bg-red-700 text-white font-semibold text-sm px-6 py-2 rounded-lg mt-2"
                 >
                   {t('nav.getStarted')}
@@ -297,19 +298,19 @@ export default function Index() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Parallax */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-110"
           style={{ backgroundImage: "url('/landing page.png')" }}
           initial={{ scale: 1.2 }}
           animate={{ scale: 1.1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         />
-        
+
         {/* Dark Overlay for text readability */}
         <div className="absolute inset-0 z-0 bg-black/60" />
-        
+
         <div className="relative z-10 text-center px-6 max-w-5xl">
-          <motion.h1 
+          <motion.h1
             className="text-6xl md:text-7xl font-black mb-6 leading-tight"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -317,7 +318,7 @@ export default function Index() {
           >
             {t('hero.title1')} <span className="text-red-600">{t('hero.title2')}</span>
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-xl md:text-2xl mb-8 text-gray-300 font-light max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -330,35 +331,35 @@ export default function Index() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
           >
-            <Button 
+            <Button
               onClick={scrollToRegistration}
-              size="lg" 
+              size="lg"
               className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-12 py-6 rounded-lg transform hover:scale-105 transition-all duration-300 shadow-2xl"
             >
               {t('hero.cta')}
             </Button>
           </motion.div>
-          
+
           {/* Social Media Follow Section */}
-          <motion.div 
+          <motion.div
             className="mt-8 flex items-center justify-center gap-4 text-gray-300"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <span className="text-sm font-medium">{t('hero.followUs')}</span>
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
+            <a
+              href="https://instagram.com"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-red-600 transition-colors"
             >
               <RiInstagramFill className="w-5 h-5" />
               <span className="text-sm">Instagram</span>
             </a>
-            <a 
-              href="https://tiktok.com" 
-              target="_blank" 
+            <a
+              href="https://tiktok.com"
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-red-600 transition-colors"
             >
@@ -372,7 +373,7 @@ export default function Index() {
       {/* About Section */}
       <section id="about" className="py-24 px-6 bg-zinc-950 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
@@ -380,7 +381,7 @@ export default function Index() {
             variants={fadeInUp}
           >
             <h2 className="text-5xl font-black mb-6">{t('about.title')}</h2>
-            <motion.div 
+            <motion.div
               className="w-24 h-1 bg-red-600 mx-auto mb-8"
               initial={{ width: 0 }}
               whileInView={{ width: 96 }}
@@ -393,20 +394,20 @@ export default function Index() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div 
+            <motion.div
               className="rounded-2xl h-80 overflow-hidden"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInLeft}
             >
-              <img 
-                src="/Who we are.png" 
-                alt="Professional team working on sports content" 
+              <img
+                src="/Who we are.png"
+                alt="Professional team working on sports content"
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
               />
             </motion.div>
-            <motion.div 
+            <motion.div
               className="space-y-6"
               initial="hidden"
               whileInView="visible"
@@ -448,7 +449,7 @@ export default function Index() {
       {/* Services Section */}
       <section id="services" className="py-24 px-6 bg-black overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
@@ -456,7 +457,7 @@ export default function Index() {
             variants={fadeInUp}
           >
             <h2 className="text-5xl font-black mb-6">{t('services.title')}</h2>
-            <motion.div 
+            <motion.div
               className="w-24 h-1 bg-red-600 mx-auto mb-8"
               initial={{ width: 0 }}
               whileInView={{ width: 96 }}
@@ -468,8 +469,8 @@ export default function Index() {
             </p>
           </motion.div>
 
-          <motion.div 
-            className="grid md:grid-cols-3 gap-8 items-stretch" 
+          <motion.div
+            className="grid md:grid-cols-3 gap-8 items-stretch"
             style={{ perspective: '1000px' }}
             initial="hidden"
             whileInView="visible"
@@ -540,20 +541,20 @@ export default function Index() {
             </motion.div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="mt-16 bg-zinc-900 rounded-2xl p-8 border border-zinc-800"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <img 
-              src="/how it works.png" 
-              alt="Social media growth visualization" 
+            <img
+              src="/how it works.png"
+              alt="Social media growth visualization"
               className="w-full rounded-lg mb-6"
             />
             <h3 className="text-3xl font-bold mb-4 text-center">{t('services.howItWorks')}</h3>
-            <motion.div 
+            <motion.div
               className="grid md:grid-cols-3 gap-6 text-center"
               initial="hidden"
               whileInView="visible"
@@ -580,7 +581,7 @@ export default function Index() {
       {/* Social Proof Section */}
       <section className="py-24 px-6 bg-zinc-950 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
@@ -588,7 +589,7 @@ export default function Index() {
             variants={fadeInUp}
           >
             <h2 className="text-5xl font-black mb-6">{t('athletes.title')}</h2>
-            <motion.div 
+            <motion.div
               className="w-24 h-1 bg-red-600 mx-auto mb-8"
               initial={{ width: 0 }}
               whileInView={{ width: 96 }}
@@ -600,7 +601,7 @@ export default function Index() {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-3 gap-8"
             initial="hidden"
             whileInView="visible"
@@ -608,7 +609,7 @@ export default function Index() {
             variants={staggerContainer}
           >
             {/* Soccer Card */}
-            <motion.div 
+            <motion.div
               className="group relative rounded-2xl overflow-hidden cursor-pointer"
               variants={staggerItem}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
@@ -618,9 +619,9 @@ export default function Index() {
               <div className="relative overflow-hidden rounded-2xl z-10">
                 {/* Border frame */}
                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-red-500/50 rounded-2xl z-20 transition-all duration-500"></div>
-                <img 
-                  src="/1.png" 
-                  alt="Soccer athlete" 
+                <img
+                  src="/1.png"
+                  alt="Soccer athlete"
                   className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
                 {/* Gradient overlay with animation */}
@@ -642,7 +643,7 @@ export default function Index() {
             </motion.div>
 
             {/* Basketball Card */}
-            <motion.div 
+            <motion.div
               className="group relative rounded-2xl overflow-hidden cursor-pointer"
               variants={staggerItem}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
@@ -652,9 +653,9 @@ export default function Index() {
               <div className="relative overflow-hidden rounded-2xl z-10">
                 {/* Border frame */}
                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-red-500/50 rounded-2xl z-20 transition-all duration-500"></div>
-                <img 
-                  src="/2.png" 
-                  alt="Basketball athlete" 
+                <img
+                  src="/2.png"
+                  alt="Basketball athlete"
                   className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
                 {/* Gradient overlay with animation */}
@@ -676,7 +677,7 @@ export default function Index() {
             </motion.div>
 
             {/* All Sports Card */}
-            <motion.div 
+            <motion.div
               className="group relative rounded-2xl overflow-hidden cursor-pointer"
               variants={staggerItem}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
@@ -686,9 +687,9 @@ export default function Index() {
               <div className="relative overflow-hidden rounded-2xl z-10">
                 {/* Border frame */}
                 <div className="absolute inset-0 border-2 border-transparent group-hover:border-red-500/50 rounded-2xl z-20 transition-all duration-500"></div>
-                <img 
-                  src="/3.png" 
-                  alt="Multi-sport athletes" 
+                <img
+                  src="/3.png"
+                  alt="Multi-sport athletes"
                   className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
                 {/* Gradient overlay with animation */}
@@ -715,7 +716,7 @@ export default function Index() {
       {/* Pricing Section */}
       <section id="pricing" className="py-24 px-6 bg-zinc-950 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-20"
             initial="hidden"
             whileInView="visible"
@@ -730,7 +731,7 @@ export default function Index() {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
             initial="hidden"
             whileInView="visible"
@@ -739,10 +740,10 @@ export default function Index() {
             style={{ perspective: '1000px' }}
           >
             {/* Starter Plan - Silver Theme */}
-            <motion.div 
+            <motion.div
               className="group relative"
               variants={staggerItem}
-              whileHover={{ 
+              whileHover={{
                 y: -12,
                 transition: { duration: 0.4, ease: "easeOut" }
               }}
@@ -759,55 +760,55 @@ export default function Index() {
                 {/* Corner accents */}
                 <div className="absolute top-3 left-3 w-6 h-6 border-t border-l border-slate-600/50 group-hover:border-slate-400/80 transition-all duration-500 rounded-tl-lg"></div>
                 <div className="absolute bottom-3 right-3 w-6 h-6 border-b border-r border-slate-600/50 group-hover:border-slate-400/80 transition-all duration-500 rounded-br-lg"></div>
-                
-              <div className="relative text-center mb-8">
-                <div className="inline-block px-3 py-1 bg-slate-700/50 rounded-full text-xs text-slate-300 mb-4">{t('pricing.starterTag')}</div>
-                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-slate-100 transition-colors duration-300">{t('pricing.starter')}</h3>
-                <p className="text-sm text-gray-400 mb-6">{t('pricing.starterDesc')}</p>
-                <div className="mb-8">
-                  <span className="text-4xl font-black text-white">$99</span>
-                  <span className="text-gray-400 text-sm">/month</span>
-                </div>
-              </div>
-              
-              <ul className="space-y-3 mb-8 min-h-[280px]">
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">TikTok & Instagram account setup</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">2 professional edited videos/month</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Basic content strategy</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Monthly performance report</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Email support</span>
-                </li>
-              </ul>
 
-              <Button 
-                onClick={scrollToRegistration}
-                variant="outline"
-                className="w-full border-slate-600 text-white hover:bg-slate-600 hover:border-slate-500 py-5 text-sm font-semibold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20"
-              >
-                Get Started
-              </Button>
+                <div className="relative text-center mb-8">
+                  <div className="inline-block px-3 py-1 bg-slate-700/50 rounded-full text-xs text-slate-300 mb-4">{t('pricing.starterTag')}</div>
+                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-slate-100 transition-colors duration-300">{t('pricing.starter')}</h3>
+                  <p className="text-sm text-gray-400 mb-6">{t('pricing.starterDesc')}</p>
+                  <div className="mb-8">
+                    <span className="text-4xl font-black text-white">$99</span>
+                    <span className="text-gray-400 text-sm">/month</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-3 mb-8 min-h-[280px]">
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.starterFeatures.setup', 'TikTok & Instagram account setup')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.starterFeatures.videos', '2 professional edited videos/month')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.starterFeatures.strategy', 'Basic content strategy')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.starterFeatures.report', 'Monthly performance report')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.starterFeatures.support', 'Email support')}</span>
+                  </li>
+                </ul>
+
+                <Button
+                  onClick={scrollToRegistration}
+                  variant="outline"
+                  className="w-full border-slate-600 text-white hover:bg-slate-600 hover:border-slate-500 py-5 text-sm font-semibold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20"
+                >
+                  {t('nav.getStarted')}
+                </Button>
               </div>
             </motion.div>
 
             {/* Pro Plan - Featured Red Theme */}
-            <motion.div 
+            <motion.div
               className="group relative scale-105 z-10"
               variants={staggerItem}
-              whileHover={{ 
+              whileHover={{
                 y: -8,
                 scale: 1.07,
                 transition: { duration: 0.3, ease: "easeOut" }
@@ -833,66 +834,66 @@ export default function Index() {
                 {/* Decorative corner accents */}
                 <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-red-500/20 to-transparent rounded-br-full"></div>
                 <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-red-500/20 to-transparent rounded-tl-full"></div>
-              
-              <div className="relative text-center mb-8">
-                <h3 className="text-xl font-bold mb-2 text-white">{t('pricing.pro')}</h3>
-                <p className="text-sm text-gray-400 mb-6">{t('pricing.proDesc')}</p>
-                <div className="mb-8">
-                  <span className="text-4xl font-black text-red-500">$249</span>
-                  <span className="text-gray-400 text-sm">/month</span>
-                </div>
-              </div>
-              
-              <ul className="space-y-3 mb-8 min-h-[280px] relative">
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Everything in Starter</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">5 professional edited videos/month</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Advanced content strategy</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Brand partnership outreach</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Weekly performance reports</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Priority support</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Custom thumbnails & graphics</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Trend analysis & recommendations</span>
-                </li>
-              </ul>
 
-              <Button 
-                onClick={scrollToRegistration}
-                className="relative w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white py-5 text-sm font-bold shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/50 transition-all duration-300 overflow-hidden group/btn"
-              >
-                <span className="relative z-10">Get Started</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500"></div>
-              </Button>
+                <div className="relative text-center mb-8">
+                  <h3 className="text-xl font-bold mb-2 text-white">{t('pricing.pro')}</h3>
+                  <p className="text-sm text-gray-400 mb-6">{t('pricing.proDesc')}</p>
+                  <div className="mb-8">
+                    <span className="text-4xl font-black text-red-500">$249</span>
+                    <span className="text-gray-400 text-sm">/month</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-3 mb-8 min-h-[280px] relative">
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.proFeatures.everything', 'Everything in Starter')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.proFeatures.videos', '5 professional edited videos/month')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.proFeatures.strategy', 'Advanced content strategy')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.proFeatures.partnerships', 'Brand partnership outreach')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.proFeatures.reports', 'Weekly performance reports')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.proFeatures.priority', 'Priority support')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.proFeatures.thumbnails', 'Custom thumbnails & graphics')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.proFeatures.trends', 'Trend analysis & recommendations')}</span>
+                  </li>
+                </ul>
+
+                <Button
+                  onClick={scrollToRegistration}
+                  className="relative w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white py-5 text-sm font-bold shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/50 transition-all duration-300 overflow-hidden group/btn"
+                >
+                  <span className="relative z-10">{t('nav.getStarted')}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-500"></div>
+                </Button>
               </div>
             </motion.div>
 
             {/* Elite Plan - Gold/Premium Theme */}
-            <motion.div 
+            <motion.div
               className="group relative"
               variants={staggerItem}
-              whileHover={{ 
+              whileHover={{
                 y: -12,
                 transition: { duration: 0.4, ease: "easeOut" }
               }}
@@ -910,75 +911,75 @@ export default function Index() {
                 <div className="absolute top-3 right-3">
                   <div className="w-8 h-8 text-amber-500/50 group-hover:text-amber-400 transition-colors duration-500">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 1L9 9H2L7 14L5 22L12 17L19 22L17 14L22 9H15L12 1Z"/>
+                      <path d="M12 1L9 9H2L7 14L5 22L12 17L19 22L17 14L22 9H15L12 1Z" />
                     </svg>
                   </div>
                 </div>
                 {/* Corner accents - Gold */}
                 <div className="absolute top-3 left-3 w-6 h-6 border-t border-l border-amber-600/50 group-hover:border-amber-400/80 transition-all duration-500 rounded-tl-lg"></div>
                 <div className="absolute bottom-3 right-3 w-6 h-6 border-b border-r border-amber-600/50 group-hover:border-amber-400/80 transition-all duration-500 rounded-br-lg"></div>
-                
-              <div className="relative text-center mb-8">
-                <div className="inline-block px-3 py-1 bg-gradient-to-r from-amber-600/30 to-yellow-600/30 rounded-full text-xs text-amber-300 mb-4 border border-amber-500/30">{t('pricing.premium')}</div>
-                <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-50 transition-colors duration-300">{t('pricing.elite')}</h3>
-                <p className="text-sm text-gray-400 mb-6">{t('pricing.eliteDesc')}</p>
-                <div className="mb-8">
-                  <span className="text-4xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">$499</span>
-                  <span className="text-gray-400 text-sm">/month</span>
-                </div>
-              </div>
-              
-              <ul className="space-y-3 mb-8 min-h-[280px]">
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Everything in Pro</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Unlimited video edits</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Dedicated account manager</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Direct team/brand connections</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Daily content posting</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">24/7 priority support</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Sponsorship negotiation</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Media training sessions</span>
-                </li>
-                <li className="flex items-start gap-2 text-sm">
-                  <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-300">Press release distribution</span>
-                </li>
-              </ul>
 
-              <Button 
-                onClick={scrollToRegistration}
-                className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 text-black font-bold py-5 text-sm transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-500/30"
-              >
-                Get Started
-              </Button>
+                <div className="relative text-center mb-8">
+                  <div className="inline-block px-3 py-1 bg-gradient-to-r from-amber-600/30 to-yellow-600/30 rounded-full text-xs text-amber-300 mb-4 border border-amber-500/30">{t('pricing.premium')}</div>
+                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-50 transition-colors duration-300">{t('pricing.elite')}</h3>
+                  <p className="text-sm text-gray-400 mb-6">{t('pricing.eliteDesc')}</p>
+                  <div className="mb-8">
+                    <span className="text-4xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">$499</span>
+                    <span className="text-gray-400 text-sm">/month</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-3 mb-8 min-h-[280px]">
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.everything', 'Everything in Pro')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.unlimited', 'Unlimited video edits')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.manager', 'Dedicated account manager')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.connections', 'Direct team/brand connections')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.daily', 'Daily content posting')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.support247', '24/7 priority support')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.sponsorship', 'Sponsorship negotiation')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.media', 'Media training sessions')}</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.press', 'Press release distribution')}</span>
+                  </li>
+                </ul>
+
+                <Button
+                  onClick={scrollToRegistration}
+                  className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 text-black font-bold py-5 text-sm transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-500/30"
+                >
+                  {t('nav.getStarted')}
+                </Button>
               </div>
             </motion.div>
           </motion.div>
 
           {/* Payment Methods & Trust */}
-          <motion.div 
+          <motion.div
             className="mt-16 text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -987,25 +988,25 @@ export default function Index() {
           >
             <p className="text-gray-500 text-sm mb-6">{t('pricing.trustPayment')}</p>
             <div className="flex items-center justify-center gap-8">
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300"
                 whileHover={{ scale: 1.1 }}
               >
                 <FaStripe className="w-10 h-10" />
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-2 text-gray-400 hover:text-blue-500 transition-colors duration-300"
                 whileHover={{ scale: 1.1 }}
               >
                 <FaCcVisa className="w-12 h-12" />
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors duration-300"
                 whileHover={{ scale: 1.1 }}
               >
                 <FaCcMastercard className="w-12 h-12" />
               </motion.div>
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-2 text-gray-400 hover:text-blue-600 transition-colors duration-300"
                 whileHover={{ scale: 1.1 }}
               >
@@ -1019,7 +1020,7 @@ export default function Index() {
       {/* Registration Section */}
       <section id="registration" className="py-24 px-6 bg-black overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial="hidden"
             whileInView="visible"
@@ -1027,7 +1028,7 @@ export default function Index() {
             variants={fadeInUp}
           >
             <h2 className="text-5xl font-black mb-6">{t('registration.title')}</h2>
-            <motion.div 
+            <motion.div
               className="w-24 h-1 bg-red-600 mx-auto mb-8"
               initial={{ width: 0 }}
               whileInView={{ width: 96 }}
@@ -1042,113 +1043,21 @@ export default function Index() {
           {!showInfoRequest && !showPayment ? (
             <div className="grid lg:grid-cols-2 gap-8">
               {/* Registration Form */}
-              <Card className="bg-zinc-900 border-zinc-800">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-white">{t('registration.athleteReg')}</CardTitle>
-                  <CardDescription className="text-sm text-gray-400">
-                    {t('registration.athleteRegDesc')}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleRegistration} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="full_name" className="text-sm font-medium text-gray-200">{t('registration.fullName')}</Label>
-                        <Input
-                          id="full_name"
-                          value={formData.full_name}
-                          onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                          required
-                          className="bg-zinc-800 border-zinc-700 text-white h-10"
-                          placeholder="John Doe"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="text-sm font-medium text-gray-200">{t('registration.email')}</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          required
-                          className="bg-zinc-800 border-zinc-700 text-white h-10"
-                          placeholder="john@example.com"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="phone" className="text-sm font-medium text-gray-200">Phone Number</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="bg-zinc-800 border-zinc-700 text-white h-10"
-                          placeholder="+1 (555) 000-0000"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="sport_type" className="text-sm font-medium text-gray-200">{t('registration.sport')}</Label>
-                        <Select
-                          value={formData.sport_type}
-                          onValueChange={(value) => setFormData({ ...formData, sport_type: value })}
-                        >
-                          <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white h-10">
-                            <SelectValue placeholder={t('registration.selectSport')} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="soccer">{t('sports.soccer')}</SelectItem>
-                            <SelectItem value="basketball">{t('sports.basketball')}</SelectItem>
-                            <SelectItem value="tennis">{t('sports.tennis')}</SelectItem>
-                            <SelectItem value="swimming">{t('sports.swimming')}</SelectItem>
-                            <SelectItem value="track">{t('sports.track')}</SelectItem>
-                            <SelectItem value="boxing">{t('sports.boxing')}</SelectItem>
-                            <SelectItem value="volleyball">{t('sports.volleyball')}</SelectItem>
-                            <SelectItem value="baseball">{t('sports.baseball')}</SelectItem>
-                            <SelectItem value="other">{t('sports.other')}</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="instagram_handle" className="text-sm font-medium text-gray-200">{t('registration.instagram')}</Label>
-                        <Input
-                          id="instagram_handle"
-                          value={formData.instagram_handle}
-                          onChange={(e) => setFormData({ ...formData, instagram_handle: e.target.value })}
-                          className="bg-zinc-800 border-zinc-700 text-white h-10"
-                          placeholder="@yourhandle"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="tiktok_handle" className="text-sm font-medium text-gray-200">{t('registration.tiktok')}</Label>
-                        <Input
-                          id="tiktok_handle"
-                          value={formData.tiktok_handle}
-                          onChange={(e) => setFormData({ ...formData, tiktok_handle: e.target.value })}
-                          className="bg-zinc-800 border-zinc-700 text-white h-10"
-                          placeholder="@yourhandle"
-                        />
-                      </div>
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={isRegistering}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-base py-5 mt-2"
-                    >
-                      {isRegistering ? t('registration.registering') : t('registration.register')}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+              {/* Headquarters Image */}
+              <div className="flex items-center justify-center p-4">
+                <div className="w-full h-full min-h-[500px] border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/50 relative group">
+                  <img
+                    src="/contact-building.png"
+                    alt="Global Media Sports Headquarters"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+                  <div className="absolute bottom-6 left-6 pointer-events-none">
+                    <p className="text-white font-bold text-xl tracking-tight">Global Media Sports</p>
+                    <p className="text-red-500 text-sm font-medium">Headquarters</p>
+                  </div>
+                </div>
+              </div>
 
               {/* Contact Information */}
               <div className="space-y-6">
@@ -1190,17 +1099,17 @@ export default function Index() {
                   <div className="border-t border-zinc-800 pt-6">
                     <h4 className="font-semibold text-white mb-4">{t('registration.followUs')}</h4>
                     <div className="flex items-center gap-3">
-                      <a 
-                        href="https://instagram.com" 
-                        target="_blank" 
+                      <a
+                        href="https://instagram.com"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors group"
                       >
                         <RiInstagramFill className="w-5 h-5 text-gray-400 group-hover:text-white" />
                       </a>
-                      <a 
-                        href="https://tiktok.com" 
-                        target="_blank" 
+                      <a
+                        href="https://tiktok.com"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors group"
                       >
@@ -1329,9 +1238,9 @@ export default function Index() {
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
             {t('cta.subtitle')}
           </p>
-          <Button 
+          <Button
             onClick={scrollToRegistration}
-            size="lg" 
+            size="lg"
             className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-12 py-6 rounded-lg transform hover:scale-105 transition-all duration-300"
           >
             {t('cta.button')}
@@ -1360,25 +1269,25 @@ export default function Index() {
                 {t('footer.description')}
               </p>
               <div className="flex items-center gap-3">
-                <a 
-                  href="https://instagram.com" 
-                  target="_blank" 
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 bg-zinc-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors group"
                 >
                   <RiInstagramFill className="w-4 h-4 text-gray-400 group-hover:text-white" />
                 </a>
-                <a 
-                  href="https://tiktok.com" 
-                  target="_blank" 
+                <a
+                  href="https://tiktok.com"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 bg-zinc-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors group"
                 >
                   <RiTiktokFill className="w-4 h-4 text-gray-400 group-hover:text-white" />
                 </a>
-                <a 
-                  href="https://twitter.com" 
-                  target="_blank" 
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 bg-zinc-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors group"
                 >

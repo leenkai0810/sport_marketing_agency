@@ -212,7 +212,7 @@ const Dashboard = () => {
                                     </div>
                                     {!isPremium && (
                                         <Button
-                                            onClick={handleSubscribe}
+                                            onClick={() => handleSubscribe('starter')}
                                             size="sm"
                                             className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold"
                                         >
@@ -312,14 +312,14 @@ const Dashboard = () => {
                                     >
                                         <div className="absolute -inset-[1px] bg-gradient-to-b from-zinc-700/40 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         <div className="relative flex flex-col flex-1">
-                                            <div className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-800 text-gray-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4">Starter</div>
+                                            <div className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-800 text-gray-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4">{t('pricing.starterTitle', 'Starter')}</div>
                                             <div className="mb-1">
                                                 <span className="text-4xl font-black text-white">$99</span>
-                                                <span className="text-gray-500 text-sm ml-1">/month</span>
+                                                <span className="text-gray-500 text-sm ml-1">/{t('pricing.month', 'month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.starterDesc', 'Perfect for rising athletes')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
-                                                {[t('pricing.s1', 'TikTok & Instagram account setup'), t('pricing.s2', '2 professional edited videos/month'), t('pricing.s3', 'Basic content strategy'), t('pricing.s4', 'Monthly performance report'), t('pricing.s5', 'Email support')].map((f, i) => (
+                                                {[t('pricing.starterFeatures.setup', 'TikTok & Instagram account setup'), t('pricing.starterFeatures.videos', '2 professional edited videos/month'), t('pricing.starterFeatures.strategy', 'Basic content strategy'), t('pricing.starterFeatures.report', 'Monthly performance report'), t('pricing.starterFeatures.support', 'Email support')].map((f, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                                                         <span className="text-red-500 mt-0.5">✓</span>{f}
                                                     </li>
@@ -328,7 +328,7 @@ const Dashboard = () => {
                                             <Button
                                                 onClick={() => handleSubscribe('starter')}
                                                 variant="outline"
-                                                className="w-full border-zinc-600 text-white hover:bg-zinc-800 hover:border-zinc-500 font-bold"
+                                                className="w-full border-zinc-600 text-white hover:bg-zinc-800 hover:text-white hover:border-zinc-500 font-bold"
                                             >
                                                 {t('pricing.getStarted', 'Get Started')}
                                             </Button>
@@ -345,14 +345,14 @@ const Dashboard = () => {
                                             <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                                                 <span className="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">{t('pricing.mostPopular', 'Most Popular')}</span>
                                             </div>
-                                            <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4 mt-2">Pro</div>
+                                            <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4 mt-2">{t('pricing.proTitle', 'Pro')}</div>
                                             <div className="mb-1">
                                                 <span className="text-4xl font-black text-red-500">$249</span>
-                                                <span className="text-gray-500 text-sm ml-1">/month</span>
+                                                <span className="text-gray-500 text-sm ml-1">/{t('pricing.month', 'month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.proDesc', 'For athletes who want to go pro')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
-                                                {[t('pricing.p0', 'Everything in Starter'), t('pricing.p1', '5 professional edited videos/month'), t('pricing.p2', 'Advanced content strategy'), t('pricing.p3', 'Brand partnership outreach'), t('pricing.p4', 'Weekly performance reports'), t('pricing.p5', 'Priority support'), t('pricing.p6', 'Custom thumbnails & graphics'), t('pricing.p7', 'Trend analysis & recommendations')].map((f, i) => (
+                                                {[t('pricing.proFeatures.everything', 'Everything in Starter'), t('pricing.proFeatures.videos', '5 professional edited videos/month'), t('pricing.proFeatures.strategy', 'Advanced content strategy'), t('pricing.proFeatures.partnerships', 'Brand partnership outreach'), t('pricing.proFeatures.reports', 'Weekly performance reports'), t('pricing.proFeatures.priority', 'Priority support'), t('pricing.proFeatures.thumbnails', 'Custom thumbnails & graphics'), t('pricing.proFeatures.trends', 'Trend analysis & recommendations')].map((f, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                                                         <span className="text-red-500 mt-0.5">✓</span>{f}
                                                     </li>
@@ -375,16 +375,16 @@ const Dashboard = () => {
                                         <div className="absolute -inset-[1px] bg-gradient-to-b from-yellow-500/40 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col flex-1">
                                             <div className="flex items-center justify-between mb-4">
-                                                <div className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-wider">Elite</div>
+                                                <div className="inline-flex items-center px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs font-semibold uppercase tracking-wider">{t('pricing.eliteTitle', 'Elite')}</div>
                                                 <span className="text-yellow-400 text-lg">★</span>
                                             </div>
                                             <div className="mb-1">
                                                 <span className="text-4xl font-black text-yellow-400">$499</span>
-                                                <span className="text-gray-500 text-sm ml-1">/month</span>
+                                                <span className="text-gray-500 text-sm ml-1">/{t('pricing.month', 'month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.eliteDesc', 'Maximum reach and visibility')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
-                                                {[t('pricing.e0', 'Everything in Pro'), t('pricing.e1', 'Unlimited video edits'), t('pricing.e2', 'Dedicated account manager'), t('pricing.e3', 'Direct team/brand connections'), t('pricing.e4', 'Daily content posting'), t('pricing.e5', '24/7 priority support'), t('pricing.e6', 'Sponsorship negotiation'), t('pricing.e7', 'Media training sessions'), t('pricing.e8', 'Press release distribution')].map((f, i) => (
+                                                {[t('pricing.eliteFeatures.everything', 'Everything in Pro'), t('pricing.eliteFeatures.unlimited', 'Unlimited video edits'), t('pricing.eliteFeatures.manager', 'Dedicated account manager'), t('pricing.eliteFeatures.connections', 'Direct team/brand connections'), t('pricing.eliteFeatures.daily', 'Daily content posting'), t('pricing.eliteFeatures.support247', '24/7 priority support'), t('pricing.eliteFeatures.sponsorship', 'Sponsorship negotiation'), t('pricing.eliteFeatures.media', 'Media training sessions'), t('pricing.eliteFeatures.press', 'Press release distribution')].map((f, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                                                         <span className="text-yellow-400 mt-0.5">✓</span>{f}
                                                     </li>
@@ -429,7 +429,7 @@ const Dashboard = () => {
                                                     </p>
                                                 </div>
                                                 <Button
-                                                    onClick={handleSubscribe}
+                                                    onClick={() => handleSubscribe('starter')}
                                                     className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-5 text-sm transition-all hover:shadow-lg hover:shadow-red-600/30"
                                                 >
                                                     {t('dashboard.upgradeBtn', 'Upgrade to Premium')}

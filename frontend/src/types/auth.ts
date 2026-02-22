@@ -4,10 +4,10 @@ export const registerSchema = z.object({
     email: z.string().email(),
     password: z.string().min(6),
     name: z.string().min(2),
-    phone: z.string().optional(),
+    phone: z.string().min(1, 'Phone number is required'),
     sport: z.string().min(1, 'Please select your primary sport'),
-    instagram: z.string().optional(),
-    tiktok: z.string().optional(),
+    instagram: z.string().min(1, 'Instagram handle is required'),
+    tiktok: z.string().min(1, 'TikTok handle is required'),
     termsAccepted: z.boolean().refine((val) => val === true, {
         message: 'You must accept the terms and conditions',
     }),
