@@ -1044,18 +1044,16 @@ export default function Index() {
             <div className="grid lg:grid-cols-2 gap-8">
               {/* Registration Form */}
               {/* Headquarters Image */}
-              <div className="flex items-center justify-center">
-                <div className="w-full h-full min-h-[400px] border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/50 relative group">
-                  <img
-                    src="/contact-building.png"
-                    alt="Global Media Sports Headquarters"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
-                  <div className="absolute bottom-6 left-6 pointer-events-none">
-                    <p className="text-white font-bold text-xl tracking-tight">Global Media Sports</p>
-                    <p className="text-red-500 text-sm font-medium">Headquarters</p>
-                  </div>
+              <div className="w-full h-full min-h-[350px] lg:min-h-0 border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/50 relative group">
+                <img
+                  src="/contact-building.png"
+                  alt="Global Media Sports Headquarters"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+                <div className="absolute bottom-6 left-6 pointer-events-none">
+                  <p className="text-white font-bold text-xl tracking-tight">Global Media Sports</p>
+                  <p className="text-red-500 text-sm font-medium">Headquarters</p>
                 </div>
               </div>
 
