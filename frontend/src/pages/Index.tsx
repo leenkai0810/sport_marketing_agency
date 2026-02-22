@@ -1041,14 +1041,14 @@ export default function Index() {
           </motion.div>
 
           {!showInfoRequest && !showPayment ? (
-            <div className="grid lg:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-8 items-stretch">
               {/* Registration Form */}
               {/* Headquarters Image */}
-              <div className="w-full h-full min-h-[350px] lg:min-h-0 border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/50 relative group">
+              <div className="w-full relative rounded-2xl overflow-hidden border border-zinc-800 group min-h-[400px]">
                 <img
                   src="/contact-building.png"
                   alt="Global Media Sports Headquarters"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
                 <div className="absolute bottom-6 left-6 pointer-events-none">
@@ -1058,7 +1058,7 @@ export default function Index() {
               </div>
 
               {/* Contact Information */}
-              <div className="space-y-6">
+              <div className="space-y-6 flex flex-col justify-center">
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2">{t('registration.contactInfo')}</h3>
                   <p className="text-sm text-gray-400">
