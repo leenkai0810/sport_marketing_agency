@@ -1044,8 +1044,8 @@ export default function Index() {
             <div className="grid lg:grid-cols-2 gap-8">
               {/* Registration Form */}
               {/* Headquarters Image */}
-              <div className="flex items-center justify-center p-4">
-                <div className="w-full h-full min-h-[500px] border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/50 relative group">
+              <div className="flex items-center justify-center">
+                <div className="w-full h-full min-h-[400px] border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/50 relative group">
                   <img
                     src="/contact-building.png"
                     alt="Global Media Sports Headquarters"
