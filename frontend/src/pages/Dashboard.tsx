@@ -469,6 +469,8 @@ const Dashboard = () => {
                                                             onChange={(info) => setUploadedUrl(info.cdnUrl)}
                                                             ref={widgetApi}
                                                             clearable
+                                                            systemDialog={true}
+                                                            accept="video/*"
                                                         />
                                                     </div>
                                                 </div>
