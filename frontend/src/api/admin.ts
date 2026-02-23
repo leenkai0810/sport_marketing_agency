@@ -15,4 +15,9 @@ export const adminApi = {
         const response = await client.put(`/api/admin/videos/${id}/status`, { status });
         return response.data;
     },
+
+    getUserById: async (id: string) => {
+        const response = await client.get(`/api/admin/users/${id}`);
+        return response.data;
+    },
 };

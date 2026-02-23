@@ -64,6 +64,10 @@ export const getMe = async (req: AuthRequest, res: Response) => {
                 role: true,
                 subscriptionStatus: true,
                 contractAccepted: true,
+                phone: true,
+                sport: true,
+                instagram: true,
+                tiktok: true,
             },
         });
         if (!user) {

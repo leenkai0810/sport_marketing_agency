@@ -144,6 +144,7 @@ const AdminDashboard = () => {
                                         <TableHead>{t('user.role', 'Role')}</TableHead>
                                         <TableHead>{t('admin.subscription', 'Subscription')}</TableHead>
                                         <TableHead>{t('admin.joined', 'Joined')}</TableHead>
+                                        <TableHead>{t('admin.actions', 'Actions')}</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
@@ -156,6 +157,11 @@ const AdminDashboard = () => {
                                                 {u.subscriptionStatus === 'ACTIVE' ? t('dashboard.activePrem', 'Active (Premium)') : t('dashboard.inactiveFree', 'Inactive (Free)')}
                                             </TableCell>
                                             <TableCell>{new Date(u.createdAt).toLocaleDateString()}</TableCell>
+                                            <TableCell>
+                                                <Button size="sm" variant="outline" onClick={() => navigate(`/admin/users/${u.id}`)}>
+                                                    {t('admin.viewProfile', 'View Profile')}
+                                                </Button>
+                                            </TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>

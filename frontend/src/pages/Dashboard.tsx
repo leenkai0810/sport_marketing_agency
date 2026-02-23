@@ -536,6 +536,53 @@ const Dashboard = () => {
                                                     className="bg-zinc-800 border-zinc-700 text-white h-11 disabled:opacity-70"
                                                 />
                                             </div>
+                                            {(user.phone || user.sport || user.instagram || user.tiktok) && (
+                                                <>
+                                                    <div className="pt-4 border-t border-zinc-800">
+                                                        <h4 className="text-sm font-semibold mb-4 text-white">{t('dashboard.additionalInfo', 'Additional Information')}</h4>
+                                                    </div>
+                                                    {user.phone && (
+                                                        <div>
+                                                            <Label className="text-gray-400 text-xs uppercase tracking-wider mb-1.5 block">{t('registration.phone', 'Phone Number')}</Label>
+                                                            <Input
+                                                                value={user.phone}
+                                                                disabled
+                                                                className="bg-zinc-800 border-zinc-700 text-white h-11 disabled:opacity-70"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    {user.sport && (
+                                                        <div>
+                                                            <Label className="text-gray-400 text-xs uppercase tracking-wider mb-1.5 block">{t('registration.sport', 'Primary Sport')}</Label>
+                                                            <Input
+                                                                value={user.sport}
+                                                                disabled
+                                                                className="bg-zinc-800 border-zinc-700 text-white h-11 disabled:opacity-70 capitalize"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    {user.instagram && (
+                                                        <div>
+                                                            <Label className="text-gray-400 text-xs uppercase tracking-wider mb-1.5 block">{t('registration.instagram', 'Instagram Handle')}</Label>
+                                                            <Input
+                                                                value={user.instagram}
+                                                                disabled
+                                                                className="bg-zinc-800 border-zinc-700 text-white h-11 disabled:opacity-70"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                    {user.tiktok && (
+                                                        <div>
+                                                            <Label className="text-gray-400 text-xs uppercase tracking-wider mb-1.5 block">{t('registration.tiktok', 'TikTok Handle')}</Label>
+                                                            <Input
+                                                                value={user.tiktok}
+                                                                disabled
+                                                                className="bg-zinc-800 border-zinc-700 text-white h-11 disabled:opacity-70"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

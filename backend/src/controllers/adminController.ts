@@ -82,3 +82,31 @@ export const updateVideoStatus = async (req: AuthRequest, res: Response) => {
         res.status(500).json({ message: req.t('auth.internal_error') });
     }
 };
+
+export const getUserById = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!isAdmin(req)) {
+            return res.status(403).json({ message: (req as any).t('admin.unauthorized') });
+        }
+
+        const { id } = req.params as { id: string };
+
+        const user = await prisma.user.findUnique({
+            where: { id },
+            include: {
+                videos: {
+                    orderBy: { createdAt: 'desc' },
+                },
+            },
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: req.t('video.user_not_found', 'User not found') });
+        }
+
+        res.json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: req.t('auth.internal_error') });
+    }
+};

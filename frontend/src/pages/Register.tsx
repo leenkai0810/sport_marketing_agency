@@ -54,6 +54,7 @@ const Register = () => {
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(false);
     const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+    const [isGoogleUser, setIsGoogleUser] = useState(false);
     const [showOtp, setShowOtp] = useState(false);
     const [pendingData, setPendingData] = useState<RegisterData | null>(null);
 
@@ -110,6 +111,7 @@ const Register = () => {
             // Set a dummy password since they are using Google
             // (The backend won't use this if we adjust it, but the schema requires it)
             form.setValue('password', 'google-auth-placeholder');
+            setIsGoogleUser(true);
 
             toast.success(t('auth.googleDataLoaded', 'Google data loaded! Please complete the rest of the form.'));
         } catch (error: any) {
@@ -199,13 +201,15 @@ const Register = () => {
 
                                     {/* Row 2: Password + Primary Sport */}
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <FormField control={form.control} name="password" render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className="text-gray-200 text-sm font-medium">{t('user.password', 'Password')} <span className="text-red-500">*</span></FormLabel>
-                                                <FormControl><Input type="password" placeholder="••••••••" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
-                                                <FormMessage className="text-red-400 text-xs" />
-                                            </FormItem>
-                                        )} />
+                                        {!isGoogleUser && (
+                                            <FormField control={form.control} name="password" render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel className="text-gray-200 text-sm font-medium">{t('user.password', 'Password')} <span className="text-red-500">*</span></FormLabel>
+                                                    <FormControl><Input type="password" placeholder="••••••••" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
+                                                    <FormMessage className="text-red-400 text-xs" />
+                                                </FormItem>
+                                            )} />
+                                        )}
                                         <FormField control={form.control} name="sport" render={({ field }) => (
                                             <FormItem>
                                                 <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.sport', 'Primary Sport')} <span className="text-red-500">*</span></FormLabel>
