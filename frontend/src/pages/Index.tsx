@@ -795,7 +795,7 @@ export default function Index() {
                 </ul>
 
                 <Button
-                  onClick={scrollToRegistration}
+                  onClick={() => navigate('/register')}
                   variant="outline"
                   className="w-full border-slate-600 text-white hover:bg-slate-600 hover:border-slate-500 py-5 text-sm font-semibold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20"
                 >
@@ -880,7 +880,7 @@ export default function Index() {
                 </ul>
 
                 <Button
-                  onClick={scrollToRegistration}
+                  onClick={() => navigate('/register')}
                   className="relative w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-600 text-white py-5 text-sm font-bold shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/50 transition-all duration-300 overflow-hidden group/btn"
                 >
                   <span className="relative z-10">{t('nav.getStarted')}</span>
@@ -969,7 +969,7 @@ export default function Index() {
                 </ul>
 
                 <Button
-                  onClick={scrollToRegistration}
+                  onClick={() => navigate('/register')}
                   className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 text-black font-bold py-5 text-sm transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-500/30"
                 >
                   {t('nav.getStarted')}
@@ -1237,7 +1237,7 @@ export default function Index() {
             {t('cta.subtitle')}
           </p>
           <Button
-            onClick={scrollToRegistration}
+            onClick={() => navigate('/register')}
             size="lg"
             className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-12 py-6 rounded-lg transform hover:scale-105 transition-all duration-300"
           >
