@@ -241,6 +241,8 @@
     "role": "Rôle"
   },
   "dashboard": {
+    "choosePlan": "Choisissez votre forfait",
+    "choosePlanDesc": "Mettez à niveau pour débloquer la création de contenu professionnel et l'exposition de la marque.",
     "uploadFirst": "Veuillez d'abord télécharger une vidéo",
     "uploadSuccess": "Vidéo téléchargée avec succès !",
     "uploadFailed": "Échec du téléchargement de la vidéo",

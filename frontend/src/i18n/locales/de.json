@@ -241,6 +241,8 @@
     "role": "Rolle"
   },
   "dashboard": {
+    "choosePlan": "Wählen Sie Ihren Plan",
+    "choosePlanDesc": "Upgraden Sie, um professionelle Content-Erstellung und Markenpräsenz freizuschalten.",
     "uploadFirst": "Bitte laden Sie zuerst ein Video hoch",
     "uploadSuccess": "Video erfolgreich hochgeladen!",
     "uploadFailed": "Fehler beim Hochladen des Videos",

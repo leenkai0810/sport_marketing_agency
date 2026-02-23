@@ -249,6 +249,8 @@
     "role": "Role"
   },
   "dashboard": {
+    "choosePlan": "Choose Your Plan",
+    "choosePlanDesc": "Upgrade to unlock professional content creation and brand exposure.",
     "uploadFirst": "Please upload a video first",
     "uploadSuccess": "Video uploaded successfully!",
     "uploadFailed": "Failed to upload video",

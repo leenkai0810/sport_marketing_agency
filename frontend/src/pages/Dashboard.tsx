@@ -315,7 +315,7 @@ const Dashboard = () => {
                                             <div className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-800 text-gray-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4">{t('pricing.starterTitle', 'Starter')}</div>
                                             <div className="mb-1">
                                                 <span className="text-4xl font-black text-white">$99</span>
-                                                <span className="text-gray-500 text-sm ml-1">/{t('pricing.month', 'month')}</span>
+                                                <span className="text-gray-500 text-sm ml-1">{t('pricing.month', '/month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.starterDesc', 'Perfect for rising athletes')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
@@ -348,7 +348,7 @@ const Dashboard = () => {
                                             <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4 mt-2">{t('pricing.proTitle', 'Pro')}</div>
                                             <div className="mb-1">
                                                 <span className="text-4xl font-black text-red-500">$249</span>
-                                                <span className="text-gray-500 text-sm ml-1">/{t('pricing.month', 'month')}</span>
+                                                <span className="text-gray-500 text-sm ml-1">{t('pricing.month', '/month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.proDesc', 'For athletes who want to go pro')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
@@ -380,7 +380,7 @@ const Dashboard = () => {
                                             </div>
                                             <div className="mb-1">
                                                 <span className="text-4xl font-black text-yellow-400">$499</span>
-                                                <span className="text-gray-500 text-sm ml-1">/{t('pricing.month', 'month')}</span>
+                                                <span className="text-gray-500 text-sm ml-1">{t('pricing.month', '/month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.eliteDesc', 'Maximum reach and visibility')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">

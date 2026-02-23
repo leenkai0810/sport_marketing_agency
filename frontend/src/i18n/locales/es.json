@@ -241,6 +241,8 @@
     "role": "Rol"
   },
   "dashboard": {
+    "choosePlan": "Elige tu plan",
+    "choosePlanDesc": "Actualiza para desbloquear la creación de contenido profesional y la exposición de marca.",
     "uploadFirst": "Por favor, sube un video primero",
     "uploadSuccess": "¡Video subido con éxito!",
     "uploadFailed": "Error al subir el video",

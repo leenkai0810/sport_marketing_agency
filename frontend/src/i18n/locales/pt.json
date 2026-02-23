@@ -241,6 +241,8 @@
     "role": "Cargo"
   },
   "dashboard": {
+    "choosePlan": "Escolha o seu plano",
+    "choosePlanDesc": "Atualize para desbloquear a criação de conteúdo profissional e a exposição da marca.",
     "uploadFirst": "Por favor, carregue um vídeo primeiro",
     "uploadSuccess": "Vídeo carregado com sucesso!",
     "uploadFailed": "Falha ao carregar o vídeo",
