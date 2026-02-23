@@ -72,7 +72,7 @@ const AdminUserProfile = () => {
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <LanguageSwitcher isDark={false} />
+                        <LanguageSwitcher isDark={true} />
                         <Button
                             variant="outline"
                             onClick={handleLogout}
@@ -156,7 +156,7 @@ const AdminUserProfile = () => {
                                 <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8">
                                     <div>
                                         <dt className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                                            <Phone className="w-3.5 h-3.5" /> {t('user.phone', 'Phone Number')}
+                                            <Phone className="w-3.5 h-3.5" /> {t('registration.phone', 'Phone Number')}
                                         </dt>
                                         <dd className="text-gray-900 font-medium bg-gray-50 px-3 py-2 border border-gray-200 rounded-lg">
                                             {user.phone || <span className="text-gray-400 italic">{t('common.notProvided', 'Not provided')}</span>}
@@ -164,7 +164,7 @@ const AdminUserProfile = () => {
                                     </div>
                                     <div>
                                         <dt className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                                            <MapPin className="w-3.5 h-3.5" /> {t('user.primarySport', 'Primary Sport')}
+                                            <MapPin className="w-3.5 h-3.5" /> {t('registration.sport', 'Primary Sport')}
                                         </dt>
                                         <dd className="text-gray-900 font-medium bg-gray-50 px-3 py-2 border border-gray-200 rounded-lg capitalize">
                                             {user.sport || <span className="text-gray-400 italic">{t('common.notProvided', 'Not provided')}</span>}
@@ -172,7 +172,7 @@ const AdminUserProfile = () => {
                                     </div>
                                     <div>
                                         <dt className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                                            <Instagram className="w-3.5 h-3.5" /> Instagram
+                                            <Instagram className="w-3.5 h-3.5" /> {t('registration.instagram', 'Instagram')}
                                         </dt>
                                         <dd className="text-gray-900 font-medium bg-gray-50 px-3 py-2 border border-gray-200 rounded-lg">
                                             {user.instagram || <span className="text-gray-400 italic">{t('common.notProvided', 'Not provided')}</span>}
@@ -180,7 +180,7 @@ const AdminUserProfile = () => {
                                     </div>
                                     <div>
                                         <dt className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                                            <Youtube className="w-3.5 h-3.5" /> TikTok
+                                            <Youtube className="w-3.5 h-3.5" /> {t('registration.tiktok', 'TikTok')}
                                         </dt>
                                         <dd className="text-gray-900 font-medium bg-gray-50 px-3 py-2 border border-gray-200 rounded-lg">
                                             {user.tiktok || <span className="text-gray-400 italic">{t('common.notProvided', 'Not provided')}</span>}

@@ -503,7 +503,7 @@ const Dashboard = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4 }}
                         >
-                            <div className="relative max-w-3xl">
+                            <div className="relative max-w-xl">
                                 <div className="absolute -inset-[1px] bg-gradient-to-b from-red-600/40 via-zinc-700/10 to-zinc-700/10 rounded-2xl" />
                                 <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
                                     {/* Avatar header */}

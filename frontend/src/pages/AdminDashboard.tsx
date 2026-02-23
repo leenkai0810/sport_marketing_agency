@@ -72,7 +72,7 @@ const AdminDashboard = () => {
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
-                        <LanguageSwitcher isDark={false} />
+                        <LanguageSwitcher isDark={true} />
                         <Button
                             variant="outline"
                             onClick={handleLogout}
