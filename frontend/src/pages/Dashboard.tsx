@@ -469,8 +469,13 @@ const Dashboard = () => {
                                                             onChange={(info) => setUploadedUrl(info.cdnUrl)}
                                                             ref={widgetApi}
                                                             clearable
-                                                            systemDialog={true}
-                                                            accept="video/*"
+                                                            validators={[
+                                                                (fileInfo) => {
+                                                                    if (fileInfo.isImage || !fileInfo.mimeType?.startsWith('video/')) {
+                                                                        throw new Error('Only video files are allowed.');
+                                                                    }
+                                                                }
+                                                            ]}
                                                         />
                                                     </div>
                                                 </div>
