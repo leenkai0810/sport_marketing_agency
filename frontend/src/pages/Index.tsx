@@ -332,7 +332,7 @@ export default function Index() {
             transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
           >
             <Button
-              onClick={scrollToRegistration}
+              onClick={() => navigate('/register')}
               size="lg"
               className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-12 py-6 rounded-lg transform hover:scale-105 transition-all duration-300 shadow-2xl"
             >
