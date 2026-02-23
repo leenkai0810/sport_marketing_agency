@@ -797,7 +797,7 @@ export default function Index() {
                 <Button
                   onClick={() => navigate('/register')}
                   variant="outline"
-                  className="relative z-10 w-full border-slate-600 text-white hover:bg-slate-600 hover:border-slate-500 py-5 text-sm font-semibold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20"
+                  className="relative z-10 w-full border-slate-600 text-white hover:bg-slate-700 hover:text-white hover:border-slate-500 py-5 text-sm font-semibold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20"
                 >
                   {t('nav.getStarted')}
                 </Button>
