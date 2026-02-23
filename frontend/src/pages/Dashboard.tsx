@@ -328,7 +328,7 @@ const Dashboard = () => {
                                             <Button
                                                 onClick={() => handleSubscribe('starter')}
                                                 variant="outline"
-                                                className="w-full border-zinc-600 text-white hover:bg-zinc-800 hover:text-white hover:border-zinc-500 font-bold"
+                                                className="w-full border-zinc-600 text-white hover:bg-zinc-800 hover:text-white hover:border-zinc-500 font-black tracking-wider uppercase py-5"
                                             >
                                                 {t('pricing.getStarted', 'Get Started')}
                                             </Button>
