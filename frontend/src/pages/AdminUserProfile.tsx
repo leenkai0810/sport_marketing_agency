@@ -128,12 +128,12 @@ const AdminUserProfile = () => {
                         <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
                             <h3 className="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">{t('admin.metrics', 'Metrics')}</h3>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                                    <div className="text-gray-500 text-xs mb-1 font-medium uppercase">{t('admin.totalVideos', 'Total Videos')}</div>
+                                <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex flex-col justify-between">
+                                    <div className="text-gray-500 text-xs mb-2 font-medium uppercase">{t('admin.totalVideos', 'Total Videos')}</div>
                                     <div className="text-2xl font-black text-gray-900">{user.videos?.length || 0}</div>
                                 </div>
-                                <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
-                                    <div className="text-emerald-700 text-xs mb-1 font-medium uppercase">{t('admin.approved', 'Approved')}</div>
+                                <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100 flex flex-col justify-between">
+                                    <div className="text-emerald-700 text-xs mb-2 font-medium uppercase">{t('admin.approved', 'Approved')}</div>
                                     <div className="text-2xl font-black text-emerald-600">
                                         {user.videos?.filter((v: any) => v.status === 'APPROVED').length || 0}
                                     </div>
