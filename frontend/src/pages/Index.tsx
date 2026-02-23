@@ -797,7 +797,7 @@ export default function Index() {
                 <Button
                   onClick={() => navigate('/register')}
                   variant="outline"
-                  className="w-full border-slate-600 text-white hover:bg-slate-600 hover:border-slate-500 py-5 text-sm font-semibold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20"
+                  className="relative z-10 w-full border-slate-600 text-white hover:bg-slate-600 hover:border-slate-500 py-5 text-sm font-semibold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20"
                 >
                   {t('nav.getStarted')}
                 </Button>
@@ -970,7 +970,7 @@ export default function Index() {
 
                 <Button
                   onClick={() => navigate('/register')}
-                  className="w-full bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 text-black font-bold py-5 text-sm transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-500/30"
+                  className="relative z-10 w-full bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 text-black font-bold py-5 text-sm transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-500/30"
                 >
                   {t('nav.getStarted')}
                 </Button>
