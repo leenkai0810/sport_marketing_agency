@@ -294,7 +294,20 @@
     "view": "Ansehen",
     "registeredUsers": "Registrierte Benutzer",
     "subscription": "Abonnement",
-    "joined": "Beigetreten"
+    "joined": "Beigetreten",
+    "viewProfile": "Profil ansehen",
+    "premium": "Premium",
+    "freeUser": "Kostenloser Benutzer",
+    "role": "Rolle",
+    "metrics": "Metriken",
+    "totalVideos": "Gesamte Videos",
+    "approved": "Genehmigt",
+    "regDetails": "Registrierungsdetails",
+    "regDetailsDesc": "Zusätzliche Informationen, die bei der Registrierung erfasst wurden.",
+    "usersVideos": "Videos des Benutzers",
+    "usersVideosDesc": "Alle Videoeinreichungen von diesem Benutzer.",
+    "noCaption": "Keine Beschreibung angegeben.",
+    "noVideosSubmitted": "Noch keine Videos eingereicht."
   },
   "status": {
     "pending": "AUSSTEHEND",

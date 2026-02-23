@@ -128,19 +128,19 @@ const Dashboard = () => {
         <div className="min-h-screen bg-black text-white">
             {/* Fixed Nav */}
             <nav className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-sm border-b border-white/10">
-                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-                    <Link to="/" className="flex items-center gap-2">
-                        <img src="/LOGO.png" alt="Global Media Sports" className="w-9 h-9 object-contain" />
-                        <div className="flex flex-col leading-tight">
-                            <span className="text-base font-bold">Global</span>
-                            <span className="text-[8px] uppercase tracking-[0.2em] text-gray-400">Media Sports</span>
-                        </div>
-                    </Link>
+                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
                     <div className="flex items-center gap-3">
+                        <img src="/LOGO.png" alt="Global Media Sports" className="w-12 h-12 object-contain" />
+                        <div className="flex flex-col leading-tight">
+                            <span className="text-xl font-bold">Global</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Media Sports</span>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-4">
                         <LanguageSwitcher isDark={false} />
                         <button
                             onClick={handleLogout}
-                            className="text-sm font-medium text-gray-300 hover:text-white px-4 py-2 rounded-lg border border-zinc-700 hover:border-zinc-500 transition-all duration-200"
+                            className="text-base font-medium text-gray-300 hover:text-white px-6 py-2.5 rounded-lg border border-zinc-700 hover:border-zinc-500 transition-all duration-200"
                         >
                             {t('auth.logout', 'Logout')}
                         </button>
@@ -200,14 +200,14 @@ const Dashboard = () => {
                             {/* Subscription Status Card */}
                             <motion.div variants={staggerItem} className="group relative">
                                 <div className="absolute -inset-[1px] bg-gradient-to-br from-red-600/30 to-zinc-700/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+                                <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 h-full flex flex-col">
                                     <div className="flex items-center gap-3 mb-3">
                                         <div className="w-10 h-10 bg-red-600/20 rounded-xl flex items-center justify-center">
                                             <CreditCard className="w-5 h-5 text-red-500" />
                                         </div>
                                         <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">{t('dashboard.subStatus', 'Subscription Status')}</span>
                                     </div>
-                                    <div className={`text-xl font-bold ${isPremium ? 'text-red-400' : 'text-gray-300'}`}>
+                                    <div className={`text-xl font-bold flex-1 ${isPremium ? 'text-red-400' : 'text-gray-300'}`}>
                                         {isPremium ? t('dashboard.activePrem', 'Active (Premium)') : t('dashboard.inactiveFree', 'Inactive (Free)')}
                                     </div>
                                     {!isPremium && (
@@ -225,14 +225,14 @@ const Dashboard = () => {
                             {/* Videos count card */}
                             <motion.div variants={staggerItem} className="group relative">
                                 <div className="absolute -inset-[1px] bg-gradient-to-br from-red-600/30 to-zinc-700/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+                                <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 h-full flex flex-col">
                                     <div className="flex items-center gap-3 mb-3">
                                         <div className="w-10 h-10 bg-red-600/20 rounded-xl flex items-center justify-center">
                                             <Video className="w-5 h-5 text-red-500" />
                                         </div>
                                         <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">{t('dashboard.videosUploaded', 'Videos Uploaded')}</span>
                                     </div>
-                                    <div className="text-4xl font-black text-white">{videos.length}</div>
+                                    <div className="text-4xl font-black text-white flex-1">{videos.length}</div>
                                 </div>
                             </motion.div>
                         </motion.div>
@@ -469,6 +469,7 @@ const Dashboard = () => {
                                                             onChange={(info) => setUploadedUrl(info.cdnUrl)}
                                                             ref={widgetApi}
                                                             clearable
+                                                            inputAcceptTypes="video/*"
                                                             validators={[
                                                                 (fileInfo) => {
                                                                     if (fileInfo.isImage || !fileInfo.mimeType?.startsWith('video/')) {
@@ -502,7 +503,7 @@ const Dashboard = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4 }}
                         >
-                            <div className="relative max-w-md">
+                            <div className="relative max-w-3xl">
                                 <div className="absolute -inset-[1px] bg-gradient-to-b from-red-600/40 via-zinc-700/10 to-zinc-700/10 rounded-2xl" />
                                 <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
                                     {/* Avatar header */}

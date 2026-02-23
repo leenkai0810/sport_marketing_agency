@@ -302,7 +302,20 @@
     "view": "View",
     "registeredUsers": "Registered Users",
     "subscription": "Subscription",
-    "joined": "Joined"
+    "joined": "Joined",
+    "viewProfile": "View Profile",
+    "premium": "Premium",
+    "freeUser": "Free User",
+    "role": "Role",
+    "metrics": "Metrics",
+    "totalVideos": "Total Videos",
+    "approved": "Approved",
+    "regDetails": "Registration Details",
+    "regDetailsDesc": "Additional info collected during registration.",
+    "usersVideos": "User's Videos",
+    "usersVideosDesc": "All video submissions by this user.",
+    "noCaption": "No caption provided.",
+    "noVideosSubmitted": "No videos submitted yet."
   },
   "status": {
     "pending": "PENDING",

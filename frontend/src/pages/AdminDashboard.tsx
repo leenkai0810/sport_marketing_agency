@@ -52,25 +52,41 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleLogout = () => {
+        authApi.logout();
+        navigate('/login');
+    };
+
     if (!user) return null;
 
     return (
         <div className="container py-10 min-h-screen">
-            <div className="flex justify-between items-center mb-8">
-                <div>
-                    <h1 className="text-3xl font-bold">{t('admin.title', 'Admin Panel')}</h1>
-                    <p className="text-gray-500">{t('admin.desc', 'Manage users and content.')}</p>
-                </div>
-                <div className="flex items-center gap-4">
-                    <div className="border rounded-lg bg-white/50 backdrop-blur-sm shadow-sm hidden sm:block">
-                        <LanguageSwitcher isDark={true} />
+            {/* Top Navbar */}
+            <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+                    <div className="flex items-center gap-3">
+                        <img src="/LOGO.png" alt="Global Media Sports" className="w-12 h-12 object-contain" />
+                        <div className="flex flex-col leading-tight">
+                            <span className="text-xl font-bold text-gray-900">Global</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-500">Media Sports</span>
+                        </div>
                     </div>
-                    <Button variant="outline" onClick={() => navigate('/dashboard')}>{t('admin.backBtn', 'Back to Dashboard')}</Button>
+                    <div className="flex items-center gap-4">
+                        <LanguageSwitcher isDark={false} />
+                        <Button
+                            variant="outline"
+                            onClick={handleLogout}
+                            className="text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 bg-white border-gray-200 px-6 py-2.5 h-auto"
+                        >
+                            {t('auth.logout', 'Logout')}
+                        </Button>
+                    </div>
                 </div>
-            </div>
+            </nav>
 
-            <div className="sm:hidden mb-6 border rounded-lg bg-white/50 backdrop-blur-sm shadow-sm inline-block">
-                <LanguageSwitcher isDark={true} />
+            <div className="pt-24 mb-8">
+                <h1 className="text-3xl font-bold text-gray-900">{t('admin.title', 'Admin Panel')}</h1>
+                <p className="text-gray-500">{t('admin.desc', 'Manage users and content.')}</p>
             </div>
 
             <Tabs defaultValue="videos" className="space-y-4">
