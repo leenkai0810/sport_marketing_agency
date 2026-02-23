@@ -35,6 +35,7 @@ const Dashboard = () => {
     const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
     const [caption, setCaption] = useState('');
     const [platform, setPlatform] = useState('Instagram');
+    const [activeTab, setActiveTab] = useState('overview');
     const widgetApi = useRef<any>(null);
 
     useEffect(() => {
@@ -166,7 +167,7 @@ const Dashboard = () => {
                 </motion.div>
 
                 {/* Tabs */}
-                <Tabs defaultValue="overview" className="space-y-6">
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
                     <TabsList className="bg-zinc-900 border border-zinc-800 rounded-xl p-1 w-fit">
                         <TabsTrigger
                             value="overview"
@@ -297,6 +298,7 @@ const Dashboard = () => {
                         {/* ── Pricing Plans (non-premium only) ── */}
                         {!isPremium && (
                             <motion.div
+                                id="pricing-section"
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -429,7 +431,12 @@ const Dashboard = () => {
                                                     </p>
                                                 </div>
                                                 <Button
-                                                    onClick={() => handleSubscribe('starter')}
+                                                    onClick={() => {
+                                                        setActiveTab('overview');
+                                                        setTimeout(() => {
+                                                            document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' });
+                                                        }, 100);
+                                                    }}
                                                     className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-5 text-sm transition-all hover:shadow-lg hover:shadow-red-600/30"
                                                 >
                                                     {t('dashboard.upgradeBtn', 'Upgrade to Premium')}
@@ -599,7 +606,7 @@ const Dashboard = () => {
                     </TabsContent>
                 </Tabs>
             </div>
-        </div>
+        </div >
     );
 };
 
