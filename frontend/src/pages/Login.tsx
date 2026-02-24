@@ -38,7 +38,8 @@ const Login = () => {
             localStorage.setItem('token', response.token);
             localStorage.setItem('user', JSON.stringify(response.user));
             toast.success(t('auth.login_success', 'Login successful!'));
-            navigate(response.user.role === 'ADMIN' ? '/admin' : '/dashboard');
+            const dest = response.user.role === 'ADMIN' ? '/admin' : response.user.role === 'EDITOR' ? '/editor' : '/dashboard';
+            navigate(dest);
         }
     };
 

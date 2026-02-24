@@ -17,6 +17,16 @@ export const authApi = {
         return response.data;
     },
 
+    sendOtp: async (email: string, name: string): Promise<{ message: string }> => {
+        const response = await client.post('/api/auth/send-otp', { email, name });
+        return response.data;
+    },
+
+    verifyOtp: async (email: string, otp: string): Promise<{ verified: boolean; message: string }> => {
+        const response = await client.post('/api/auth/verify-otp', { email, otp });
+        return response.data;
+    },
+
     requestResetToken: async (email: string): Promise<{ resetToken: string }> => {
         const response = await client.post('/api/auth/request-reset-token', { email });
         return response.data;

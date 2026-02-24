@@ -1,6 +1,7 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import { register, login, googleAuth, requestResetToken, resetPassword } from '../controllers/authController';
+import { sendOtp, verifyOtp } from '../controllers/otpController';
 
 const router = express.Router();
 
@@ -16,5 +17,7 @@ router.post('/login', authLimiter, login);
 router.post('/google', authLimiter, googleAuth);
 router.post('/request-reset-token', authLimiter, requestResetToken);
 router.post('/reset-password', authLimiter, resetPassword);
+router.post('/send-otp', authLimiter, sendOtp);
+router.post('/verify-otp', authLimiter, verifyOtp);
 
 export default router;

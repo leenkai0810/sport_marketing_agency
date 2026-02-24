@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { Widget } from '@uploadcare/react-widget';
 import { authApi } from '@/api/auth';
 import { videoApi } from '@/api/video';
 import { Button } from '@/components/ui/button';
@@ -32,11 +31,14 @@ const Dashboard = () => {
     const [user, setUser] = useState<any>(null);
     const [videos, setVideos] = useState<any[]>([]);
     const [isUploading, setIsUploading] = useState(false);
-    const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [caption, setCaption] = useState('');
     const [platform, setPlatform] = useState('Instagram');
     const [activeTab, setActiveTab] = useState('overview');
-    const widgetApi = useRef<any>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
+    const API_URL = import.meta.env.VITE_API_URL || '';
 
     useEffect(() => {
         const checkUserAndContract = async () => {
@@ -87,20 +89,33 @@ const Dashboard = () => {
         navigate('/login');
     };
 
+    const handleFileSelect = (file: File | null) => {
+        if (!file) return;
+        if (!file.type.startsWith('video/')) {
+            toast.error(t('dashboard.videoOnly', 'Only video files are allowed'));
+            return;
+        }
+        if (file.size > MAX_FILE_SIZE) {
+            toast.error(t('dashboard.fileTooLarge', 'File must be under 100MB'));
+            return;
+        }
+        setSelectedFile(file);
+    };
+
     const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!uploadedUrl) {
-            toast.error(t('dashboard.uploadFirst', 'Please upload a video first'));
+        if (!selectedFile) {
+            toast.error(t('dashboard.uploadFirst', 'Please select a video first'));
             return;
         }
 
         setIsUploading(true);
         try {
-            await videoApi.uploadVideo({ url: uploadedUrl, caption, platform });
+            await videoApi.uploadVideo({ file: selectedFile, caption, platform });
             toast.success(t('dashboard.uploadSuccess', 'Video uploaded successfully!'));
-            setUploadedUrl(null);
+            setSelectedFile(null);
             setCaption('');
-            if (widgetApi.current) widgetApi.current.value(null);
+            if (fileInputRef.current) fileInputRef.current.value = '';
             fetchVideos();
         } catch (error: any) {
             console.error(error);
@@ -269,7 +284,7 @@ const Dashboard = () => {
                                                 <div className="aspect-video bg-zinc-950 flex items-center justify-center overflow-hidden">
                                                     {video.url ? (
                                                         <video
-                                                            src={video.url.startsWith('http') ? video.url : `http://localhost:5000/uploads/${video.url}`}
+                                                            src={video.url.startsWith('http') ? video.url : `${API_URL}/uploads/${video.url}`}
                                                             className="w-full h-full object-contain"
                                                             controls
                                                             preload="metadata"
@@ -281,12 +296,31 @@ const Dashboard = () => {
                                                 {/* Caption + status */}
                                                 <div className="px-5 py-4">
                                                     <p className="text-sm text-gray-300 truncate mb-3">{video.caption || '—'}</p>
-                                                    <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${video.status === 'APPROVED' ? 'bg-emerald-900/50 text-emerald-400 border border-emerald-800' :
-                                                        video.status === 'REJECTED' ? 'bg-red-900/50 text-red-400 border border-red-800' :
-                                                            'bg-amber-900/50 text-amber-400 border border-amber-800'
+                                                    {/* Pipeline progress */}
+                                                    <div className="flex items-center gap-1 mb-3">
+                                                        {['PENDING', 'EDITING', 'READY', 'PUBLISHED'].map((step, i) => {
+                                                            const stepOrder = ['PENDING', 'EDITING', 'READY', 'PUBLISHED'];
+                                                            const currentIdx = stepOrder.indexOf(video.status);
+                                                            const isActive = i <= currentIdx && video.status !== 'REJECTED';
+                                                            const colors = ['bg-amber-500', 'bg-blue-500', 'bg-green-500', 'bg-purple-500'];
+                                                            return (
+                                                                <div key={step} className="flex items-center gap-1 flex-1">
+                                                                    <div className={`h-1.5 flex-1 rounded-full transition-all ${isActive ? colors[i] : 'bg-zinc-800'}`} />
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                    <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${video.status === 'PUBLISHED' ? 'bg-purple-900/50 text-purple-400 border border-purple-800' :
+                                                            video.status === 'READY' ? 'bg-green-900/50 text-green-400 border border-green-800' :
+                                                                video.status === 'EDITING' ? 'bg-blue-900/50 text-blue-400 border border-blue-800' :
+                                                                    video.status === 'REJECTED' ? 'bg-red-900/50 text-red-400 border border-red-800' :
+                                                                        'bg-amber-900/50 text-amber-400 border border-amber-800'
                                                         }`}>
                                                         {t(`status.${video.status.toLowerCase()}`, video.status)}
                                                     </span>
+                                                    {video.editorNotes && (
+                                                        <p className="text-gray-500 text-xs mt-2">📝 {video.editorNotes}</p>
+                                                    )}
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -470,27 +504,54 @@ const Dashboard = () => {
 
                                                 <div className="space-y-2">
                                                     <Label className="text-gray-200 text-sm font-medium">{t('dashboard.videoFile', 'Video File')}</Label>
-                                                    <div className="border-2 border-dashed border-zinc-700 hover:border-red-600/50 rounded-xl p-6 flex justify-center bg-zinc-800/30 transition-colors">
-                                                        <Widget
-                                                            publicKey={import.meta.env.VITE_UPLOADCARE_PUBLIC_KEY || ''}
-                                                            onChange={(info) => setUploadedUrl(info.cdnUrl)}
-                                                            ref={widgetApi}
-                                                            clearable
-                                                            inputAcceptTypes="video/*"
-                                                            validators={[
-                                                                (fileInfo) => {
-                                                                    if (fileInfo.isImage || !fileInfo.mimeType?.startsWith('video/')) {
-                                                                        throw new Error('Only video files are allowed.');
-                                                                    }
-                                                                }
-                                                            ]}
+                                                    <div
+                                                        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 ${selectedFile ? 'border-red-600 bg-red-600/5' : 'border-zinc-700 hover:border-red-600/50 bg-zinc-800/30'}`}
+                                                        onClick={() => fileInputRef.current?.click()}
+                                                        onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                                                        onDrop={(e) => {
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            const file = e.dataTransfer.files[0];
+                                                            handleFileSelect(file);
+                                                        }}
+                                                    >
+                                                        <input
+                                                            ref={fileInputRef}
+                                                            type="file"
+                                                            accept="video/*"
+                                                            className="hidden"
+                                                            onChange={(e) => handleFileSelect(e.target.files?.[0] || null)}
                                                         />
+                                                        {selectedFile ? (
+                                                            <div className="space-y-2">
+                                                                <div className="w-12 h-12 bg-red-600/20 rounded-xl flex items-center justify-center mx-auto">
+                                                                    <Video className="w-6 h-6 text-red-500" />
+                                                                </div>
+                                                                <p className="text-white font-medium text-sm">{selectedFile.name}</p>
+                                                                <p className="text-gray-500 text-xs">{(selectedFile.size / (1024 * 1024)).toFixed(1)} MB</p>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={(e) => { e.stopPropagation(); setSelectedFile(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+                                                                    className="text-red-500 text-xs hover:text-red-400 transition-colors"
+                                                                >
+                                                                    {t('dashboard.removeFile', 'Remove file')}
+                                                                </button>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="space-y-2">
+                                                                <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto">
+                                                                    <Video className="w-6 h-6 text-zinc-600" />
+                                                                </div>
+                                                                <p className="text-gray-400 text-sm">{t('dashboard.dropVideo', 'Click or drag a video file here')}</p>
+                                                                <p className="text-zinc-600 text-xs">{t('dashboard.maxSize', 'Max 100MB • Video files only')}</p>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
 
                                                 <Button
                                                     type="submit"
-                                                    disabled={isUploading}
+                                                    disabled={isUploading || !selectedFile}
                                                     className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-5 text-sm transition-all duration-300 hover:shadow-lg hover:shadow-red-600/30"
                                                 >
                                                     {isUploading ? t('dashboard.uploading', 'Uploading...') : t('dashboard.submitReview', 'Submit for Review')}

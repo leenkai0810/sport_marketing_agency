@@ -1,9 +1,14 @@
 import client from './client';
 
 export const videoApi = {
-    // Now accepts a JSON object with the URL instead of FormData
-    uploadVideo: async (data: { url: string; caption: string; platform: string }) => {
-        const response = await client.post('/api/videos/upload', data);
+    uploadVideo: async (data: { file: File; caption: string; platform: string }) => {
+        const formData = new FormData();
+        formData.append('video', data.file);
+        formData.append('caption', data.caption);
+        formData.append('platform', data.platform);
+        const response = await client.post('/api/videos/upload', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
         return response.data;
     },
 

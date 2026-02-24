@@ -6,26 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { authApi } from '@/api/auth';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import OtpModal, { hashOtp } from '@/components/OtpModal';
-import emailjs from '@emailjs/browser';
+import OtpModal from '@/components/OtpModal';
 import { useTranslation } from 'react-i18next';
 
 type Step = 'email' | 'otp' | 'newpassword';
 
-const sendOtp = async (email: string, name: string) => {
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    // Store HASHED OTP — never the raw code
-    const hashed = await hashOtp(otp);
-    sessionStorage.setItem('pendingOtpHash', hashed);
-    sessionStorage.setItem('otpExpiry', (Date.now() + 10 * 60 * 1000).toString());
-
-    await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        { otp, to_email: email, name },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    );
-};
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
@@ -43,7 +28,7 @@ const ForgotPassword = () => {
         if (!email) return;
         setIsLoading(true);
         try {
-            await sendOtp(email, email.split('@')[0]);
+            await authApi.sendOtp(email, email.split('@')[0]);
             setShowOtp(true);
             // SECURITY: Generic message — never reveal if email exists
             toast.success(t('auth.otpSent', 'If an account exists with this email, a code has been sent.'));
@@ -216,7 +201,7 @@ const ForgotPassword = () => {
                 email={email}
                 onVerified={handleOtpVerified}
                 onClose={() => setShowOtp(false)}
-                onResend={() => sendOtp(email, email.split('@')[0])}
+                onResend={() => authApi.sendOtp(email, email.split('@')[0])}
             />
         </div>
     );

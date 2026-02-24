@@ -5,7 +5,7 @@ import { authenticateToken } from '../middleware/auth';
 
 const router = express.Router();
 
-router.post('/upload', authenticateToken, uploadVideo);
+router.post('/upload', authenticateToken, upload.single('video'), uploadVideo);
 router.get('/my-videos', authenticateToken, getUserVideos);
 
 export default router;

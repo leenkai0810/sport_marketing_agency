@@ -18,8 +18,7 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { motion } from 'framer-motion';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase';
-import OtpModal, { hashOtp } from '@/components/OtpModal';
-import emailjs from '@emailjs/browser';
+import OtpModal from '@/components/OtpModal';
 
 const SPORTS = [
     { value: 'soccer', fallback: '⚽ Soccer / Football' },
@@ -35,19 +34,7 @@ const SPORTS = [
     { value: 'other', fallback: '🏅 Other' },
 ];
 
-const sendOtp = async (email: string, name: string) => {
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    // Store HASHED OTP — raw code is never saved anywhere in the browser
-    const hashed = await hashOtp(otp);
-    sessionStorage.setItem('pendingOtpHash', hashed);
-    sessionStorage.setItem('otpExpiry', (Date.now() + 10 * 60 * 1000).toString());
-    await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        { otp, to_email: email, name },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    );
-};
+
 
 const Register = () => {
     const navigate = useNavigate();
@@ -66,16 +53,29 @@ const Register = () => {
         },
     });
 
-    // Step 1: validate form → send OTP → show modal
+    // Step 1: validate form → send OTP → show modal (skip OTP for Google users)
     const onSubmit = async (data: RegisterData) => {
         setIsLoading(true);
         try {
-            await sendOtp(data.email, data.name);
+            // Google already verifies email — skip OTP and register directly
+            if (isGoogleUser) {
+                await authApi.register(data);
+                toast.success(t('auth.register_success', 'Registration successful! Please login.'));
+                navigate('/login');
+                return;
+            }
+
+            await authApi.sendOtp(data.email, data.name);
             setPendingData(data);
             setShowOtp(true);
             toast.success(t('auth.verificationSent', 'Verification code sent to your email!'));
-        } catch {
-            toast.error(t('auth.otpSendFailed', 'Failed to send verification email. Please check your email address.'));
+        } catch (error: any) {
+            if (isGoogleUser) {
+                const message = error.response?.data?.message || t('auth.register_failed', 'Registration failed');
+                toast.error(message);
+            } else {
+                toast.error(t('auth.otpSendFailed', 'Failed to send verification email. Please check your email address.'));
+            }
         } finally {
             setIsLoading(false);
         }
@@ -302,7 +302,7 @@ const Register = () => {
                 email={form.getValues('email')}
                 onVerified={handleOtpVerified}
                 onClose={() => setShowOtp(false)}
-                onResend={() => sendOtp(form.getValues('email'), form.getValues('name'))}
+                onResend={() => authApi.sendOtp(form.getValues('email'), form.getValues('name'))}
             />
         </div>
     );

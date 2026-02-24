@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import EditorDashboard from "./pages/EditorDashboard";
 import AdminUserProfile from "./pages/AdminUserProfile";
 import Contract from "./pages/Contract";
 import Terms from "./pages/Terms";
@@ -41,6 +42,7 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/editor" element={<EditorDashboard />} />
               <Route path="/admin/users/:id" element={<AdminUserProfile />} />
               <Route path="/contract" element={<Contract />} />
               <Route path="/terms" element={<Terms />} />

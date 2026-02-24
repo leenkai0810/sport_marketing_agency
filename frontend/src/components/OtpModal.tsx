@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { authApi } from '@/api/auth';
 
 interface OtpModalProps {
     isOpen: boolean;
@@ -8,15 +9,6 @@ interface OtpModalProps {
     onVerified: () => void;
     onClose: () => void;
     onResend: () => void;
-}
-
-// Simple hash function — NOT crypto-grade, but prevents casual console snooping
-async function hashOtp(otp: string): Promise<string> {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(otp + '_gms_salt_2025');
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 const OtpModal: React.FC<OtpModalProps> = ({ isOpen, email, onVerified, onClose, onResend }) => {
@@ -70,27 +62,26 @@ const OtpModal: React.FC<OtpModalProps> = ({ isOpen, email, onVerified, onClose,
 
     const handleVerify = async () => {
         const code = otp.join('');
-        const storedHash = sessionStorage.getItem('pendingOtpHash');
-        const expiry = sessionStorage.getItem('otpExpiry');
-
-        if (!storedHash || !expiry || Date.now() > parseInt(expiry)) {
-            setError('OTP has expired. Please request a new one.');
-            return;
-        }
-
         setIsVerifying(true);
-        const inputHash = await hashOtp(code);
+        setError('');
 
-        if (inputHash === storedHash) {
-            sessionStorage.removeItem('pendingOtpHash');
-            sessionStorage.removeItem('otpExpiry');
-            onVerified();
-        } else {
-            setError('Incorrect OTP. Please try again.');
+        try {
+            const result = await authApi.verifyOtp(email, code);
+            if (result.verified) {
+                onVerified();
+            } else {
+                setError(result.message || 'Incorrect code. Please try again.');
+                setOtp(['', '', '', '', '', '']);
+                inputRefs.current[0]?.focus();
+            }
+        } catch (err: any) {
+            const message = err.response?.data?.message || 'Verification failed. Please try again.';
+            setError(message);
             setOtp(['', '', '', '', '', '']);
             inputRefs.current[0]?.focus();
+        } finally {
+            setIsVerifying(false);
         }
-        setIsVerifying(false);
     };
 
     const handleResend = () => {
@@ -172,6 +163,4 @@ const OtpModal: React.FC<OtpModalProps> = ({ isOpen, email, onVerified, onClose,
     );
 };
 
-// Export the hash function so Register/ForgotPassword can use it
-export { hashOtp };
 export default OtpModal;

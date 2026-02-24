@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { VideoStatus } from '@prisma/client';
+import { VideoStatus, Role } from '@prisma/client';
 import prisma from '../config/client';
 import { AuthRequest } from '../middleware/auth';
 
@@ -20,6 +20,7 @@ export const getAllUsers = async (req: AuthRequest, res: Response) => {
                 email: true,
                 name: true,
                 role: true,
+                plan: true,
                 createdAt: true,
                 subscriptionStatus: true,
             },
@@ -42,10 +43,10 @@ export const getAllVideos = async (req: AuthRequest, res: Response) => {
         const videos = await prisma.video.findMany({
             include: {
                 user: {
-                    select: {
-                        name: true,
-                        email: true,
-                    },
+                    select: { name: true, email: true },
+                },
+                editor: {
+                    select: { name: true, email: true },
                 },
             },
             orderBy: { createdAt: 'desc' },
@@ -67,7 +68,8 @@ export const updateVideoStatus = async (req: AuthRequest, res: Response) => {
         const { id } = req.params as { id: string };
         const { status } = req.body;
 
-        if (!['PENDING', 'APPROVED', 'REJECTED'].includes(status)) {
+        const validStatuses = ['PENDING', 'EDITING', 'READY', 'PUBLISHED', 'REJECTED'];
+        if (!validStatuses.includes(status)) {
             return res.status(400).json({ message: req.t('admin.invalid_status', 'Invalid status') });
         }
 
@@ -77,6 +79,85 @@ export const updateVideoStatus = async (req: AuthRequest, res: Response) => {
         });
 
         res.json(video);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: req.t('auth.internal_error') });
+    }
+};
+
+// Admin assigns an editor to a video
+export const assignEditor = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!isAdmin(req)) {
+            return res.status(403).json({ message: (req as any).t('admin.unauthorized') });
+        }
+
+        const { id } = req.params as { id: string };
+        const { editorId } = req.body;
+
+        // Verify the editor exists and has EDITOR role
+        const editor = await prisma.user.findUnique({ where: { id: editorId } });
+        if (!editor || (editor.role !== 'EDITOR' && editor.role !== 'ADMIN')) {
+            return res.status(400).json({ message: 'Invalid editor' });
+        }
+
+        const video = await prisma.video.update({
+            where: { id },
+            data: { editorId, status: 'EDITING' },
+        });
+
+        res.json({ message: 'Editor assigned', video });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: req.t('auth.internal_error') });
+    }
+};
+
+// Admin updates a user's role
+export const updateUserRole = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!isAdmin(req)) {
+            return res.status(403).json({ message: (req as any).t('admin.unauthorized') });
+        }
+
+        const { id } = req.params as { id: string };
+        const { role } = req.body;
+
+        const validRoles = ['USER', 'EDITOR', 'ADMIN'];
+        if (!validRoles.includes(role)) {
+            return res.status(400).json({ message: 'Invalid role' });
+        }
+
+        // Prevent admin from changing their own role
+        if (id === req.user?.userId) {
+            return res.status(400).json({ message: 'Cannot change your own role' });
+        }
+
+        const user = await prisma.user.update({
+            where: { id },
+            data: { role: role as Role },
+        });
+
+        res.json({ message: `User role updated to ${role}`, user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: req.t('auth.internal_error') });
+    }
+};
+
+// Get all editors (for assignment dropdown)
+export const getEditors = async (req: AuthRequest, res: Response) => {
+    try {
+        if (!isAdmin(req)) {
+            return res.status(403).json({ message: (req as any).t('admin.unauthorized') });
+        }
+
+        const editors = await prisma.user.findMany({
+            where: { role: { in: ['EDITOR', 'ADMIN'] } },
+            select: { id: true, name: true, email: true, role: true },
+        });
+
+        res.json(editors);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: req.t('auth.internal_error') });

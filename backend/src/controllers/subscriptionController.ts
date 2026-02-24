@@ -85,7 +85,7 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
 };
 
 // Helper: activate subscription in DB
-async function activateSubscription(userId: string, stripeSubscriptionId: string, stripeSub: any) {
+async function activateSubscription(userId: string, stripeSubscriptionId: string, stripeSub: any, plan?: string) {
     // Try multiple possible field names for the period end date
     const periodEndRaw = stripeSub.current_period_end
         || stripeSub.currentPeriodEnd
@@ -116,10 +116,13 @@ async function activateSubscription(userId: string, stripeSubscriptionId: string
         },
     });
 
-    // Update User status
+    // Update User status and plan
     await prisma.user.update({
         where: { id: userId },
-        data: { subscriptionStatus: 'ACTIVE' },
+        data: {
+            subscriptionStatus: 'ACTIVE',
+            ...(plan ? { plan } : {}),
+        },
     });
 
     console.log(`User ${userId} subscription activated (Stripe sub: ${stripeSubscriptionId}, periodEnd: ${currentPeriodEnd.toISOString()})`);
@@ -159,7 +162,8 @@ export const handleWebhook = async (req: Request, res: Response) => {
                 try {
                     // Fetch the subscription from Stripe
                     const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
-                    await activateSubscription(userId, stripeSubscriptionId, stripeSub);
+                    const plan = session.metadata?.plan;
+                    await activateSubscription(userId, stripeSubscriptionId, stripeSub, plan);
                 } catch (dbError) {
                     console.error('Failed to activate subscription in webhook:', dbError);
                 }
@@ -215,7 +219,8 @@ export const verifySession = async (req: AuthRequest, res: Response) => {
 
         // Fetch the subscription from Stripe
         const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
-        await activateSubscription(userId, stripeSubscriptionId, stripeSub);
+        const plan = session.metadata?.plan;
+        await activateSubscription(userId, stripeSubscriptionId, stripeSub, plan);
 
         res.json({ message: 'Subscription activated successfully', status: 'ACTIVE' });
     } catch (error: any) {

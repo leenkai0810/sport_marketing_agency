@@ -11,6 +11,7 @@ datasource db {
 
 enum Role {
   USER
+  EDITOR
   ADMIN
 }
 
@@ -22,7 +23,9 @@ enum SubscriptionStatus {
 
 enum VideoStatus {
   PENDING
-  APPROVED
+  EDITING
+  READY
+  PUBLISHED
   REJECTED
 }
 
@@ -37,26 +40,32 @@ model User {
   tiktok             String?
   role               Role               @default(USER)
   subscriptionStatus SubscriptionStatus @default(INACTIVE)
+  plan               String             @default("none") // none, starter, pro, elite
   contractAccepted   Boolean            @default(false)
   contractAcceptedAt DateTime?
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
 
-  videos        Video[]
+  videos        Video[]        @relation("UserVideos")
+  editedVideos  Video[]        @relation("EditedVideos")
   subscriptions Subscription[]
 }
 
 model Video {
-  id        String      @id @default(uuid())
-  caption   String?
-  platform  String // Instagram, TikTok, Facebook
-  url       String // File path or Cloud URL
-  status    VideoStatus @default(PENDING)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id          String      @id @default(uuid())
+  caption     String?
+  platform    String // Instagram, TikTok, Facebook
+  url         String // Original file path or Cloud URL
+  editedUrl   String? // Edited version uploaded by editor
+  editorNotes String? // Notes from editor
+  status      VideoStatus @default(PENDING)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  userId   String
+  user     User   @relation("UserVideos", fields: [userId], references: [id])
+  editorId String?
+  editor   User?  @relation("EditedVideos", fields: [editorId], references: [id])
 }
 
 model Subscription {
