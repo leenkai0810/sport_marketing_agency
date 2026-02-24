@@ -22,17 +22,17 @@ import OtpModal, { hashOtp } from '@/components/OtpModal';
 import emailjs from '@emailjs/browser';
 
 const SPORTS = [
-    { value: 'soccer', label: '⚽ Soccer / Football' },
-    { value: 'basketball', label: '🏀 Basketball' },
-    { value: 'tennis', label: '🎾 Tennis' },
-    { value: 'swimming', label: '🏊 Swimming' },
-    { value: 'track', label: '🏃 Track & Field' },
-    { value: 'boxing', label: '🥊 Boxing / MMA' },
-    { value: 'volleyball', label: '🏐 Volleyball' },
-    { value: 'baseball', label: '⚾ Baseball' },
-    { value: 'golf', label: '⛳ Golf' },
-    { value: 'cycling', label: '🚴 Cycling' },
-    { value: 'other', label: '🏅 Other' },
+    { value: 'soccer', fallback: '⚽ Soccer / Football' },
+    { value: 'basketball', fallback: '🏀 Basketball' },
+    { value: 'tennis', fallback: '🎾 Tennis' },
+    { value: 'swimming', fallback: '🏊 Swimming' },
+    { value: 'track', fallback: '🏃 Track & Field' },
+    { value: 'boxing', fallback: '🥊 Boxing / MMA' },
+    { value: 'volleyball', fallback: '🏐 Volleyball' },
+    { value: 'baseball', fallback: '⚾ Baseball' },
+    { value: 'golf', fallback: '⛳ Golf' },
+    { value: 'cycling', fallback: '🚴 Cycling' },
+    { value: 'other', fallback: '🏅 Other' },
 ];
 
 const sendOtp = async (email: string, name: string) => {
@@ -221,7 +221,9 @@ const Register = () => {
                                                     </FormControl>
                                                     <SelectContent className="bg-zinc-800 border-zinc-700">
                                                         {SPORTS.map(s => (
-                                                            <SelectItem key={s.value} value={s.value} className="text-white hover:bg-zinc-700 hover:text-white focus:bg-zinc-700 focus:text-white data-[highlighted]:bg-zinc-700 data-[highlighted]:text-white">{s.label}</SelectItem>
+                                                            <SelectItem key={s.value} value={s.value} className="text-white hover:bg-zinc-700 hover:text-white focus:bg-zinc-700 focus:text-white data-[highlighted]:bg-zinc-700 data-[highlighted]:text-white">
+                                                                {t(`sportsList.${s.value}`, s.fallback)}
+                                                            </SelectItem>
                                                         ))}
                                                     </SelectContent>
                                                 </Select>

@@ -339,5 +339,18 @@
     "section3Desc": "Não partilhamos as suas informações pessoais com terceiros, exceto conforme descrito nesta política ou com o seu consentimento.",
     "section4Title": "4. Segurança de Dados",
     "section4Desc": "Tomamos medidas razoáveis para ajudar a proteger as suas informações contra perda, roubo, uso indevido e acesso não autorizado, divulgação, alteração e destruição."
+  },
+  "sportsList": {
+    "soccer": "⚽ Futebol",
+    "basketball": "🏀 Basquete",
+    "tennis": "🎾 Tênis",
+    "swimming": "🏊 Natação",
+    "track": "🏃 Atletismo",
+    "boxing": "🥊 Boxe / MMA",
+    "volleyball": "🏐 Vôlei",
+    "baseball": "⚾ Beisebol",
+    "golf": "⛳ Golfe",
+    "cycling": "🚴 Ciclismo",
+    "other": "🏅 Outro"
   }
 }

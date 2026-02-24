@@ -339,5 +339,18 @@
     "section3Desc": "Wir geben Ihre persönlichen Daten nicht an Dritte weiter, es sei denn, dies ist in dieser Richtlinie beschrieben oder Sie haben zugestimmt.",
     "section4Title": "4. Datensicherheit",
     "section4Desc": "Wir ergreifen angemessene Maßnahmen, um die Informationen über Sie vor Verlust, Diebstahl, Missbrauch und unbefugtem Zugriff, Offenlegung, Änderung und Zerstörung zu schützen."
+  },
+  "sportsList": {
+    "soccer": "⚽ Fußball",
+    "basketball": "🏀 Basketball",
+    "tennis": "�� Tennis",
+    "swimming": "🏊 Schwimmen",
+    "track": "🏃 Leichtathletik",
+    "boxing": "🥊 Boxen / MMA",
+    "volleyball": "🏐 Volleyball",
+    "baseball": "⚾ Baseball",
+    "golf": "⛳ Golf",
+    "cycling": "🚴 Radsport",
+    "other": "🏅 Sonstiges"
   }
 }

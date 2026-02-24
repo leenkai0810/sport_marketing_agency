@@ -347,5 +347,18 @@
     "section3Desc": "We do not share your personal information with third parties except as described in this policy or with your consent.",
     "section4Title": "4. Data Security",
     "section4Desc": "We take reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction."
+  },
+  "sportsList": {
+    "soccer": "⚽ Soccer / Football",
+    "basketball": "🏀 Basketball",
+    "tennis": "🎾 Tennis",
+    "swimming": "🏊 Swimming",
+    "track": "🏃 Track & Field",
+    "boxing": "🥊 Boxing / MMA",
+    "volleyball": "🏐 Volleyball",
+    "baseball": "⚾ Baseball",
+    "golf": "⛳ Golf",
+    "cycling": "🚴 Cycling",
+    "other": "🏅 Other"
   }
 }

@@ -1299,16 +1299,13 @@ export default function Index() {
               <h4 className="text-white font-semibold mb-6">{t('footer.quickLinks')}</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.aboutUs')}</a>
+                  <a href="#about" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.aboutUs')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.ourServices')}</a>
+                  <a href="#services" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.ourServices')}</a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.pricingPlans')}</a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.successStories')}</a>
+                  <a href="#pricing" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.pricingPlans')}</a>
                 </li>
                 <li>
                   <a href="#registration" className="text-gray-400 text-sm hover:text-red-600 transition-colors">{t('footer.contactUs')}</a>
