@@ -1370,6 +1370,9 @@ export default function Index() {
                 {t('footer.rights')}
               </p>
               <div className="flex items-center gap-6">
+                <a href="/legal" className="text-gray-500 text-sm hover:text-red-600 transition-colors">
+                  {t('legal.title')}
+                </a>
                 <a href="/privacy" className="text-gray-500 text-sm hover:text-red-600 transition-colors">
                   {t('footer.privacy')}
                 </a>

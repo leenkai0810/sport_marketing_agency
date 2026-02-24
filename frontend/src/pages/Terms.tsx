@@ -10,20 +10,28 @@ const Terms = () => {
 
     const sections = [
         {
-            title: t('terms.section1Title', '1. Acceptance of Terms'),
-            content: t('terms.section1Desc', 'By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.'),
+            title: t('terms.section1Title'),
+            content: t('terms.section1Desc'),
         },
         {
-            title: t('terms.section2Title', '2. Use License'),
-            content: t('terms.section2Desc', "Permission is granted to temporarily download one copy of the materials (information or software) on Global Media Sports' website for personal, non-commercial transitory viewing only."),
+            title: t('terms.section2Title'),
+            content: t('terms.section2Desc'),
         },
         {
-            title: t('terms.section3Title', '3. Disclaimer'),
-            content: t('terms.section3Desc', "The materials on Global Media Sports' website are provided on an 'as is' basis. Global Media Sports makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights."),
+            title: t('terms.section3Title'),
+            content: t('terms.section3Desc'),
         },
         {
-            title: t('terms.section4Title', '4. Limitations'),
-            content: t('terms.section4Desc', "In no event shall Global Media Sports or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Global Media Sports' website."),
+            title: t('terms.section4Title'),
+            content: t('terms.section4Desc'),
+        },
+        {
+            title: t('terms.section5Title'),
+            content: t('terms.section5Desc'),
+        },
+        {
+            title: t('terms.section6Title'),
+            content: t('terms.section6Desc'),
         },
     ];
 
@@ -45,7 +53,7 @@ const Terms = () => {
                             onClick={() => navigate('/')}
                             className="text-sm font-medium text-gray-300 hover:text-white px-4 py-2 rounded-lg border border-zinc-700 hover:border-zinc-500 transition-all"
                         >
-                            {t('terms.back', 'Back to Home')}
+                            {t('terms.back')}
                         </button>
                     </div>
                 </div>
@@ -63,9 +71,9 @@ const Terms = () => {
                 >
                     {/* Heading */}
                     <div className="mb-12">
-                        <h1 className="text-5xl font-black mb-3">{t('terms.title', 'Terms of Service')}</h1>
+                        <h1 className="text-5xl font-black mb-3">{t('terms.title')}</h1>
                         <div className="w-16 h-1 bg-red-600 mb-4" />
-                        <p className="text-gray-500 text-sm">{t('terms.lastUpdated', 'Last updated:')} {new Date().toLocaleDateString()}</p>
+                        <p className="text-gray-500 text-sm">{t('terms.lastUpdated')} {new Date().toLocaleDateString()}</p>
                     </div>
 
                     {/* Sections */}

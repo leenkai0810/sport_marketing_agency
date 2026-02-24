@@ -10,20 +10,32 @@ const Privacy = () => {
 
     const sections = [
         {
-            title: t('privacy.section1Title', '1. Information We Collect'),
-            content: t('privacy.section1Desc', 'We collect information you provide directly to us, such as when you create an account, subscribe, or upload content.'),
+            title: t('privacy.section1Title'),
+            content: t('privacy.section1Desc'),
         },
         {
-            title: t('privacy.section2Title', '2. How We Use Your Information'),
-            content: t('privacy.section2Desc', 'We use the information we collect to operate, maintain, and improve our services, and to communicate with you.'),
+            title: t('privacy.section2Title'),
+            content: t('privacy.section2Desc'),
         },
         {
-            title: t('privacy.section3Title', '3. Sharing of Information'),
-            content: t('privacy.section3Desc', 'We do not share your personal information with third parties except as described in this policy or with your consent.'),
+            title: t('privacy.section3Title'),
+            content: t('privacy.section3Desc'),
         },
         {
-            title: t('privacy.section4Title', '4. Data Security'),
-            content: t('privacy.section4Desc', 'We take reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction.'),
+            title: t('privacy.section4Title'),
+            content: t('privacy.section4Desc'),
+        },
+        {
+            title: t('privacy.section5Title'),
+            content: t('privacy.section5Desc'),
+        },
+        {
+            title: t('privacy.section6Title'),
+            content: t('privacy.section6Desc'),
+        },
+        {
+            title: t('privacy.section7Title'),
+            content: t('privacy.section7Desc'),
         },
     ];
 
@@ -45,7 +57,7 @@ const Privacy = () => {
                             onClick={() => navigate('/')}
                             className="text-sm font-medium text-gray-300 hover:text-white px-4 py-2 rounded-lg border border-zinc-700 hover:border-zinc-500 transition-all"
                         >
-                            {t('privacy.back', 'Back to Home')}
+                            {t('privacy.back')}
                         </button>
                     </div>
                 </div>
@@ -63,9 +75,9 @@ const Privacy = () => {
                 >
                     {/* Heading */}
                     <div className="mb-12">
-                        <h1 className="text-5xl font-black mb-3">{t('privacy.title', 'Privacy Policy')}</h1>
+                        <h1 className="text-5xl font-black mb-3">{t('privacy.title')}</h1>
                         <div className="w-16 h-1 bg-red-600 mb-4" />
-                        <p className="text-gray-500 text-sm">{t('privacy.lastUpdated', 'Last updated:')} {new Date().toLocaleDateString()}</p>
+                        <p className="text-gray-500 text-sm">{t('privacy.lastUpdated')}</p>
                     </div>
 
                     {/* Sections */}
