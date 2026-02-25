@@ -6,9 +6,7 @@ export const videoApi = {
         formData.append('video', data.file);
         formData.append('caption', data.caption);
         formData.append('platform', data.platform);
-        const response = await client.post('/api/videos/upload', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        const response = await client.post('/api/videos/upload', formData);
         return response.data;
     },
 
