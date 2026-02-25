@@ -97,7 +97,7 @@ export const assignEditor = async (req: AuthRequest, res: Response) => {
 
         // Verify the editor exists and has EDITOR role
         const editor = await prisma.user.findUnique({ where: { id: editorId } });
-        if (!editor || (editor.role !== 'EDITOR' && editor.role !== 'ADMIN')) {
+        if (!editor || editor.role !== 'EDITOR') {
             return res.status(400).json({ message: 'Invalid editor' });
         }
 
@@ -153,7 +153,7 @@ export const getEditors = async (req: AuthRequest, res: Response) => {
         }
 
         const editors = await prisma.user.findMany({
-            where: { role: { in: ['EDITOR', 'ADMIN'] } },
+            where: { role: 'EDITOR' },
             select: { id: true, name: true, email: true, role: true },
         });
 
