@@ -12,6 +12,7 @@ import { subscriptionApi } from '@/api/subscription';
 import { userApi } from '@/api/user';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { getAPIBaseURL } from '@/lib/config';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Video, CreditCard, User } from 'lucide-react';
@@ -284,7 +285,7 @@ const Dashboard = () => {
                                                 <div className="aspect-video bg-zinc-950 flex items-center justify-center overflow-hidden">
                                                     {video.url ? (
                                                         <video
-                                                            src={video.url.startsWith('http') ? video.url : `${API_URL}/uploads/${video.url}`}
+                                                            src={video.url.startsWith('http') ? video.url : `${getAPIBaseURL()}/uploads/${video.url}`}
                                                             className="w-full h-full object-contain"
                                                             controls
                                                             preload="metadata"
@@ -311,10 +312,10 @@ const Dashboard = () => {
                                                         })}
                                                     </div>
                                                     <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${video.status === 'PUBLISHED' ? 'bg-purple-900/50 text-purple-400 border border-purple-800' :
-                                                            video.status === 'READY' ? 'bg-green-900/50 text-green-400 border border-green-800' :
-                                                                video.status === 'EDITING' ? 'bg-blue-900/50 text-blue-400 border border-blue-800' :
-                                                                    video.status === 'REJECTED' ? 'bg-red-900/50 text-red-400 border border-red-800' :
-                                                                        'bg-amber-900/50 text-amber-400 border border-amber-800'
+                                                        video.status === 'READY' ? 'bg-green-900/50 text-green-400 border border-green-800' :
+                                                            video.status === 'EDITING' ? 'bg-blue-900/50 text-blue-400 border border-blue-800' :
+                                                                video.status === 'REJECTED' ? 'bg-red-900/50 text-red-400 border border-red-800' :
+                                                                    'bg-amber-900/50 text-amber-400 border border-amber-800'
                                                         }`}>
                                                         {t(`status.${video.status.toLowerCase()}`, video.status)}
                                                     </span>
