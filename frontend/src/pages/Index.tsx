@@ -349,7 +349,7 @@ export default function Index() {
           >
             <span className="text-sm font-medium">{t('hero.followUs')}</span>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/globalmediasports.es?igsh=N3p4aXIzNHlheWNk"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-red-600 transition-colors"
@@ -358,7 +358,7 @@ export default function Index() {
               <span className="text-sm">Instagram</span>
             </a>
             <a
-              href="https://tiktok.com"
+              href="https://www.tiktok.com/@globalmediasports?_r=1&_t=ZN-94CDxoNvc3S"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-red-600 transition-colors"
@@ -1268,7 +1268,7 @@ export default function Index() {
               </p>
               <div className="flex items-center gap-3">
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/globalmediasports.es?igsh=N3p4aXIzNHlheWNk"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 bg-zinc-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors group"
@@ -1276,20 +1276,12 @@ export default function Index() {
                   <RiInstagramFill className="w-4 h-4 text-gray-400 group-hover:text-white" />
                 </a>
                 <a
-                  href="https://tiktok.com"
+                  href="https://www.tiktok.com/@globalmediasports?_r=1&_t=ZN-94CDxoNvc3S"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 bg-zinc-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors group"
                 >
                   <RiTiktokFill className="w-4 h-4 text-gray-400 group-hover:text-white" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 bg-zinc-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors group"
-                >
-                  <BsTwitterX className="w-4 h-4 text-gray-400 group-hover:text-white" />
                 </a>
               </div>
             </div>

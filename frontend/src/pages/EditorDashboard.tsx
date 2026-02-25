@@ -106,7 +106,7 @@ const EditorDashboard = () => {
         navigate('/login');
     };
 
-    const VideoCard = ({ video, showClaim = false }: { video: any; showClaim?: boolean }) => {
+    const VideoCard = ({ video, showClaim = false }: { key?: React.Key; video: any; showClaim?: boolean }) => {
         const status = STATUS_STYLES[video.status] || STATUS_STYLES.PENDING;
 
         return (
@@ -182,7 +182,7 @@ const EditorDashboard = () => {
                                 <Button
                                     onClick={() => fileInputRefs.current[video.id]?.click()}
                                     disabled={uploadingId === video.id}
-                                    className="w-full bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium py-3"
+                                    className="w-full bg-zinc-800 hover:bg-zinc-700 text-white hover:text-white text-xs font-medium py-3"
                                     variant="outline"
                                 >
                                     <Upload className="w-4 h-4 mr-2" />
@@ -207,7 +207,8 @@ const EditorDashboard = () => {
                                 <Button
                                     onClick={() => handleSaveNotes(video.id)}
                                     size="sm"
-                                    className="mt-1 bg-zinc-700 hover:bg-zinc-600 text-xs"
+                                    disabled={!(editingNotes[video.id] ?? video.editorNotes ?? '').trim()}
+                                    className="mt-1 bg-zinc-700 hover:bg-zinc-600 text-xs disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     <FileText className="w-3 h-3 mr-1" /> {t('editor.saveNotes')}
                                 </Button>

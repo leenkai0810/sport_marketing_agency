@@ -180,7 +180,7 @@ const Contract = () => {
                                 {clauses.map((clause, i) => (
                                     <div key={i}>
                                         <h3 className="font-bold text-white mb-1">{clause.title}</h3>
-                                        <p className="text-gray-400">{clause.desc}</p>
+                                        <p className="text-gray-400 whitespace-pre-wrap">{clause.desc}</p>
                                     </div>
                                 ))}
                                 <p className="text-xs text-zinc-600 pt-4">Last Updated: {new Date().toLocaleDateString()}</p>
