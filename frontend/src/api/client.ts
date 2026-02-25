@@ -21,6 +21,11 @@ client.interceptors.request.use(
         // Pass the user's selected language to the backend
         config.headers['Accept-Language'] = i18n.language || 'es';
 
+        // Remove the default JSON Content-Type if sending FormData so Axios sets the proper multipart boundary
+        if (config.data instanceof FormData) {
+            delete config.headers['Content-Type'];
+        }
+
         return config;
     },
     (error) => {
