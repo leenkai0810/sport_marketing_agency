@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowLeft, User, Phone, MapPin, Instagram, Youtube, Video, CreditCard, Calendar } from 'lucide-react';
 
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { getAPIBaseURL } from '@/lib/config';
 
 const AdminUserProfile = () => {
     const { id } = useParams<{ id: string }>();
@@ -206,7 +207,7 @@ const AdminUserProfile = () => {
                                                 <div className="w-full sm:w-48 aspect-video bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden shrink-0">
                                                     {video.url ? (
                                                         <video
-                                                            src={video.url.startsWith('http') ? video.url : `http://localhost:5000/uploads/${video.url}`}
+                                                            src={video.url.startsWith('http') ? video.url : `${getAPIBaseURL()}/api/uploads/${video.url}`}
                                                             className="w-full h-full object-cover"
                                                             controls
                                                         />

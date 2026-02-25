@@ -285,7 +285,7 @@ const Dashboard = () => {
                                                 <div className="aspect-video bg-zinc-950 flex items-center justify-center overflow-hidden">
                                                     {video.url ? (
                                                         <video
-                                                            src={video.url.startsWith('http') ? video.url : `${getAPIBaseURL()}/uploads/${video.url}`}
+                                                            src={video.url.startsWith('http') ? video.url : `${getAPIBaseURL()}/api/uploads/${video.url}`}
                                                             className="w-full h-full object-contain"
                                                             controls
                                                             preload="metadata"

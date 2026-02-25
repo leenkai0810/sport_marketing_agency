@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Video, Download, Upload, CheckCircle, Clock, FileText, User, LogOut } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { getAPIBaseURL } from '@/lib/config';
 
 const STATUS_STYLES: Record<string, { bg: string; text: string; labelKey: string }> = {
     PENDING: { bg: 'bg-amber-600/20', text: 'text-amber-400', labelKey: 'status.pending' },
@@ -30,7 +31,7 @@ const EditorDashboard = () => {
     const [uploadingId, setUploadingId] = useState<string | null>(null);
     const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
-    const API_URL = import.meta.env.VITE_API_URL || '';
+    const API_URL = getAPIBaseURL();
 
     useEffect(() => {
         const user = authApi.getCurrentUser();
@@ -117,7 +118,7 @@ const EditorDashboard = () => {
                 {/* Video Preview */}
                 <div className="aspect-video bg-zinc-950 flex items-center justify-center overflow-hidden relative">
                     <video
-                        src={video.url.startsWith('http') ? video.url : `${API_URL}/uploads/${video.url}`}
+                        src={video.url.startsWith('http') ? video.url : `${API_URL}/api/uploads/${video.url}`}
                         className="w-full h-full object-contain"
                         controls
                         preload="metadata"
@@ -144,7 +145,7 @@ const EditorDashboard = () => {
                         </div>
                         {/* Download Original */}
                         <a
-                            href={video.url.startsWith('http') ? video.url : `${API_URL}/uploads/${video.url}`}
+                            href={video.url.startsWith('http') ? video.url : `${API_URL}/api/uploads/${video.url}`}
                             download
                             className="p-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors"
                             title={t('editor.downloadOriginal')}
@@ -227,7 +228,7 @@ const EditorDashboard = () => {
                         <div className="pt-2 border-t border-zinc-800">
                             <p className="text-gray-500 text-xs mb-1">{t('editor.editedVersion')}</p>
                             <video
-                                src={video.editedUrl.startsWith('http') ? video.editedUrl : `${API_URL}/uploads/${video.editedUrl}`}
+                                src={video.editedUrl.startsWith('http') ? video.editedUrl : `${API_URL}/api/uploads/${video.editedUrl}`}
                                 className="w-full rounded-lg"
                                 controls
                                 preload="metadata"

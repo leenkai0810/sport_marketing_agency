@@ -5,7 +5,7 @@ import path from 'path';
 const app = express();
 
 // Serve uploaded files statically
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/api/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Middleware
 const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';

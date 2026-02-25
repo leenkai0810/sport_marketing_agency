@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { getAPIBaseURL } from '@/lib/config';
 
 const STATUS_STYLES: Record<string, { bg: string; text: string }> = {
     PENDING: { bg: 'bg-amber-100', text: 'text-amber-800' },
@@ -26,7 +27,7 @@ const AdminDashboard = () => {
     const [videos, setVideos] = useState<any[]>([]);
     const [editors, setEditors] = useState<any[]>([]);
 
-    const API_URL = import.meta.env.VITE_API_URL || '';
+    const API_URL = getAPIBaseURL();
 
     useEffect(() => {
         const currentUser = authApi.getCurrentUser();
@@ -188,7 +189,7 @@ const AdminDashboard = () => {
                                                         </Button>
                                                     )}
                                                     <a
-                                                        href={video.url.startsWith('http') ? video.url : `${API_URL}/uploads/${video.url}`}
+                                                        href={video.url.startsWith('http') ? video.url : `${API_URL}/api/uploads/${video.url}`}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         className="ml-1 underline text-blue-600 text-xs"
@@ -197,7 +198,7 @@ const AdminDashboard = () => {
                                                     </a>
                                                     {video.editedUrl && (
                                                         <a
-                                                            href={video.editedUrl.startsWith('http') ? video.editedUrl : `${API_URL}/uploads/${video.editedUrl}`}
+                                                            href={video.editedUrl.startsWith('http') ? video.editedUrl : `${API_URL}/api/uploads/${video.editedUrl}`}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             className="ml-1 underline text-green-600 text-xs"
@@ -243,8 +244,8 @@ const AdminDashboard = () => {
                                                     value={u.role}
                                                     onChange={(e) => handleRoleUpdate(u.id, e.target.value)}
                                                     className={`border rounded px-2 py-1 text-xs font-medium ${u.role === 'ADMIN' ? 'bg-red-50 text-red-700 border-red-200' :
-                                                            u.role === 'EDITOR' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                                                                'bg-gray-50 text-gray-700 border-gray-200'
+                                                        u.role === 'EDITOR' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                                                            'bg-gray-50 text-gray-700 border-gray-200'
                                                         }`}
                                                     disabled={u.id === user?.id}
                                                 >
@@ -255,9 +256,9 @@ const AdminDashboard = () => {
                                             </TableCell>
                                             <TableCell>
                                                 <span className={`px-2 py-1 rounded text-xs font-medium ${u.plan === 'elite' ? 'bg-purple-100 text-purple-800' :
-                                                        u.plan === 'pro' ? 'bg-blue-100 text-blue-800' :
-                                                            u.plan === 'starter' ? 'bg-amber-100 text-amber-800' :
-                                                                'bg-gray-100 text-gray-500'
+                                                    u.plan === 'pro' ? 'bg-blue-100 text-blue-800' :
+                                                        u.plan === 'starter' ? 'bg-amber-100 text-amber-800' :
+                                                            'bg-gray-100 text-gray-500'
                                                     }`}>
                                                     {u.plan || 'none'}
                                                 </span>
