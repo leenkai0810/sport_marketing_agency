@@ -343,7 +343,10 @@
   "status": {
     "pending": "PENDING",
     "approved": "APPROVED",
-    "rejected": "REJECTED"
+    "rejected": "REJECTED",
+    "editing": "EDITING",
+    "ready": "READY",
+    "published": "PUBLISHED"
   },
   "legal": {
     "title": "Legal Notice",
@@ -421,5 +424,42 @@
     "golf": "⛳ Golf",
     "cycling": "🚴 Cycling",
     "other": "🏅 Other"
+  },
+  "editor": {
+    "title": "Editor Panel",
+    "subtitle": "Manage and edit athlete content",
+    "inQueue": "In Queue",
+    "myEditing": "My Editing",
+    "ready": "Ready",
+    "published": "Published",
+    "videoQueue": "Video Queue",
+    "myWork": "My Work",
+    "loading": "Loading...",
+    "queueEmpty": "Queue is empty",
+    "queueEmptyDesc": "No videos waiting for editing",
+    "noAssigned": "No assigned videos",
+    "noAssignedDesc": "Claim videos from the queue to start editing",
+    "claimVideo": "Claim This Video",
+    "uploadEdited": "Upload Edited Video",
+    "replaceEdited": "Replace Edited Video",
+    "uploading": "Uploading...",
+    "editedUploaded": "Edited version uploaded",
+    "editorNotes": "Editor Notes",
+    "notesPlaceholder": "Add notes about the edit...",
+    "saveNotes": "Save Notes",
+    "markReady": "Mark as Ready to Publish",
+    "editedVersion": "Edited Version:",
+    "notes": "Notes:",
+    "noCaption": "No caption",
+    "sport": "Sport",
+    "downloadOriginal": "Download original",
+    "videoClaimed": "Video claimed! It's now in your work queue.",
+    "claimFailed": "Failed to claim video",
+    "uploadSuccess": "Edited video uploaded!",
+    "uploadFailed": "Failed to upload",
+    "readySuccess": "Video marked as ready for publishing!",
+    "readyFailed": "Failed to update status",
+    "notesSaved": "Notes saved!",
+    "notesFailed": "Failed to save notes"
   }
 }

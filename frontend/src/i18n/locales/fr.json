@@ -312,7 +312,10 @@
   "status": {
     "pending": "EN ATTENTE",
     "approved": "APPROUVÉ",
-    "rejected": "REJETÉ"
+    "rejected": "REJETÉ",
+    "editing": "EN ÉDITION",
+    "ready": "PRÊT",
+    "published": "PUBLIÉ"
   },
   "legal": {
     "title": "Mentions Légales",
@@ -418,5 +421,42 @@
     "golf": "⛳ Golf",
     "cycling": "�� Cyclisme",
     "other": "🏅 Autre"
+  },
+  "editor": {
+    "title": "Panneau Éditeur",
+    "subtitle": "Gérer et éditer le contenu des athlètes",
+    "inQueue": "En File",
+    "myEditing": "Mon Édition",
+    "ready": "Prêt",
+    "published": "Publié",
+    "videoQueue": "File de Vidéos",
+    "myWork": "Mon Travail",
+    "loading": "Chargement...",
+    "queueEmpty": "La file est vide",
+    "queueEmptyDesc": "Aucune vidéo en attente d'édition",
+    "noAssigned": "Pas de vidéos assignées",
+    "noAssignedDesc": "Réclamez des vidéos de la file pour commencer à éditer",
+    "claimVideo": "Réclamer Cette Vidéo",
+    "uploadEdited": "Télécharger la Vidéo Éditée",
+    "replaceEdited": "Remplacer la Vidéo Éditée",
+    "uploading": "Téléchargement...",
+    "editedUploaded": "Version éditée téléchargée",
+    "editorNotes": "Notes de l'Éditeur",
+    "notesPlaceholder": "Ajouter des notes sur l'édition...",
+    "saveNotes": "Sauvegarder les Notes",
+    "markReady": "Marquer comme Prêt à Publier",
+    "editedVersion": "Version Éditée :",
+    "notes": "Notes :",
+    "noCaption": "Sans description",
+    "sport": "Sport",
+    "downloadOriginal": "Télécharger l'original",
+    "videoClaimed": "Vidéo réclamée ! Elle est maintenant dans votre file de travail.",
+    "claimFailed": "Échec de la réclamation de la vidéo",
+    "uploadSuccess": "Vidéo éditée téléchargée !",
+    "uploadFailed": "Échec du téléchargement",
+    "readySuccess": "Vidéo marquée comme prête à publier !",
+    "readyFailed": "Échec de la mise à jour du statut",
+    "notesSaved": "Notes sauvegardées !",
+    "notesFailed": "Échec de la sauvegarde des notes"
   }
 }

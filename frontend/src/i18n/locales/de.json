@@ -312,7 +312,10 @@
   "status": {
     "pending": "AUSSTEHEND",
     "approved": "GENEHMIGT",
-    "rejected": "ABGELEHNT"
+    "rejected": "ABGELEHNT",
+    "editing": "IN BEARBEITUNG",
+    "ready": "BEREIT",
+    "published": "VERÖFFENTLICHT"
   },
   "legal": {
     "title": "Impressum",
@@ -418,5 +421,42 @@
     "golf": "⛳ Golf",
     "cycling": "🚴 Radsport",
     "other": "🏅 Sonstiges"
+  },
+  "editor": {
+    "title": "Editor-Panel",
+    "subtitle": "Athleteninhalte verwalten und bearbeiten",
+    "inQueue": "In Warteschlange",
+    "myEditing": "Meine Bearbeitung",
+    "ready": "Bereit",
+    "published": "Veröffentlicht",
+    "videoQueue": "Video-Warteschlange",
+    "myWork": "Meine Arbeit",
+    "loading": "Wird geladen...",
+    "queueEmpty": "Warteschlange ist leer",
+    "queueEmptyDesc": "Keine Videos warten auf Bearbeitung",
+    "noAssigned": "Keine zugewiesenen Videos",
+    "noAssignedDesc": "Beanspruchen Sie Videos aus der Warteschlange, um mit der Bearbeitung zu beginnen",
+    "claimVideo": "Dieses Video Beanspruchen",
+    "uploadEdited": "Bearbeitetes Video Hochladen",
+    "replaceEdited": "Bearbeitetes Video Ersetzen",
+    "uploading": "Wird hochgeladen...",
+    "editedUploaded": "Bearbeitete Version hochgeladen",
+    "editorNotes": "Editor-Notizen",
+    "notesPlaceholder": "Notizen zur Bearbeitung hinzufügen...",
+    "saveNotes": "Notizen Speichern",
+    "markReady": "Als Bereit zum Veröffentlichen Markieren",
+    "editedVersion": "Bearbeitete Version:",
+    "notes": "Notizen:",
+    "noCaption": "Keine Beschreibung",
+    "sport": "Sportart",
+    "downloadOriginal": "Original herunterladen",
+    "videoClaimed": "Video beansprucht! Es ist jetzt in Ihrer Arbeitswarteschlange.",
+    "claimFailed": "Fehler beim Beanspruchen des Videos",
+    "uploadSuccess": "Bearbeitetes Video hochgeladen!",
+    "uploadFailed": "Fehler beim Hochladen",
+    "readySuccess": "Video als bereit zur Veröffentlichung markiert!",
+    "readyFailed": "Fehler beim Aktualisieren des Status",
+    "notesSaved": "Notizen gespeichert!",
+    "notesFailed": "Fehler beim Speichern der Notizen"
   }
 }

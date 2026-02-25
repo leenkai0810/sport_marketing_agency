@@ -312,7 +312,10 @@
   "status": {
     "pending": "PENDENTE",
     "approved": "APROVADO",
-    "rejected": "REJEITADO"
+    "rejected": "REJEITADO",
+    "editing": "EM EDIÇÃO",
+    "ready": "PRONTO",
+    "published": "PUBLICADO"
   },
   "legal": {
     "title": "Aviso Legal",
@@ -418,5 +421,42 @@
     "golf": "⛳ Golfe",
     "cycling": "🚴 Ciclismo",
     "other": "🏅 Outro"
+  },
+  "editor": {
+    "title": "Painel do Editor",
+    "subtitle": "Gerir e editar conteúdo de atletas",
+    "inQueue": "Na Fila",
+    "myEditing": "Minha Edição",
+    "ready": "Pronto",
+    "published": "Publicado",
+    "videoQueue": "Fila de Vídeos",
+    "myWork": "Meu Trabalho",
+    "loading": "A carregar...",
+    "queueEmpty": "A fila está vazia",
+    "queueEmptyDesc": "Não há vídeos à espera de edição",
+    "noAssigned": "Sem vídeos atribuídos",
+    "noAssignedDesc": "Reivindique vídeos da fila para começar a editar",
+    "claimVideo": "Reivindicar Este Vídeo",
+    "uploadEdited": "Carregar Vídeo Editado",
+    "replaceEdited": "Substituir Vídeo Editado",
+    "uploading": "A carregar...",
+    "editedUploaded": "Versão editada carregada",
+    "editorNotes": "Notas do Editor",
+    "notesPlaceholder": "Adicionar notas sobre a edição...",
+    "saveNotes": "Guardar Notas",
+    "markReady": "Marcar como Pronto para Publicar",
+    "editedVersion": "Versão Editada:",
+    "notes": "Notas:",
+    "noCaption": "Sem descrição",
+    "sport": "Desporto",
+    "downloadOriginal": "Descarregar original",
+    "videoClaimed": "Vídeo reivindicado! Agora está na sua fila de trabalho.",
+    "claimFailed": "Falha ao reivindicar o vídeo",
+    "uploadSuccess": "Vídeo editado carregado!",
+    "uploadFailed": "Falha ao carregar",
+    "readySuccess": "Vídeo marcado como pronto para publicar!",
+    "readyFailed": "Falha ao atualizar o estado",
+    "notesSaved": "Notas guardadas!",
+    "notesFailed": "Falha ao guardar as notas"
   }
 }

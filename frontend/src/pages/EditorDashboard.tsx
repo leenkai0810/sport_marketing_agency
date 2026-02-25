@@ -11,12 +11,12 @@ import { Video, Download, Upload, CheckCircle, Clock, FileText, User, LogOut } f
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
-const STATUS_STYLES: Record<string, { bg: string; text: string; label: string }> = {
-    PENDING: { bg: 'bg-amber-600/20', text: 'text-amber-400', label: 'Pending' },
-    EDITING: { bg: 'bg-blue-600/20', text: 'text-blue-400', label: 'Editing' },
-    READY: { bg: 'bg-green-600/20', text: 'text-green-400', label: 'Ready' },
-    PUBLISHED: { bg: 'bg-purple-600/20', text: 'text-purple-400', label: 'Published' },
-    REJECTED: { bg: 'bg-red-600/20', text: 'text-red-400', label: 'Rejected' },
+const STATUS_STYLES: Record<string, { bg: string; text: string; labelKey: string }> = {
+    PENDING: { bg: 'bg-amber-600/20', text: 'text-amber-400', labelKey: 'status.pending' },
+    EDITING: { bg: 'bg-blue-600/20', text: 'text-blue-400', labelKey: 'status.editing' },
+    READY: { bg: 'bg-green-600/20', text: 'text-green-400', labelKey: 'status.ready' },
+    PUBLISHED: { bg: 'bg-purple-600/20', text: 'text-purple-400', labelKey: 'status.published' },
+    REJECTED: { bg: 'bg-red-600/20', text: 'text-red-400', labelKey: 'status.rejected' },
 };
 
 const EditorDashboard = () => {
@@ -60,10 +60,10 @@ const EditorDashboard = () => {
     const handleClaim = async (videoId: string) => {
         try {
             await editorApi.assignToSelf(videoId);
-            toast.success('Video claimed! It\'s now in your work queue.');
+            toast.success(t('editor.videoClaimed'));
             fetchData();
         } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Failed to claim video');
+            toast.error(error.response?.data?.message || t('editor.claimFailed'));
         }
     };
 
@@ -71,10 +71,10 @@ const EditorDashboard = () => {
         setUploadingId(videoId);
         try {
             await editorApi.uploadEdited(videoId, file);
-            toast.success('Edited video uploaded!');
+            toast.success(t('editor.uploadSuccess'));
             fetchData();
         } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Failed to upload');
+            toast.error(error.response?.data?.message || t('editor.uploadFailed'));
         } finally {
             setUploadingId(null);
         }
@@ -83,20 +83,20 @@ const EditorDashboard = () => {
     const handleMarkReady = async (videoId: string) => {
         try {
             await editorApi.markReady(videoId);
-            toast.success('Video marked as ready for publishing!');
+            toast.success(t('editor.readySuccess'));
             fetchData();
         } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Failed to update status');
+            toast.error(error.response?.data?.message || t('editor.readyFailed'));
         }
     };
 
     const handleSaveNotes = async (videoId: string) => {
         try {
             await editorApi.addNotes(videoId, editingNotes[videoId] || '');
-            toast.success('Notes saved!');
+            toast.success(t('editor.notesSaved'));
             fetchData();
         } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Failed to save notes');
+            toast.error(error.response?.data?.message || t('editor.notesFailed'));
         }
     };
 
@@ -123,7 +123,7 @@ const EditorDashboard = () => {
                         preload="metadata"
                     />
                     <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold ${status.bg} ${status.text}`}>
-                        {status.label}
+                        {t(status.labelKey)}
                     </div>
                 </div>
 
@@ -131,7 +131,7 @@ const EditorDashboard = () => {
                 <div className="p-4 space-y-3">
                     <div className="flex items-start justify-between">
                         <div>
-                            <h3 className="text-white font-semibold text-sm">{video.caption || 'No caption'}</h3>
+                            <h3 className="text-white font-semibold text-sm">{video.caption || t('editor.noCaption')}</h3>
                             <div className="flex items-center gap-2 mt-1">
                                 <User className="w-3 h-3 text-gray-500" />
                                 <span className="text-gray-400 text-xs">{video.user?.name || video.user?.email}</span>
@@ -139,7 +139,7 @@ const EditorDashboard = () => {
                                 <span className="text-gray-500 text-xs">{video.platform}</span>
                             </div>
                             {video.user?.sport && (
-                                <span className="text-xs text-gray-600 mt-1 block">Sport: {video.user.sport}</span>
+                                <span className="text-xs text-gray-600 mt-1 block">{t('editor.sport')}: {video.user.sport}</span>
                             )}
                         </div>
                         {/* Download Original */}
@@ -147,7 +147,7 @@ const EditorDashboard = () => {
                             href={video.url.startsWith('http') ? video.url : `${API_URL}/uploads/${video.url}`}
                             download
                             className="p-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors"
-                            title="Download original"
+                            title={t('editor.downloadOriginal')}
                         >
                             <Download className="w-4 h-4 text-gray-400" />
                         </a>
@@ -159,7 +159,7 @@ const EditorDashboard = () => {
                             onClick={() => handleClaim(video.id)}
                             className="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm py-4"
                         >
-                            Claim This Video
+                            {t('editor.claimVideo')}
                         </Button>
                     )}
 
@@ -185,22 +185,22 @@ const EditorDashboard = () => {
                                     variant="outline"
                                 >
                                     <Upload className="w-4 h-4 mr-2" />
-                                    {uploadingId === video.id ? 'Uploading...' : (video.editedUrl ? 'Replace Edited Video' : 'Upload Edited Video')}
+                                    {uploadingId === video.id ? t('editor.uploading') : (video.editedUrl ? t('editor.replaceEdited') : t('editor.uploadEdited'))}
                                 </Button>
                                 {video.editedUrl && (
                                     <p className="text-green-500 text-xs mt-1 flex items-center gap-1">
-                                        <CheckCircle className="w-3 h-3" /> Edited version uploaded
+                                        <CheckCircle className="w-3 h-3" /> {t('editor.editedUploaded')}
                                     </p>
                                 )}
                             </div>
 
                             {/* Notes */}
                             <div>
-                                <Label className="text-gray-400 text-xs">Editor Notes</Label>
+                                <Label className="text-gray-400 text-xs">{t('editor.editorNotes')}</Label>
                                 <Textarea
                                     value={editingNotes[video.id] ?? video.editorNotes ?? ''}
                                     onChange={(e) => setEditingNotes(prev => ({ ...prev, [video.id]: e.target.value }))}
-                                    placeholder="Add notes about the edit..."
+                                    placeholder={t('editor.notesPlaceholder')}
                                     className="mt-1 bg-zinc-800 border-zinc-700 text-white text-xs min-h-[60px]"
                                 />
                                 <Button
@@ -208,7 +208,7 @@ const EditorDashboard = () => {
                                     size="sm"
                                     className="mt-1 bg-zinc-700 hover:bg-zinc-600 text-xs"
                                 >
-                                    <FileText className="w-3 h-3 mr-1" /> Save Notes
+                                    <FileText className="w-3 h-3 mr-1" /> {t('editor.saveNotes')}
                                 </Button>
                             </div>
 
@@ -217,7 +217,7 @@ const EditorDashboard = () => {
                                 onClick={() => handleMarkReady(video.id)}
                                 className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-sm py-4"
                             >
-                                <CheckCircle className="w-4 h-4 mr-2" /> Mark as Ready to Publish
+                                <CheckCircle className="w-4 h-4 mr-2" /> {t('editor.markReady')}
                             </Button>
                         </div>
                     )}
@@ -225,7 +225,7 @@ const EditorDashboard = () => {
                     {/* Show edited video preview */}
                     {video.editedUrl && video.status !== 'EDITING' && (
                         <div className="pt-2 border-t border-zinc-800">
-                            <p className="text-gray-500 text-xs mb-1">Edited Version:</p>
+                            <p className="text-gray-500 text-xs mb-1">{t('editor.editedVersion')}</p>
                             <video
                                 src={video.editedUrl.startsWith('http') ? video.editedUrl : `${API_URL}/uploads/${video.editedUrl}`}
                                 className="w-full rounded-lg"
@@ -238,7 +238,7 @@ const EditorDashboard = () => {
                     {/* Show notes read-only */}
                     {video.editorNotes && video.status !== 'EDITING' && (
                         <div className="pt-2 border-t border-zinc-800">
-                            <p className="text-gray-500 text-xs">Notes: <span className="text-gray-300">{video.editorNotes}</span></p>
+                            <p className="text-gray-500 text-xs">{t('editor.notes')} <span className="text-gray-300">{video.editorNotes}</span></p>
                         </div>
                     )}
 
@@ -253,32 +253,44 @@ const EditorDashboard = () => {
 
     return (
         <div className="min-h-screen bg-black text-white">
-            {/* Header */}
+            {/* Header - Global Media Sports branding like AdminDashboard */}
             <div className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-                    <div>
-                        <h1 className="text-xl font-black tracking-tight">
-                            <span className="text-red-600">EDITOR</span> DASHBOARD
-                        </h1>
-                        <p className="text-gray-500 text-xs mt-1">Manage and edit athlete content</p>
+                    <div className="flex items-center gap-3">
+                        <img src="/LOGO.png" alt="Global Media Sports" className="w-12 h-12 object-contain" />
+                        <div className="flex flex-col leading-tight">
+                            <span className="text-xl font-bold text-white">Global</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Media Sports</span>
+                        </div>
                     </div>
                     <div className="flex items-center gap-3">
                         <LanguageSwitcher />
-                        <Button onClick={handleLogout} variant="outline" size="sm" className="border-zinc-700 text-gray-300 hover:text-white text-xs">
-                            <LogOut className="w-4 h-4 mr-1" /> Logout
+                        <Button
+                            onClick={handleLogout}
+                            variant="outline"
+                            size="sm"
+                            className="border-zinc-700 text-gray-300 hover:bg-zinc-700 hover:text-gray-300 text-xs"
+                        >
+                            <LogOut className="w-4 h-4 mr-1" /> {t('auth.logout')}
                         </Button>
                     </div>
                 </div>
             </div>
 
             <div className="max-w-7xl mx-auto px-6 py-8">
+                {/* Page Title */}
+                <div className="mb-8">
+                    <h1 className="text-2xl font-black tracking-tight text-white">{t('editor.title')}</h1>
+                    <p className="text-gray-500 text-xs mt-1">{t('editor.subtitle')}</p>
+                </div>
+
                 {/* Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                     {[
-                        { label: 'In Queue', value: queue.length, color: 'text-amber-400' },
-                        { label: 'My Editing', value: myVideos.filter(v => v.status === 'EDITING').length, color: 'text-blue-400' },
-                        { label: 'Ready', value: myVideos.filter(v => v.status === 'READY').length, color: 'text-green-400' },
-                        { label: 'Published', value: myVideos.filter(v => v.status === 'PUBLISHED').length, color: 'text-purple-400' },
+                        { label: t('editor.inQueue'), value: queue.length, color: 'text-amber-400' },
+                        { label: t('editor.myEditing'), value: myVideos.filter(v => v.status === 'EDITING').length, color: 'text-blue-400' },
+                        { label: t('editor.ready'), value: myVideos.filter(v => v.status === 'READY').length, color: 'text-green-400' },
+                        { label: t('editor.published'), value: myVideos.filter(v => v.status === 'PUBLISHED').length, color: 'text-purple-400' },
                     ].map((stat) => (
                         <div key={stat.label} className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 text-center">
                             <p className={`text-2xl font-black ${stat.color}`}>{stat.value}</p>
@@ -294,11 +306,11 @@ const EditorDashboard = () => {
                             key={tab}
                             onClick={() => setActiveTab(tab)}
                             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all ${activeTab === tab
-                                    ? 'bg-red-600 text-white'
-                                    : 'text-gray-400 hover:text-white hover:bg-zinc-800'
+                                ? 'bg-red-600 text-white'
+                                : 'text-gray-400 hover:text-white hover:bg-zinc-800'
                                 }`}
                         >
-                            {tab === 'queue' ? `📥 Video Queue (${queue.length})` : `🎬 My Work (${myVideos.length})`}
+                            {tab === 'queue' ? `📥 ${t('editor.videoQueue')} (${queue.length})` : `🎬 ${t('editor.myWork')} (${myVideos.length})`}
                         </button>
                     ))}
                 </div>
@@ -307,7 +319,7 @@ const EditorDashboard = () => {
                 {isLoading ? (
                     <div className="text-center py-20">
                         <div className="animate-spin w-8 h-8 border-2 border-red-600 border-t-transparent rounded-full mx-auto" />
-                        <p className="text-gray-500 text-sm mt-4">Loading...</p>
+                        <p className="text-gray-500 text-sm mt-4">{t('editor.loading')}</p>
                     </div>
                 ) : (
                     <AnimatePresence mode="wait">
@@ -316,8 +328,8 @@ const EditorDashboard = () => {
                                 {queue.length === 0 ? (
                                     <div className="text-center py-20 bg-zinc-900 rounded-xl border border-zinc-800">
                                         <Video className="w-12 h-12 text-zinc-700 mx-auto mb-3" />
-                                        <p className="text-gray-400 font-medium">Queue is empty</p>
-                                        <p className="text-gray-600 text-sm">No videos waiting for editing</p>
+                                        <p className="text-gray-400 font-medium">{t('editor.queueEmpty')}</p>
+                                        <p className="text-gray-600 text-sm">{t('editor.queueEmptyDesc')}</p>
                                     </div>
                                 ) : (
                                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -334,8 +346,8 @@ const EditorDashboard = () => {
                                 {myVideos.length === 0 ? (
                                     <div className="text-center py-20 bg-zinc-900 rounded-xl border border-zinc-800">
                                         <Video className="w-12 h-12 text-zinc-700 mx-auto mb-3" />
-                                        <p className="text-gray-400 font-medium">No assigned videos</p>
-                                        <p className="text-gray-600 text-sm">Claim videos from the queue to start editing</p>
+                                        <p className="text-gray-400 font-medium">{t('editor.noAssigned')}</p>
+                                        <p className="text-gray-600 text-sm">{t('editor.noAssignedDesc')}</p>
                                     </div>
                                 ) : (
                                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
