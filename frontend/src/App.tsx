@@ -19,6 +19,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Legal from "./pages/Legal";
 import ForgotPassword from "./pages/ForgotPassword";
+import Clauses from "./pages/Clauses";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/legal" element={<Legal />} />
+              <Route path="/clauses" element={<Clauses />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -65,14 +65,14 @@
     "trustPayment": "Traitement de paiement sécurisé",
     "starterFeatures": {
       "setup": "Configuration des comptes TikTok et Instagram",
-      "videos": "2 vidéos éditées professionnellement/mois",
+      "videos": "2 vidéos éditées et 2 stories/mois",
       "strategy": "Stratégie de contenu de base",
       "report": "Rapport de performance mensuel",
       "support": "Support par email"
     },
     "proFeatures": {
       "everything": "Tout du plan Débutant",
-      "videos": "5 vidéos éditées professionnellement/mois",
+      "videos": "5 vidéos éditées et 5 stories/mois",
       "strategy": "Stratégie de contenu avancée",
       "partnerships": "Prospection de partenariats de marque",
       "reports": "Rapports de performance mensuels",
@@ -82,7 +82,7 @@
     },
     "eliteFeatures": {
       "everything": "Tout du plan Pro",
-      "unlimited": "10 par mois, plus 10 Stories",
+      "unlimited": "10 vidéos et 10 stories/mois",
       "manager": "Gestionnaire de compte dédié",
       "connections": "Connexions directes équipes/marques",
       "daily": "Publication de contenu quotidienne",
@@ -458,5 +458,13 @@
     "readyFailed": "Échec de la mise à jour du statut",
     "notesSaved": "Notes sauvegardées !",
     "notesFailed": "Échec de la sauvegarde des notes"
+  },
+  "clauses": {
+    "title": "Clauses",
+    "back": "Retour à l'accueil",
+    "section1Title": "Clause de Participation aux Primes de Signature et de Transfert",
+    "section1Desc": "Contrepartie pour Intermédiation et Projection de Carrière\n\nDroit à Commission :\nEn vertu des services de marketing, de projection de marque et de gestion de carrière fournis par l'AGENCE, l'ATHLÈTE reconnaît et accepte que l'AGENCE aura le droit de percevoir un pourcentage de toute Prime de Signature (Sign-on Fee), bonus d'embauche ou montant similaire que l'ATHLÈTE perçoit à la suite de la signature d'un nouveau contrat de travail ou d'un transfert avec un club, une équipe ou une entité sportive.\n\nPourcentage Applicable :\nLa contrepartie financière en faveur de l'AGENCE est fixée à 10 % (plus la TVA correspondante) sur le montant brut total de ladite Prime de Signature.\n\nAcquisition et Paiement : Ladite commission sera acquise au moment de la signature du nouveau contrat. Le paiement devra être effectué par l'ATHLÈTE (ou, le cas échéant, par le Club si convenu par écrit) dans un délai maximum de 15 jours calendaires à compter de la réception de ladite prime par l'ATHLÈTE.\n\nExtension de la Clause :\nCe droit de participation restera en vigueur à partir du jour de la formalisation lors de la souscription de nos services, quel que soit le nombre de transferts ou de clubs dans lesquels il preste ses services, même après la résiliation du présent contrat de représentation par notre agence.\n\nTransparence : L'ATHLÈTE s'engage à fournir à l'AGENCE une copie du contrat signé ou du document prouvant le montant de la prime dans les 48 heures suivant sa signature.",
+    "section2Title": "Clause de Cession et d'Exploitation des Droits à l'Image",
+    "section2Desc": "Article [Y].– Gestion des Droits à l'Image et des Sponsoring\n\nExclusivité de Gestion : L'ATHLÈTE cède à l'AGENCE, à titre exclusif, 10 % sur les contrats de sponsoring, la publicité et toute autre forme d'exploitation commerciale de ses droits à l'image (nom, voix, silhouette, signature ou tout autre signe distinctif) sur tout support, y compris les réseaux sociaux et la plateforme technologique appartenant à l'AGENCE, depuis son entrée sur notre plateforme jusqu'à la fin de sa carrière professionnelle d'athlète.\n\nCommission de Sponsoring : Pour chaque contrat commercial ou de sponsoring formalisé pendant la durée de cet accord, l'AGENCE percevra une commission de 10 % sur les revenus bruts totaux dérivés dudit contrat.\n\nDroits Numériques : L'ATHLÈTE autorise spécifiquement l'utilisation de son image pour la création de contenu exclusif sur le site web développé par l'AGENCE, acceptant que ledit contenu puisse être monétisé via la publicité ou des abonnements, comme convenu dans des annexes spécifiques.\n\nApprobation Préalable : L'AGENCE s'engage à ne formaliser aucun contrat de sponsoring pouvant nuire à la réputation de l'ATHLÈTE ou entrant en conflit direct avec les sponsors principaux de son club actuel, nécessitant toujours l'approbation finale par écrit de l'ATHLÈTE.\n\nRèglement des Paiements : Les paiements des marques seront de préférence effectués sur le compte de l'AGENCE."
   }
 }

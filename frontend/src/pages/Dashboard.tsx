@@ -356,7 +356,7 @@ const Dashboard = () => {
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.starterDesc', 'Perfect for rising athletes')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
-                                                {[t('pricing.starterFeatures.setup', 'TikTok & Instagram account setup'), t('pricing.starterFeatures.videos', '2 professional edited videos/month'), t('pricing.starterFeatures.strategy', 'Basic content strategy'), t('pricing.starterFeatures.report', 'Monthly performance report'), t('pricing.starterFeatures.support', 'Email support')].map((f, i) => (
+                                                {[t('pricing.starterFeatures.setup', 'TikTok & Instagram account setup'), t('pricing.starterFeatures.videos', '2 edited videos and 2 stories/month'), t('pricing.starterFeatures.strategy', 'Basic content strategy'), t('pricing.starterFeatures.report', 'Monthly performance report'), t('pricing.starterFeatures.support', 'Email support')].map((f, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                                                         <span className="text-red-500 mt-0.5">✓</span>{f}
                                                     </li>
@@ -389,7 +389,7 @@ const Dashboard = () => {
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.proDesc', 'For athletes who want to go pro')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
-                                                {[t('pricing.proFeatures.everything', 'Everything in Starter'), t('pricing.proFeatures.videos', '5 professional edited videos/month'), t('pricing.proFeatures.strategy', 'Advanced content strategy'), t('pricing.proFeatures.partnerships', 'Brand partnership outreach'), t('pricing.proFeatures.reports', 'Monthly performance reports'), t('pricing.proFeatures.priority', 'Priority support'), t('pricing.proFeatures.thumbnails', 'Custom thumbnails & graphics'), t('pricing.proFeatures.trends', 'Trend analysis & recommendations')].map((f, i) => (
+                                                {[t('pricing.proFeatures.everything', 'Everything in Starter'), t('pricing.proFeatures.videos', '5 edited videos and 5 stories/month'), t('pricing.proFeatures.strategy', 'Advanced content strategy'), t('pricing.proFeatures.partnerships', 'Brand partnership outreach'), t('pricing.proFeatures.reports', 'Monthly performance reports'), t('pricing.proFeatures.priority', 'Priority support'), t('pricing.proFeatures.thumbnails', 'Custom thumbnails & graphics'), t('pricing.proFeatures.trends', 'Trend analysis & recommendations')].map((f, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                                                         <span className="text-red-500 mt-0.5">✓</span>{f}
                                                     </li>
@@ -421,7 +421,7 @@ const Dashboard = () => {
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.eliteDesc', 'Maximum reach and visibility')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
-                                                {[t('pricing.eliteFeatures.everything', 'Everything in Pro'), t('pricing.eliteFeatures.unlimited', '10 per month, plus 10 Stories'), t('pricing.eliteFeatures.manager', 'Dedicated account manager'), t('pricing.eliteFeatures.connections', 'Direct team/brand connections'), t('pricing.eliteFeatures.daily', 'Daily content posting'), t('pricing.eliteFeatures.support247', '24/7 priority support'), t('pricing.eliteFeatures.sponsorship', 'Sponsorship negotiation'), t('pricing.eliteFeatures.press', 'Press release distribution')].map((f, i) => (
+                                                {[t('pricing.eliteFeatures.everything', 'Everything in Pro'), t('pricing.eliteFeatures.unlimited', '10 videos and 10 stories/month'), t('pricing.eliteFeatures.manager', 'Dedicated account manager'), t('pricing.eliteFeatures.connections', 'Direct team/brand connections'), t('pricing.eliteFeatures.daily', 'Daily content posting'), t('pricing.eliteFeatures.support247', '24/7 priority support'), t('pricing.eliteFeatures.sponsorship', 'Sponsorship negotiation'), t('pricing.eliteFeatures.press', 'Press release distribution')].map((f, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                                                         <span className="text-yellow-400 mt-0.5">✓</span>{f}
                                                     </li>

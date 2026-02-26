@@ -65,14 +65,14 @@
     "trustPayment": "Processamento de pagamento confiável",
     "starterFeatures": {
       "setup": "Configuração de contas TikTok e Instagram",
-      "videos": "2 vídeos editados profissionalmente/mês",
+      "videos": "2 vídeos editados e 2 stories/mês",
       "strategy": "Estratégia de conteúdo básica",
       "report": "Relatório de desempenho mensal",
       "support": "Suporte por email"
     },
     "proFeatures": {
       "everything": "Tudo do plano Iniciante",
-      "videos": "5 vídeos editados profissionalmente/mês",
+      "videos": "5 vídeos editados e 5 stories/mês",
       "strategy": "Estratégia de conteúdo avançada",
       "partnerships": "Alcance de parcerias de marca",
       "reports": "Relatórios de desempenho mensais",
@@ -82,7 +82,7 @@
     },
     "eliteFeatures": {
       "everything": "Tudo do plano Pro",
-      "unlimited": "10 por mês, mais 10 Stories",
+      "unlimited": "10 vídeos e 10 stories/mês",
       "manager": "Gerente de conta dedicado",
       "connections": "Conexões diretas com equipes/marcas",
       "daily": "Postagem de conteúdo diária",
@@ -458,5 +458,13 @@
     "readyFailed": "Falha ao atualizar o estado",
     "notesSaved": "Notas guardadas!",
     "notesFailed": "Falha ao guardar as notas"
+  },
+  "clauses": {
+    "title": "Cláusulas",
+    "back": "Voltar ao início",
+    "section1Title": "Cláusula de Participação em Prémios de Assinatura e Transferência",
+    "section1Desc": "Contrapartida por Intermediação e Projeção de Carreira\n\nDireito a Comissão:\nEm virtude dos serviços de marketing, projeção de marca e gestão de carreira prestados pela AGÊNCIA, o ATLETA reconhece e aceita que a AGÊNCIA terá o direito de receber uma percentagem de qualquer Prémio de Assinatura (Sign-on Fee), bónus de contratação ou montante semelhante que o ATLETA receba como consequência da assinatura de um novo contrato de trabalho ou transferência com um clube, equipa ou entidade desportiva.\n\nPercentagem Aplicável:\nA contrapartida financeira a favor da AGÊNCIA é fixada em 10% (mais o IVA correspondente) sobre o montante bruto total do referido Prémio de Assinatura.\n\nVencimento e Pagamento: A referida comissão vencerá no momento da assinatura do novo contrato. O pagamento deve ser efetuado pelo ATLETA (ou, se aplicável, pelo Clube se assim for acordado por escrito) num prazo máximo de 15 dias corridos a partir da receção do referido prémio pelo ATLETA.\n\nExtensão da Cláusula:\nEste direito de participação permanecerá em vigor a partir do dia da formalização ao contratar os nossos serviços, independentemente do número de transferências ou clubes nos quais preste os seus serviços, mesmo após a rescisão deste contrato de representação pela nossa agência.\n\nTransparência: O ATLETA concorda em fornecer à AGÊNCIA uma cópia do contrato assinado ou documento comprovativo do valor do prémio no prazo de 48 horas após a sua assinatura.",
+    "section2Title": "Cláusula de Cessão e Exploração de Direitos de Imagem",
+    "section2Desc": "Artigo [Y].– Gestão de Direitos de Imagem e Patrocínios\n\nExclusividade de Gestão: O ATLETA cede à AGÊNCIA, em regime de exclusividade, 10% sobre os contratos de patrocínio, publicidade e qualquer outra forma de exploração comercial dos seus direitos de imagem (nome, voz, silhueta, assinatura ou qualquer outro sinal distintivo) em qualquer meio, incluindo redes sociais e a plataforma tecnológica propriedade da AGÊNCIA, desde a sua entrada na nossa plataforma até ao fim da sua carreira profissional como atleta.\n\nComissão de Patrocínio: Por cada contrato comercial ou de patrocínio formalizado durante a vigência deste acordo, a AGÊNCIA receberá uma comissão de 10% sobre o rendimento bruto total derivado de tal contrato.\n\nDireitos Digitais: O ATLETA autoriza especificamente o uso da sua imagem para a criação de conteúdo exclusivo no site desenvolvido pela AGÊNCIA, aceitando que tal conteúdo pode ser rentabilizado através de publicidade ou subscrições, conforme acordado em anexos específicos.\n\nAprovação Prévia: A AGÊNCIA compromete-se a não formalizar nenhum contrato de patrocínio que possa prejudicar a reputação do ATLETA ou que entre em conflito direto com os patrocinadores principais do seu clube atual, exigindo sempre a aprovação final por escrito do ATLETA.\n\nLiquidação de Pagamentos: Os pagamentos das marcas serão preferencialmente efetuados para a conta da AGÊNCIA."
   }
 }

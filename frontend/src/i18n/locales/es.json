@@ -65,14 +65,14 @@
     "trustPayment": "Procesamiento de pago confiable",
     "starterFeatures": {
       "setup": "Configuración de cuentas TikTok e Instagram",
-      "videos": "2 videos editados profesionalmente/mes",
+      "videos": "2 videos editados y 2 stories/mes",
       "strategy": "Estrategia de contenido básica",
       "report": "Informe de rendimiento mensual",
       "support": "Soporte por email"
     },
     "proFeatures": {
       "everything": "Todo lo del plan Inicial",
-      "videos": "5 videos editados profesionalmente/mes",
+      "videos": "5 videos editados y 5 stories/mes",
       "strategy": "Estrategia de contenido avanzada",
       "partnerships": "Alcance a socios de marca",
       "reports": "Informes de rendimiento mensuales",
@@ -82,7 +82,7 @@
     },
     "eliteFeatures": {
       "everything": "Todo lo del plan Pro",
-      "unlimited": "10 por mes, más 10 Stories",
+      "unlimited": "10 videos y 10 stories/mes",
       "manager": "Gestor de cuenta dedicado",
       "connections": "Conexiones directas con equipos/marcas",
       "daily": "Publicación de contenido diaria",
@@ -458,5 +458,13 @@
     "readyFailed": "Error al actualizar el estado",
     "notesSaved": "¡Notas guardadas!",
     "notesFailed": "Error al guardar las notas"
+  },
+  "clauses": {
+    "title": "Cláusulas",
+    "back": "Volver al inicio",
+    "section1Title": "Cláusula de Participación en Primas de Fichaje y Transferencia",
+    "section1Desc": "Contraprestación por Intermediación y Proyección de Carrera\n\nDerecho a Comisión:\nEn virtud de los servicios de marketing, proyección de marca y gestión de carrera prestados por la AGENCIA, el DEPORTISTA reconoce y acepta que la AGENCIA tendrá derecho a percibir un porcentaje de cualquier Prima de Fichaje (Sign-on Fee), bono de contratación o cantidad análoga que el DEPORTISTA perciba como consecuencia de la firma de un nuevo contrato de trabajo o transferencia con un club, equipo o entidad deportiva.\n\nPorcentaje Aplicable:\nLa contraprestación económica a favor de la AGENCIA se fija en un 10% (más el IVA correspondiente) sobre el importe bruto total de la citada Prima de Fichaje.\n\nDevengo y Pago: Dicha comisión se devengará en el momento de la firma del nuevo contrato. El pago deberá hacerse efectivo por el DEPORTISTA (o, en su caso, por el Club si así se pactase por escrito) en un plazo máximo de 15 días naturales desde la recepción de la citada prima por parte del DEPORTISTA.\n\nExtensión de la Cláusula:\nEste derecho de participación se mantendrá vigente desde el día de formalización a la hora de contratar nuestros servicios, independientemente de el número de traspasos o clubes en los que preste su servicio aún tras la finalización del presente contrato de representación por nuestra agencia.\n\nTransparencia: El DEPORTISTA se compromete a facilitar a la AGENCIA una copia del contrato firmado o documento acreditativo de la cuantía de la prima en un plazo de 48 horas tras su firma.",
+    "section2Title": "Cláusula de Cesión y Explotación de Derechos de Imagen",
+    "section2Desc": "Artículo [Y].– Gestión de Derechos de Imagen y Patrocinios\n\nExclusividad de Gestión: El DEPORTISTA cede a la AGENCIA, con carácter en exclusiva, el 10 % sobre los contratos de patrocinio, publicidad y cualquier otra forma de explotación comercial de sus derechos de imagen (nombre, voz, silueta, firma o cualquier otro signo distintivo) en cualquier soporte, incluyendo redes sociales y la plataforma tecnológica propiedad de la AGENCIA, desde su ingreso en nuestra plataforma, hasta el final de su carrera profesional como deportista.\n\nComisión por Patrocinio: Por cada contrato comercial o de patrocinio que se formalice durante la vigencia de este acuerdo, la AGENCIA percibirá una comisión del 10 % sobre los ingresos brutos totales derivados de dicho contrato.\n\nDerechos Digitales:  El DEPORTISTA autoriza específicamente el uso de su imagen para la creación de contenido exclusivo en la web desarrollada por la AGENCIA aceptando que dicho contenido podrá ser monetizado mediante publicidad o suscripciones, según se acuerde en anexos específicos.\n\nAprobación Previa: La AGENCIA se compromete a no formalizar ningún contrato de patrocinio que pueda perjudicar la reputación del DEPORTISTA o que entre en conflicto directo con los patrocinadores principales de su club actual, requiriendo siempre la aprobación final por escrito del DEPORTISTA.\n\nLiquidación de Pagos: Los pagos de las marcas se realizarán preferentemente a la cuenta de la AGENCIA."
   }
 }

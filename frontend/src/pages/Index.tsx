@@ -778,7 +778,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.starterFeatures.videos', '2 professional edited videos/month')}</span>
+                    <span className="text-gray-300">{t('pricing.starterFeatures.videos', '2 edited videos and 2 stories/month')}</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
@@ -851,7 +851,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.proFeatures.videos', '5 professional edited videos/month')}</span>
+                    <span className="text-gray-300">{t('pricing.proFeatures.videos', '5 edited videos and 5 stories/month')}</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
@@ -936,7 +936,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.eliteFeatures.unlimited', '10 per month, plus 10 Stories')}</span>
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.unlimited', '10 videos and 10 stories/month')}</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
@@ -1364,6 +1364,9 @@ export default function Index() {
                 </a>
                 <a href="/privacy" className="text-gray-500 text-sm hover:text-red-600 transition-colors">
                   {t('footer.privacy')}
+                </a>
+                <a href="/clauses" className="text-gray-500 text-sm hover:text-red-600 transition-colors">
+                  {t('clauses.title')}
                 </a>
                 <a href="/terms" className="text-gray-500 text-sm hover:text-red-600 transition-colors">
                   {t('footer.terms')}

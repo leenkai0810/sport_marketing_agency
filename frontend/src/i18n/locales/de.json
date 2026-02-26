@@ -65,14 +65,14 @@
     "trustPayment": "Vertrauenswürdige Zahlungsabwicklung",
     "starterFeatures": {
       "setup": "TikTok & Instagram Kontoeinrichtung",
-      "videos": "2 professionell bearbeitete Videos/Monat",
+      "videos": "2 bearbeitete Videos und 2 Stories/Monat",
       "strategy": "Grundlegende Inhaltsstrategie",
       "report": "Monatlicher Leistungsbericht",
       "support": "E-Mail-Support"
     },
     "proFeatures": {
       "everything": "Alles aus Starter",
-      "videos": "5 professionell bearbeitete Videos/Monat",
+      "videos": "5 bearbeitete Videos und 5 Stories/Monat",
       "strategy": "Erweiterte Inhaltsstrategie",
       "partnerships": "Markenpartnerschaft-Outreach",
       "reports": "Monatliche Leistungsberichte",
@@ -82,7 +82,7 @@
     },
     "eliteFeatures": {
       "everything": "Alles aus Pro",
-      "unlimited": "10 pro Monat, plus 10 Stories",
+      "unlimited": "10 Videos und 10 Stories/Monat",
       "manager": "Dedizierter Account Manager",
       "connections": "Direkte Team/Marken-Verbindungen",
       "daily": "Tägliche Inhaltsveröffentlichung",
@@ -458,5 +458,13 @@
     "readyFailed": "Fehler beim Aktualisieren des Status",
     "notesSaved": "Notizen gespeichert!",
     "notesFailed": "Fehler beim Speichern der Notizen"
+  },
+  "clauses": {
+    "title": "Klauseln",
+    "back": "Zurück zur Startseite",
+    "section1Title": "Klausel zur Beteiligung an Unterzeichnungs- und Transferprämien",
+    "section1Desc": "Gegenleistung für Vermittlung und Karriereplanung\n\nAnspruch auf Provision:\nAufgrund der von der AGENTUR erbrachten Marketing-, Markenprojektions- und Karrieremanagementdienste erkennt der ATHLET an und stimmt zu, dass die AGENTUR das Recht hat, einen Prozentsatz von jeder Unterzeichnungsprämie (Sign-on Fee), jedem Einstellungsbonus oder einem ähnlichen Betrag zu erhalten, den der ATHLET infolge der Unterzeichnung eines neuen Arbeitsvertrags oder eines Transfers mit einem Verein, einer Mannschaft oder einer Sporteinrichtung erhält.\n\nAnwendbarer Prozentsatz:\nDie finanzielle Gegenleistung zugunsten der AGENTUR wird auf 10 % (zuzüglich der entsprechenden Mehrwertsteuer) des Gesamtbruttobetrags der vorgenannten Unterzeichnungsprämie festgesetzt.\n\nAnfall und Zahlung: Diese Provision wird zum Zeitpunkt der Unterzeichnung des neuen Vertrags fällig. Die Zahlung muss vom ATHLETEN (oder gegebenenfalls vom Verein, falls schriftlich vereinbart) innerhalb einer Frist von maximal 15 Kalendertagen ab Eingang der genannten Prämie beim ATHLETEN geleistet werden.\n\nKlauselerweiterung:\nDieses Beteiligungsrecht bleibt ab dem Tag der Formalisierung bei Inanspruchnahme unserer Dienste bestehen, unabhängig von der Anzahl der Transfers oder Vereine, in denen er seine Dienste erbringt, auch nach Beendigung dieses Vertretungsvertrags durch unsere Agentur.\n\nTransparenz: Der ATHLET verpflichtet sich, der AGENTUR innerhalb von 48 Stunden nach Unterzeichnung eine Kopie des unterzeichneten Vertrags oder Dokuments zum Nachweis der Höhe der Prämie zur Verfügung zu stellen.",
+    "section2Title": "Klausel zur Übertragung und Verwertung von Bildrechten",
+    "section2Desc": "Artikel [Y].– Management von Bildrechten und Sponsoring\n\nExklusivität des Managements: Der ATHLET überträgt der AGENTUR exklusiv 10 % der Sponsorenverträge, Werbung und jeder anderen Form der kommerziellen Verwertung seiner Bildrechte (Name, Stimme, Silhouette, Unterschrift oder jedes andere Unterscheidungsmerkmal) auf jedem Medium, einschließlich sozialer Netzwerke und der technologischen Plattform, die der AGENTUR gehört, ab seinem Eintritt in unsere Plattform bis zum Ende seiner professionellen Karriere als Athlet.\n\nSponsoringprovision: Für jeden Geschäfts- oder Sponsorenvertrag, der während der Laufzeit dieser Vereinbarung formalisiert wird, erhält die AGENTUR eine Provision von 10 % der gesamten Bruttoeinnahmen aus diesem Vertrag.\n\nDigitale Rechte: Der ATHLET genehmigt ausdrücklich die Nutzung seines Bildes für die Erstellung exklusiver Inhalte auf der von der AGENTUR entwickelten Website und akzeptiert, dass diese Inhalte durch Werbung oder Abonnements monetarisiert werden können, wie in spezifischen Anhängen vereinbart.\n\nVorherige Genehmigung: Die AGENTUR verpflichtet sich, keinen Sponsorenvertrag zu formalisieren, der dem Ruf des ATHLETEN schaden könnte oder in direktem Konflikt mit den Hauptsponsoren seines derzeitigen Vereins steht, und erfordert stets die schriftliche Endgenehmigung des ATHLETEN.\n\nZahlungsabwicklung: Zahlungen von Marken erfolgen vorzugsweise auf das Konto der AGENTUR."
   }
 }
