@@ -389,7 +389,7 @@ const Dashboard = () => {
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.proDesc', 'For athletes who want to go pro')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
-                                                {[t('pricing.proFeatures.everything', 'Everything in Starter'), t('pricing.proFeatures.videos', '5 professional edited videos/month'), t('pricing.proFeatures.strategy', 'Advanced content strategy'), t('pricing.proFeatures.partnerships', 'Brand partnership outreach'), t('pricing.proFeatures.reports', 'Weekly performance reports'), t('pricing.proFeatures.priority', 'Priority support'), t('pricing.proFeatures.thumbnails', 'Custom thumbnails & graphics'), t('pricing.proFeatures.trends', 'Trend analysis & recommendations')].map((f, i) => (
+                                                {[t('pricing.proFeatures.everything', 'Everything in Starter'), t('pricing.proFeatures.videos', '5 professional edited videos/month'), t('pricing.proFeatures.strategy', 'Advanced content strategy'), t('pricing.proFeatures.partnerships', 'Brand partnership outreach'), t('pricing.proFeatures.reports', 'Monthly performance reports'), t('pricing.proFeatures.priority', 'Priority support'), t('pricing.proFeatures.thumbnails', 'Custom thumbnails & graphics'), t('pricing.proFeatures.trends', 'Trend analysis & recommendations')].map((f, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                                                         <span className="text-red-500 mt-0.5">✓</span>{f}
                                                     </li>
@@ -416,12 +416,12 @@ const Dashboard = () => {
                                                 <span className="text-yellow-400 text-lg">★</span>
                                             </div>
                                             <div className="mb-1">
-                                                <span className="text-4xl font-black text-yellow-400">$499</span>
+                                                <span className="text-4xl font-black text-yellow-400">$399</span>
                                                 <span className="text-gray-500 text-sm ml-1">{t('pricing.month', '/month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.eliteDesc', 'Maximum reach and visibility')}</p>
                                             <ul className="space-y-2.5 mb-6 flex-1">
-                                                {[t('pricing.eliteFeatures.everything', 'Everything in Pro'), t('pricing.eliteFeatures.unlimited', 'Unlimited video edits'), t('pricing.eliteFeatures.manager', 'Dedicated account manager'), t('pricing.eliteFeatures.connections', 'Direct team/brand connections'), t('pricing.eliteFeatures.daily', 'Daily content posting'), t('pricing.eliteFeatures.support247', '24/7 priority support'), t('pricing.eliteFeatures.sponsorship', 'Sponsorship negotiation'), t('pricing.eliteFeatures.media', 'Media training sessions'), t('pricing.eliteFeatures.press', 'Press release distribution')].map((f, i) => (
+                                                {[t('pricing.eliteFeatures.everything', 'Everything in Pro'), t('pricing.eliteFeatures.unlimited', '10 per month, plus 10 Stories'), t('pricing.eliteFeatures.manager', 'Dedicated account manager'), t('pricing.eliteFeatures.connections', 'Direct team/brand connections'), t('pricing.eliteFeatures.daily', 'Daily content posting'), t('pricing.eliteFeatures.support247', '24/7 priority support'), t('pricing.eliteFeatures.sponsorship', 'Sponsorship negotiation'), t('pricing.eliteFeatures.press', 'Press release distribution')].map((f, i) => (
                                                     <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
                                                         <span className="text-yellow-400 mt-0.5">✓</span>{f}
                                                     </li>

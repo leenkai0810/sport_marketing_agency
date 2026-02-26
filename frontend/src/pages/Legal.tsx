@@ -13,7 +13,6 @@ const Legal = () => {
         { label: t('legal.taxId'), value: t('legal.taxIdValue') },
         { label: t('legal.address'), value: t('legal.addressValue') },
         { label: t('legal.emailLabel'), value: t('legal.emailValue'), isEmail: true },
-        { label: t('legal.registry'), value: t('legal.registryValue') },
     ];
 
     const sections = [

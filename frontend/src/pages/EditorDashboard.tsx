@@ -23,6 +23,7 @@ const STATUS_STYLES: Record<string, { bg: string; text: string; labelKey: string
 const EditorDashboard = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const [user, setUser] = useState<any>(null);
     const [queue, setQueue] = useState<any[]>([]);
     const [myVideos, setMyVideos] = useState<any[]>([]);
     const [activeTab, setActiveTab] = useState('queue');
@@ -34,11 +35,12 @@ const EditorDashboard = () => {
     const API_URL = getAPIBaseURL();
 
     useEffect(() => {
-        const user = authApi.getCurrentUser();
-        if (!user || (user.role !== 'EDITOR' && user.role !== 'ADMIN')) {
+        const currentUser = authApi.getCurrentUser();
+        if (!currentUser || (currentUser.role !== 'EDITOR' && currentUser.role !== 'ADMIN')) {
             navigate('/login');
             return;
         }
+        setUser(currentUser);
         fetchData();
     }, []);
 
@@ -265,8 +267,14 @@ const EditorDashboard = () => {
                             <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">Media Sports</span>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4">
                         <LanguageSwitcher />
+                        {user && (
+                            <div className="hidden md:flex items-center gap-2 border-r border-zinc-800 pr-4">
+                                <User className="w-4 h-4 text-gray-400" />
+                                <span className="text-sm font-medium text-gray-200">{user.name}</span>
+                            </div>
+                        )}
                         <Button
                             onClick={handleLogout}
                             variant="outline"

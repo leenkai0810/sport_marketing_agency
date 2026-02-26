@@ -863,7 +863,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.proFeatures.reports', 'Weekly performance reports')}</span>
+                    <span className="text-gray-300">{t('pricing.proFeatures.reports', 'Monthly performance reports')}</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
@@ -924,7 +924,7 @@ export default function Index() {
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-50 transition-colors duration-300">{t('pricing.elite')}</h3>
                   <p className="text-sm text-gray-400 mb-6">{t('pricing.eliteDesc')}</p>
                   <div className="mb-8">
-                    <span className="text-4xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">$499</span>
+                    <span className="text-4xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">$399</span>
                     <span className="text-gray-400 text-sm">/month</span>
                   </div>
                 </div>
@@ -936,7 +936,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.eliteFeatures.unlimited', 'Unlimited video edits')}</span>
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.unlimited', '10 per month, plus 10 Stories')}</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
@@ -958,10 +958,7 @@ export default function Index() {
                     <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-300">{t('pricing.eliteFeatures.sponsorship', 'Sponsorship negotiation')}</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.eliteFeatures.media', 'Media training sessions')}</span>
-                  </li>
+
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-300">{t('pricing.eliteFeatures.press', 'Press release distribution')}</span>
