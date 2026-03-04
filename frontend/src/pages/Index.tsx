@@ -767,7 +767,7 @@ export default function Index() {
                   <p className="text-sm text-gray-400 mb-6">{t('pricing.starterDesc')}</p>
                   <div className="mb-8">
                     <span className="text-4xl font-black text-white">$99</span>
-                    <span className="text-gray-400 text-sm">/month</span>
+                    <span className="text-gray-400 text-sm">{t('pricing.month', '/month')}</span>
                   </div>
                 </div>
 
@@ -840,7 +840,7 @@ export default function Index() {
                   <p className="text-sm text-gray-400 mb-6">{t('pricing.proDesc')}</p>
                   <div className="mb-8">
                     <span className="text-4xl font-black text-red-500">$249</span>
-                    <span className="text-gray-400 text-sm">/month</span>
+                    <span className="text-gray-400 text-sm">{t('pricing.month', '/month')}</span>
                   </div>
                 </div>
 
@@ -925,7 +925,7 @@ export default function Index() {
                   <p className="text-sm text-gray-400 mb-6">{t('pricing.eliteDesc')}</p>
                   <div className="mb-8">
                     <span className="text-4xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">$399</span>
-                    <span className="text-gray-400 text-sm">/month</span>
+                    <span className="text-gray-400 text-sm">{t('pricing.month', '/month')}</span>
                   </div>
                 </div>
 
