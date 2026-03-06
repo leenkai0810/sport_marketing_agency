@@ -8,8 +8,8 @@ const currentFile = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(currentFile);
 const projectRoot = path.resolve(__dirname, '..');
 
-// Base URL of the website (should match the actual domain)
-const baseUrl = "https://atoms.template.com";
+// Base URL of the website (set from site.config.json in main())
+let baseUrl = "https://globalmediasports.es";
 
 // Google Tag Manager container ID - set via site.config.json (e.g. "GTM-N9HH5W3W")
 // GA4 is configured inside GTM; do not add gtag.js directly when using GTM.
@@ -972,6 +972,7 @@ function generateListPage(articles) {
 
 function main(config = {}) {
   // Apply config
+  if (config.site_url) baseUrl = config.site_url;
   GTM_CONTAINER_ID = config.gtm_container_id || "";
 
   // Check if source directory exists

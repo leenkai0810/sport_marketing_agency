@@ -1,7 +1,16 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 
-const baseUrl = "https://atoms.template.com";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const configPath = path.join(__dirname, "..", "site.config.json");
+let siteConfig = {};
+if (fs.existsSync(configPath)) {
+  try {
+    siteConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+  } catch (e) {}
+}
+const baseUrl = siteConfig.site_url || "https://globalmediasports.es";
 const distDir = "./dist";
 const outFile = "./dist/sitemap.xml";
 const contentDir = "./seo/content";
@@ -57,13 +66,16 @@ function collectHtmlFiles(dir, basePath = "") {
 // Collect all HTML files
 const urls = [];
 
+let indexLastmod = new Date().toISOString();
 if (fs.existsSync(path.join(distDir, "index.html"))) {
   const stat = fs.statSync(path.join(distDir, "index.html"));
-  urls.push({
-    url: baseUrl,
-    lastmod: stat.mtime.toISOString()
-  });
+  indexLastmod = stat.mtime.toISOString();
+  urls.push({ url: baseUrl, lastmod: indexLastmod });
 }
+// Key SPA routes (same HTML, help crawlers discover important pages)
+["/register", "/login", "/terms", "/privacy", "/legal", "/clauses", "/contract"].forEach((path) => {
+  urls.push({ url: `${baseUrl}${path}`, lastmod: indexLastmod });
+});
 
 // Collect HTML files in blog directory
 const blogDir = path.join(distDir, "blog");

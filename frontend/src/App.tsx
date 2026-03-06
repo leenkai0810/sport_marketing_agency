@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
+import { PageSEO } from "@/components/PageSEO";
 import Index from "./pages/Index";
 import AuthCallback from "./pages/AuthCallback";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -37,6 +38,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <BrowserRouter>
+            <PageSEO />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/register" element={<Register />} />
