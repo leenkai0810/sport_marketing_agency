@@ -11,9 +11,9 @@ const projectRoot = path.resolve(__dirname, '..');
 // Base URL of the website (should match the actual domain)
 const baseUrl = "https://atoms.template.com";
 
-// GA4 Measurement ID - set via site.config.json
-// Format: "G-XXXXXXXXXX" or empty string if not needed
-let GA4_MEASUREMENT_ID = "";
+// Google Tag Manager container ID - set via site.config.json (e.g. "GTM-N9HH5W3W")
+// GA4 is configured inside GTM; do not add gtag.js directly when using GTM.
+let GTM_CONTAINER_ID = "";
 
 // Source markdown files directory
 // First look for ./seo/content in the project, if not found, look for ../seo/content at the same level
@@ -92,6 +92,14 @@ function getHtmlTemplate(title, content, datePublished, dateModified, meta = {})
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XPF757JKE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2XPF757JKE');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="${description}">
@@ -122,15 +130,14 @@ ${JSON.stringify(blogPostingSchema, null, 2)}
   <script type="application/ld+json">
 ${JSON.stringify(breadcrumbSchema, null, 2)}
   </script>
-  ${GA4_MEASUREMENT_ID ? `
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${GA4_MEASUREMENT_ID}');
-  </script>` : ''}
+  ${GTM_CONTAINER_ID ? `
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${GTM_CONTAINER_ID}');</script>
+  <!-- End Google Tag Manager -->` : ''}
   <style>
     :root {
       --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
@@ -456,7 +463,11 @@ ${JSON.stringify(breadcrumbSchema, null, 2)}
   </style>
 </head>
 <body>
-  <main class="container">
+  ${GTM_CONTAINER_ID ? `<!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  ` : ''}<main class="container">
     <nav class="nav">
       <a href="/blog/" class="nav-btn">← All Articles</a>
       <a href="/" class="nav-btn">Home</a>
@@ -753,6 +764,14 @@ function generateListPage(articles) {
   const listHtml = `<!DOCTYPE html>
 <html lang="${pageLang}">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XPF757JKE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2XPF757JKE');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Blog Articles List">
@@ -760,15 +779,14 @@ function generateListPage(articles) {
   <link rel="canonical" href="${baseUrl}/blog/">
   
   <title>Articles</title>
-  ${GA4_MEASUREMENT_ID ? `
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${GA4_MEASUREMENT_ID}');
-  </script>` : ''}
+  ${GTM_CONTAINER_ID ? `
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${GTM_CONTAINER_ID}');</script>
+  <!-- End Google Tag Manager -->` : ''}
   <style>
     :root {
       --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
@@ -916,7 +934,11 @@ function generateListPage(articles) {
   </style>
 </head>
 <body>
-  <div class="container">
+  ${GTM_CONTAINER_ID ? `<!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  ` : ''}<div class="container">
     <div class="header">
       <h1>Articles</h1>
       <p class="subtitle">Thoughts, stories and ideas</p>
@@ -950,7 +972,7 @@ function generateListPage(articles) {
 
 function main(config = {}) {
   // Apply config
-  GA4_MEASUREMENT_ID = config.ga4_measurement_id || "";
+  GTM_CONTAINER_ID = config.gtm_container_id || "";
 
   // Check if source directory exists
   if (!fs.existsSync(blogDir)) {
