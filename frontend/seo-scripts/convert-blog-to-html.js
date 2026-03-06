@@ -93,12 +93,12 @@ function getHtmlTemplate(title, content, datePublished, dateModified, meta = {})
 <html lang="${lang}">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XPF757JKE"></script>
+  <script src="https://www.googletagmanager.com/gtag/js?id=G-0EG1TBQ0BQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-2XPF757JKE');
+    gtag('config', 'G-0EG1TBQ0BQ');
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -765,12 +765,12 @@ function generateListPage(articles) {
 <html lang="${pageLang}">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XPF757JKE"></script>
+  <script src="https://www.googletagmanager.com/gtag/js?id=G-0EG1TBQ0BQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-2XPF757JKE');
+    gtag('config', 'G-0EG1TBQ0BQ');
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
