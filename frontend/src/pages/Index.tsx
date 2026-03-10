@@ -548,11 +548,13 @@ export default function Index() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <img
-              src="/how it works.png"
-              alt="Social media growth visualization"
-              className="w-full rounded-lg mb-6"
-            />
+            <div className="w-full aspect-[21/9] max-h-[220px] rounded-lg overflow-hidden mb-6 bg-zinc-800">
+              <img
+                src="/how it works.png"
+                alt="Social media growth visualization"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
             <h3 className="text-3xl font-bold mb-4 text-center">{t('services.howItWorks')}</h3>
             <motion.div
               className="grid md:grid-cols-3 gap-6 text-center"
