@@ -768,7 +768,7 @@ export default function Index() {
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-slate-100 transition-colors duration-300">{t('pricing.starter')}</h3>
                   <p className="text-sm text-gray-400 mb-6">{t('pricing.starterDesc')}</p>
                   <div className="mb-8">
-                    <span className="text-4xl font-black text-white">$99</span>
+                    <span className="text-4xl font-black text-white">€99</span>
                     <span className="text-gray-400 text-sm">{t('pricing.month', '/month')}</span>
                   </div>
                 </div>
@@ -841,7 +841,7 @@ export default function Index() {
                   <h3 className="text-xl font-bold mb-2 text-white">{t('pricing.pro')}</h3>
                   <p className="text-sm text-gray-400 mb-6">{t('pricing.proDesc')}</p>
                   <div className="mb-8">
-                    <span className="text-4xl font-black text-red-500">$249</span>
+                    <span className="text-4xl font-black text-red-500">€249</span>
                     <span className="text-gray-400 text-sm">{t('pricing.month', '/month')}</span>
                   </div>
                 </div>
@@ -926,7 +926,7 @@ export default function Index() {
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-50 transition-colors duration-300">{t('pricing.elite')}</h3>
                   <p className="text-sm text-gray-400 mb-6">{t('pricing.eliteDesc')}</p>
                   <div className="mb-8">
-                    <span className="text-4xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">$399</span>
+                    <span className="text-4xl font-black bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">€399</span>
                     <span className="text-gray-400 text-sm">{t('pricing.month', '/month')}</span>
                   </div>
                 </div>
@@ -1170,7 +1170,7 @@ export default function Index() {
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-2xl font-bold">Monthly Subscription</h3>
                     <div className="text-right">
-                      <div className="text-3xl font-black text-red-600">$299</div>
+                      <div className="text-3xl font-black text-red-600">€299</div>
                       <div className="text-sm text-gray-400">per month</div>
                     </div>
                   </div>

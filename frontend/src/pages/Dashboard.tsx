@@ -351,7 +351,7 @@ const Dashboard = () => {
                                         <div className="relative flex flex-col flex-1">
                                             <div className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-800 text-gray-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4">{t('pricing.starterTitle', 'Starter')}</div>
                                             <div className="mb-1">
-                                                <span className="text-4xl font-black text-white">$99</span>
+                                                <span className="text-4xl font-black text-white">€99</span>
                                                 <span className="text-gray-500 text-sm ml-1">{t('pricing.month', '/month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.starterDesc', 'Perfect for rising athletes')}</p>
@@ -384,7 +384,7 @@ const Dashboard = () => {
                                             </div>
                                             <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs font-semibold uppercase tracking-wider w-fit mb-4 mt-2">{t('pricing.proTitle', 'Pro')}</div>
                                             <div className="mb-1">
-                                                <span className="text-4xl font-black text-red-500">$249</span>
+                                                <span className="text-4xl font-black text-red-500">€249</span>
                                                 <span className="text-gray-500 text-sm ml-1">{t('pricing.month', '/month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.proDesc', 'For athletes who want to go pro')}</p>
@@ -416,7 +416,7 @@ const Dashboard = () => {
                                                 <span className="text-yellow-400 text-lg">★</span>
                                             </div>
                                             <div className="mb-1">
-                                                <span className="text-4xl font-black text-yellow-400">$399</span>
+                                                <span className="text-4xl font-black text-yellow-400">€399</span>
                                                 <span className="text-gray-500 text-sm ml-1">{t('pricing.month', '/month')}</span>
                                             </div>
                                             <p className="text-gray-400 text-sm mb-5">{t('pricing.eliteDesc', 'Maximum reach and visibility')}</p>
