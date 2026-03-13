@@ -232,32 +232,35 @@ const Register = () => {
                                         )} />
                                     </div>
 
-                                    {/* Row 3: Phone + Instagram */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <FormField control={form.control} name="phone" render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.phone', 'Phone Number')} <span className="text-red-500">*</span></FormLabel>
-                                                <FormControl><Input type="tel" placeholder="+1 (555) 000-0000" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
-                                                <FormMessage className="text-red-400 text-xs" />
-                                            </FormItem>
-                                        )} />
-                                        <FormField control={form.control} name="instagram" render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.instagram', 'Instagram Handle')} <span className="text-red-500">*</span></FormLabel>
-                                                <FormControl><Input placeholder="@yourhandle" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
-                                                <FormMessage className="text-red-400 text-xs" />
-                                            </FormItem>
-                                        )} />
-                                    </div>
-
-                                    {/* Row 4: TikTok */}
-                                    <FormField control={form.control} name="tiktok" render={({ field }) => (
+                                    {/* Row 3: Phone */}
+                                    <FormField control={form.control} name="phone" render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.tiktok', 'TikTok Handle')} <span className="text-red-500">*</span></FormLabel>
-                                            <FormControl><Input placeholder="@yourhandle" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
+                                            <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.phone', 'Phone Number')} <span className="text-red-500">*</span></FormLabel>
+                                            <FormControl><Input type="tel" placeholder="+1 (555) 000-0000" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
                                             <FormMessage className="text-red-400 text-xs" />
                                         </FormItem>
                                     )} />
+
+                                    {/* Row 4: Instagram + TikTok (at least one required) */}
+                                    <div className="space-y-3">
+                                        <p className="text-gray-400 text-xs">{t('registration.socialNote', 'Provide at least one social media handle (Instagram or TikTok)')}</p>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <FormField control={form.control} name="instagram" render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.instagram', 'Instagram Handle')}</FormLabel>
+                                                    <FormControl><Input placeholder="@yourhandle" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
+                                                    <FormMessage className="text-red-400 text-xs" />
+                                                </FormItem>
+                                            )} />
+                                            <FormField control={form.control} name="tiktok" render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel className="text-gray-200 text-sm font-medium">{t('registration.tiktok', 'TikTok Handle')}</FormLabel>
+                                                    <FormControl><Input placeholder="@yourhandle" className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-red-600 h-11" {...field} /></FormControl>
+                                                    <FormMessage className="text-red-400 text-xs" />
+                                                </FormItem>
+                                            )} />
+                                        </div>
+                                    </div>
 
                                     {/* Row 5: Terms */}
                                     <FormField control={form.control} name="termsAccepted" render={({ field }) => (

@@ -6,11 +6,14 @@ export const registerSchema = z.object({
     name: z.string().min(2),
     phone: z.string().min(1, 'Phone number is required'),
     sport: z.string().min(1, 'Please select your primary sport'),
-    instagram: z.string().min(1, 'Instagram handle is required'),
-    tiktok: z.string().min(1, 'TikTok handle is required'),
+    instagram: z.string().optional(),
+    tiktok: z.string().optional(),
     termsAccepted: z.boolean().refine((val) => val === true, {
         message: 'You must accept the terms and conditions',
     }),
+}).refine((data) => (data.instagram && data.instagram.length > 0) || (data.tiktok && data.tiktok.length > 0), {
+    message: 'Please provide at least one social media handle (Instagram or TikTok)',
+    path: ['instagram'],
 });
 
 export type RegisterData = z.infer<typeof registerSchema>;
