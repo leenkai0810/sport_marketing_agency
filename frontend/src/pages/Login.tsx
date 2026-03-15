@@ -182,7 +182,7 @@ const Login = () => {
                     </div>
 
                     <div className="mt-8 flex items-center justify-center gap-6">
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-500 hover:bg-zinc-800 transition-all duration-300 group">
+                        <a href="https://www.instagram.com/globa_lmediasports/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-500 hover:bg-zinc-800 transition-all duration-300 group">
                             <FaInstagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
                         </a>
                         <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-red-500 hover:bg-zinc-800 transition-all duration-300 group">
