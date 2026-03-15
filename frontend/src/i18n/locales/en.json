@@ -65,14 +65,14 @@
     "trustPayment": "Trusted payment processing",
     "starterFeatures": {
       "setup": "TikTok & Instagram account setup",
-      "videos": "2 edited videos and 2 stories/month",
+      "videos": "4 edited videos and 4 stories/month",
       "strategy": "Basic content strategy",
       "report": "Monthly performance report",
       "support": "Email support"
     },
     "proFeatures": {
       "everything": "Everything in Starter",
-      "videos": "5 edited videos and 5 stories/month",
+      "videos": "8 edited videos and 8 stories/month",
       "strategy": "Advanced content strategy",
       "partnerships": "Brand partnership outreach",
       "reports": "Monthly performance reports",
@@ -82,7 +82,7 @@
     },
     "eliteFeatures": {
       "everything": "Everything in Pro",
-      "unlimited": "10 videos and 10 stories/month",
+      "unlimited": "12 videos and 12 stories/month",
       "manager": "Dedicated account manager",
       "connections": "Direct team/brand connections",
       "daily": "Daily content posting",

@@ -65,14 +65,14 @@
     "trustPayment": "Traitement de paiement sécurisé",
     "starterFeatures": {
       "setup": "Configuration des comptes TikTok et Instagram",
-      "videos": "2 vidéos éditées et 2 stories/mois",
+      "videos": "4 vidéos éditées et 4 stories/mois",
       "strategy": "Stratégie de contenu de base",
       "report": "Rapport de performance mensuel",
       "support": "Support par email"
     },
     "proFeatures": {
       "everything": "Tout du plan Débutant",
-      "videos": "5 vidéos éditées et 5 stories/mois",
+      "videos": "8 vidéos éditées et 8 stories/mois",
       "strategy": "Stratégie de contenu avancée",
       "partnerships": "Prospection de partenariats de marque",
       "reports": "Rapports de performance mensuels",
@@ -82,7 +82,7 @@
     },
     "eliteFeatures": {
       "everything": "Tout du plan Pro",
-      "unlimited": "10 vidéos et 10 stories/mois",
+      "unlimited": "12 vidéos et 12 stories/mois",
       "manager": "Gestionnaire de compte dédié",
       "connections": "Connexions directes équipes/marques",
       "daily": "Publication de contenu quotidienne",

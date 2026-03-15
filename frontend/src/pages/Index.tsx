@@ -780,7 +780,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.starterFeatures.videos', '2 edited videos and 2 stories/month')}</span>
+                    <span className="text-gray-300">{t('pricing.starterFeatures.videos', '4 edited videos and 4 stories/month')}</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
@@ -853,7 +853,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.proFeatures.videos', '5 edited videos and 5 stories/month')}</span>
+                    <span className="text-gray-300">{t('pricing.proFeatures.videos', '8 edited videos and 8 stories/month')}</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
@@ -938,7 +938,7 @@ export default function Index() {
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-300">{t('pricing.eliteFeatures.unlimited', '10 videos and 10 stories/month')}</span>
+                    <span className="text-gray-300">{t('pricing.eliteFeatures.unlimited', '12 videos and 12 stories/month')}</span>
                   </li>
                   <li className="flex items-start gap-2 text-sm">
                     <RiCheckboxCircleFill className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />

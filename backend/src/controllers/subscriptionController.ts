@@ -26,17 +26,17 @@ export const createCheckoutSession = async (req: AuthRequest, res: Response) => 
         const PLANS: Record<string, { name: string; description: string; amount: number }> = {
             starter: {
                 name: 'Global Media Sports — Starter',
-                description: 'TikTok & Instagram account setup, 2 professional edited videos/month, Basic content strategy, Monthly performance report, Email support',
+                description: 'TikTok & Instagram account setup, 4 professional edited videos and 4 stories/month, Basic content strategy, Monthly performance report, Email support',
                 amount: 9900, // €99
             },
             pro: {
                 name: 'Global Media Sports — Pro',
-                description: 'Everything in Starter + 5 professional edited videos/month, Advanced content strategy, Brand partnership outreach, Weekly performance reports, Priority support',
+                description: 'Everything in Starter + 8 professional edited videos and 8 stories/month, Advanced content strategy, Brand partnership outreach, Weekly performance reports, Priority support',
                 amount: 24900, // €249
             },
             elite: {
                 name: 'Global Media Sports — Elite',
-                description: 'Everything in Pro + Unlimited video edits, Dedicated account manager, Direct team/brand connections, Daily content posting, 24/7 priority support',
+                description: 'Everything in Pro + 12 professional edited videos and 12 stories/month, Dedicated account manager, Direct team/brand connections, Daily content posting, 24/7 priority support',
                 amount: 39900, // €399
             },
         };
