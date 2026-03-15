@@ -349,7 +349,7 @@ export default function Index() {
           >
             <span className="text-sm font-medium">{t('hero.followUs')}</span>
             <a
-              href="https://www.instagram.com/globalmediasports.es?igsh=N3p4aXIzNHlheWNk"
+              href="https://www.instagram.com/globa_lmediasports?igsh=MWxwczJua2diMW9qaw=="
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-red-600 transition-colors"
@@ -1267,7 +1267,7 @@ export default function Index() {
               </p>
               <div className="flex items-center gap-3">
                 <a
-                  href="https://www.instagram.com/globalmediasports.es?igsh=N3p4aXIzNHlheWNk"
+                  href="https://www.instagram.com/globa_lmediasports?igsh=MWxwczJua2diMW9qaw=="
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 bg-zinc-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors group"
