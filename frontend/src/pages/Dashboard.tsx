@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { authApi } from '@/api/auth';
-import { videoApi } from '@/api/video';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { subscriptionApi } from '@/api/subscription';
 import { userApi } from '@/api/user';
@@ -31,14 +29,7 @@ const Dashboard = () => {
     const { t } = useTranslation();
     const [user, setUser] = useState<any>(null);
     const [videos, setVideos] = useState<any[]>([]);
-    const [isUploading, setIsUploading] = useState(false);
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [caption, setCaption] = useState('');
-    const [platform, setPlatform] = useState('Instagram');
     const [activeTab, setActiveTab] = useState('overview');
-    const fileInputRef = useRef<HTMLInputElement>(null);
-
-    const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
     const API_URL = import.meta.env.VITE_API_URL || '';
 
     useEffect(() => {
@@ -78,6 +69,9 @@ const Dashboard = () => {
 
     const fetchVideos = async () => {
         try {
+            // Keep video history visibility (uploads are not done via this page anymore).
+            // If the backend has no videos, this will simply render an empty state.
+            const { videoApi } = await import('@/api/video');
             const data = await videoApi.getMyVideos();
             setVideos(data);
         } catch (error) {
@@ -88,43 +82,6 @@ const Dashboard = () => {
     const handleLogout = () => {
         authApi.logout();
         navigate('/login');
-    };
-
-    const handleFileSelect = (file: File | null) => {
-        if (!file) return;
-        if (!file.type.startsWith('video/')) {
-            toast.error(t('dashboard.videoOnly', 'Only video files are allowed'));
-            return;
-        }
-        if (file.size > MAX_FILE_SIZE) {
-            toast.error(t('dashboard.fileTooLarge', 'File must be under 100MB'));
-            return;
-        }
-        setSelectedFile(file);
-    };
-
-    const handleUpload = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!selectedFile) {
-            toast.error(t('dashboard.uploadFirst', 'Please select a video first'));
-            return;
-        }
-
-        setIsUploading(true);
-        try {
-            await videoApi.uploadVideo({ file: selectedFile, caption, platform });
-            toast.success(t('dashboard.uploadSuccess', 'Video uploaded successfully!'));
-            setSelectedFile(null);
-            setCaption('');
-            if (fileInputRef.current) fileInputRef.current.value = '';
-            fetchVideos();
-        } catch (error: any) {
-            console.error(error);
-            const errorMessage = error.response?.data?.message || t('dashboard.uploadFailed', 'Failed to upload video');
-            toast.error(errorMessage);
-        } finally {
-            setIsUploading(false);
-        }
     };
 
     const handleSubscribe = async (plan: string = 'starter') => {
@@ -192,12 +149,6 @@ const Dashboard = () => {
                             {t('dashboard.overview', 'Overview')}
                         </TabsTrigger>
                         <TabsTrigger
-                            value="upload"
-                            className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-gray-400 rounded-lg px-5 py-2 text-sm font-medium transition-all"
-                        >
-                            {t('dashboard.upload', 'Upload Video')}
-                        </TabsTrigger>
-                        <TabsTrigger
                             value="profile"
                             className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-gray-400 rounded-lg px-5 py-2 text-sm font-medium transition-all"
                         >
@@ -207,128 +158,6 @@ const Dashboard = () => {
 
                     {/* ── Overview Tab ── */}
                     <TabsContent value="overview" className="space-y-8">
-                        {/* Stat Cards */}
-                        <motion.div
-                            className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
-                            variants={staggerContainer}
-                            initial="hidden"
-                            animate="visible"
-                        >
-                            {/* Subscription Status Card */}
-                            <motion.div variants={staggerItem} className="group relative">
-                                <div className="absolute -inset-[1px] bg-gradient-to-br from-red-600/30 to-zinc-700/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 h-full flex flex-col">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <div className="w-10 h-10 bg-red-600/20 rounded-xl flex items-center justify-center">
-                                            <CreditCard className="w-5 h-5 text-red-500" />
-                                        </div>
-                                        <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">{t('dashboard.subStatus', 'Subscription Status')}</span>
-                                    </div>
-                                    <div className={`text-xl font-bold flex-1 ${isPremium ? 'text-red-400' : 'text-gray-300'}`}>
-                                        {isPremium ? t('dashboard.activePrem', 'Active (Premium)') : t('dashboard.inactiveFree', 'Inactive (Free)')}
-                                    </div>
-                                    {!isPremium && (
-                                        <Button
-                                            onClick={() => handleSubscribe('starter')}
-                                            size="sm"
-                                            className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold"
-                                        >
-                                            {t('dashboard.upgradeBtn', 'Upgrade to Premium')}
-                                        </Button>
-                                    )}
-                                </div>
-                            </motion.div>
-
-                            {/* Videos count card */}
-                            <motion.div variants={staggerItem} className="group relative">
-                                <div className="absolute -inset-[1px] bg-gradient-to-br from-red-600/30 to-zinc-700/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 h-full flex flex-col">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <div className="w-10 h-10 bg-red-600/20 rounded-xl flex items-center justify-center">
-                                            <Video className="w-5 h-5 text-red-500" />
-                                        </div>
-                                        <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">{t('dashboard.videosUploaded', 'Videos Uploaded')}</span>
-                                    </div>
-                                    <div className="text-4xl font-black text-white flex-1">{videos.length}</div>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-
-                        {/* Recent Videos */}
-                        <div>
-                            <h3 className="text-xl font-bold mb-5">{t('dashboard.recentVideos', 'Your Recent Videos')}</h3>
-                            {videos.length === 0 ? (
-                                <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-12 text-center">
-                                    <Video className="w-12 h-12 text-zinc-700 mx-auto mb-3" />
-                                    <p className="text-gray-500">{t('dashboard.noVideos', 'No videos uploaded yet.')}</p>
-                                </div>
-                            ) : (
-                                <motion.div
-                                    className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-                                    variants={staggerContainer}
-                                    initial="hidden"
-                                    animate="visible"
-                                >
-                                    {videos.map((video) => (
-                                        <motion.div key={video.id} variants={staggerItem} className="group relative">
-                                            <div className="absolute -inset-[1px] bg-gradient-to-br from-red-600/20 to-zinc-700/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                                            <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
-                                                {/* Platform badge */}
-                                                <div className="px-5 pt-5 pb-3 flex items-center justify-between">
-                                                    <div className="flex items-center gap-2 text-sm font-semibold">
-                                                        <span className="w-2 h-2 rounded-full bg-red-600 inline-block" />
-                                                        {video.platform}
-                                                    </div>
-                                                    <span className="text-xs text-gray-500">{new Date(video.createdAt).toLocaleDateString()}</span>
-                                                </div>
-                                                {/* Video */}
-                                                <div className="aspect-video bg-zinc-950 flex items-center justify-center overflow-hidden">
-                                                    {video.url ? (
-                                                        <video
-                                                            src={video.url.startsWith('http') ? video.url : `${getAPIBaseURL()}/api/uploads/${video.url}`}
-                                                            className="w-full h-full object-contain"
-                                                            controls
-                                                            preload="metadata"
-                                                        />
-                                                    ) : (
-                                                        <span className="text-gray-600 text-sm">{t('dashboard.videoUnavailable', 'Video Unavailable')}</span>
-                                                    )}
-                                                </div>
-                                                {/* Caption + status */}
-                                                <div className="px-5 py-4">
-                                                    <p className="text-sm text-gray-300 truncate mb-3">{video.caption || '—'}</p>
-                                                    {/* Pipeline progress */}
-                                                    <div className="flex items-center gap-1 mb-3">
-                                                        {['PENDING', 'EDITING', 'READY', 'PUBLISHED'].map((step, i) => {
-                                                            const stepOrder = ['PENDING', 'EDITING', 'READY', 'PUBLISHED'];
-                                                            const currentIdx = stepOrder.indexOf(video.status);
-                                                            const isActive = i <= currentIdx && video.status !== 'REJECTED';
-                                                            const colors = ['bg-amber-500', 'bg-blue-500', 'bg-green-500', 'bg-purple-500'];
-                                                            return (
-                                                                <div key={step} className="flex items-center gap-1 flex-1">
-                                                                    <div className={`h-1.5 flex-1 rounded-full transition-all ${isActive ? colors[i] : 'bg-zinc-800'}`} />
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                    <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${video.status === 'PUBLISHED' ? 'bg-purple-900/50 text-purple-400 border border-purple-800' :
-                                                        video.status === 'READY' ? 'bg-green-900/50 text-green-400 border border-green-800' :
-                                                            video.status === 'EDITING' ? 'bg-blue-900/50 text-blue-400 border border-blue-800' :
-                                                                video.status === 'REJECTED' ? 'bg-red-900/50 text-red-400 border border-red-800' :
-                                                                    'bg-amber-900/50 text-amber-400 border border-amber-800'
-                                                        }`}>
-                                                        {t(`status.${video.status.toLowerCase()}`, video.status)}
-                                                    </span>
-                                                    {video.editorNotes && (
-                                                        <p className="text-gray-500 text-xs mt-2">📝 {video.editorNotes}</p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-                            )}
-                        </div>
 
                         {/* ── Pricing Plans (non-premium only) ── */}
                         {!isPremium && (
@@ -367,7 +196,7 @@ const Dashboard = () => {
                                                 variant="outline"
                                                 className="w-full border-zinc-600 text-white hover:bg-zinc-800 hover:text-white hover:border-zinc-500 font-black tracking-wider uppercase py-5"
                                             >
-                                                {t('pricing.getStarted', 'Get Started')}
+                                                {t('nav.getStarted', 'Get Started')}
                                             </Button>
                                         </div>
                                     </motion.div>
@@ -399,7 +228,7 @@ const Dashboard = () => {
                                                 onClick={() => handleSubscribe('pro')}
                                                 className="w-full bg-red-600 hover:bg-red-700 text-white font-black tracking-wider uppercase py-5"
                                             >
-                                                {t('pricing.getStarted', 'Get Started')}
+                                                {t('nav.getStarted', 'Get Started')}
                                             </Button>
                                         </div>
                                     </motion.div>
@@ -431,7 +260,7 @@ const Dashboard = () => {
                                                 onClick={() => handleSubscribe('elite')}
                                                 className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-black tracking-wider uppercase py-5"
                                             >
-                                                {t('pricing.getStarted', 'Get Started')}
+                                                {t('nav.getStarted', 'Get Started')}
                                             </Button>
                                         </div>
                                     </motion.div>
@@ -439,130 +268,6 @@ const Dashboard = () => {
                                 </div>
                             </motion.div>
                         )}
-                    </TabsContent>
-
-                    {/* ── Upload Tab ── */}
-                    <TabsContent value="upload">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4 }}
-                        >
-                            <div className="relative max-w-xl">
-                                <div className="absolute -inset-[1px] bg-gradient-to-b from-red-600/40 via-zinc-700/10 to-zinc-700/10 rounded-2xl" />
-                                <div className="relative bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
-                                    <div className="px-8 pt-8 pb-4 border-b border-zinc-800">
-                                        <h2 className="text-xl font-bold">{t('dashboard.uploadContent', 'Upload Content')}</h2>
-                                        <p className="text-gray-400 text-sm mt-1">{t('dashboard.uploadDesc', 'Submit your sports highlights for review.')}</p>
-                                    </div>
-                                    <div className="p-8">
-                                        {!isPremium ? (
-                                            <div className="flex flex-col items-center justify-center py-12 space-y-5 text-center">
-                                                <div className="w-16 h-16 bg-zinc-800 rounded-2xl flex items-center justify-center text-3xl">🔒</div>
-                                                <div>
-                                                    <h3 className="text-lg font-bold mb-2">{t('dashboard.premiumRequired', 'Premium Required')}</h3>
-                                                    <p className="text-gray-500 text-sm max-w-xs mx-auto leading-relaxed">
-                                                        {t('dashboard.premiumRequiredDesc', 'Video uploads are available for premium members only. Upgrade your plan to start submitting your sports highlights.')}
-                                                    </p>
-                                                </div>
-                                                <Button
-                                                    onClick={() => {
-                                                        setActiveTab('overview');
-                                                        setTimeout(() => {
-                                                            document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' });
-                                                        }, 100);
-                                                    }}
-                                                    className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-5 text-sm transition-all hover:shadow-lg hover:shadow-red-600/30"
-                                                >
-                                                    {t('dashboard.upgradeBtn', 'Upgrade to Premium')}
-                                                </Button>
-                                            </div>
-                                        ) : (
-                                            <form onSubmit={handleUpload} className="space-y-6">
-                                                <div className="space-y-2">
-                                                    <Label className="text-gray-200 text-sm font-medium">{t('dashboard.platform', 'Platform')}</Label>
-                                                    <Select value={platform} onValueChange={setPlatform}>
-                                                        <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white h-11">
-                                                            <SelectValue placeholder={t('dashboard.selectPlatform', 'Select platform')} />
-                                                        </SelectTrigger>
-                                                        <SelectContent className="bg-zinc-800 border-zinc-700">
-                                                            <SelectItem value="Instagram" className="text-white hover:bg-zinc-700">Instagram</SelectItem>
-                                                            <SelectItem value="TikTok" className="text-white hover:bg-zinc-700">TikTok</SelectItem>
-                                                            <SelectItem value="Facebook" className="text-white hover:bg-zinc-700">Facebook</SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </div>
-
-                                                <div className="space-y-2">
-                                                    <Label className="text-gray-200 text-sm font-medium">{t('dashboard.caption', 'Caption/Description')}</Label>
-                                                    <Input
-                                                        placeholder={t('dashboard.descHighlight', 'Describe your highlight...')}
-                                                        value={caption}
-                                                        onChange={(e) => setCaption(e.target.value)}
-                                                        className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 h-11"
-                                                    />
-                                                </div>
-
-                                                <div className="space-y-2">
-                                                    <Label className="text-gray-200 text-sm font-medium">{t('dashboard.videoFile', 'Video File')}</Label>
-                                                    <div
-                                                        className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 ${selectedFile ? 'border-red-600 bg-red-600/5' : 'border-zinc-700 hover:border-red-600/50 bg-zinc-800/30'}`}
-                                                        onClick={() => fileInputRef.current?.click()}
-                                                        onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
-                                                        onDrop={(e) => {
-                                                            e.preventDefault();
-                                                            e.stopPropagation();
-                                                            const file = e.dataTransfer.files[0];
-                                                            handleFileSelect(file);
-                                                        }}
-                                                    >
-                                                        <input
-                                                            ref={fileInputRef}
-                                                            type="file"
-                                                            accept="video/*"
-                                                            className="hidden"
-                                                            onChange={(e) => handleFileSelect(e.target.files?.[0] || null)}
-                                                        />
-                                                        {selectedFile ? (
-                                                            <div className="space-y-2">
-                                                                <div className="w-12 h-12 bg-red-600/20 rounded-xl flex items-center justify-center mx-auto">
-                                                                    <Video className="w-6 h-6 text-red-500" />
-                                                                </div>
-                                                                <p className="text-white font-medium text-sm">{selectedFile.name}</p>
-                                                                <p className="text-gray-500 text-xs">{(selectedFile.size / (1024 * 1024)).toFixed(1)} MB</p>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={(e) => { e.stopPropagation(); setSelectedFile(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
-                                                                    className="text-red-500 text-xs hover:text-red-400 transition-colors"
-                                                                >
-                                                                    {t('dashboard.removeFile', 'Remove file')}
-                                                                </button>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="space-y-2">
-                                                                <div className="w-12 h-12 bg-zinc-800 rounded-xl flex items-center justify-center mx-auto">
-                                                                    <Video className="w-6 h-6 text-zinc-600" />
-                                                                </div>
-                                                                <p className="text-gray-400 text-sm">{t('dashboard.dropVideo', 'Click or drag a video file here')}</p>
-                                                                <p className="text-zinc-600 text-xs">{t('dashboard.maxSize', 'Max 100MB • Video files only')}</p>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </div>
-
-                                                <Button
-                                                    type="submit"
-                                                    disabled={isUploading || !selectedFile}
-                                                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-5 text-sm transition-all duration-300 hover:shadow-lg hover:shadow-red-600/30"
-                                                >
-                                                    {isUploading ? t('dashboard.uploading', 'Uploading...') : t('dashboard.submitReview', 'Submit for Review')}
-                                                </Button>
-                                            </form>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
                     </TabsContent>
 
                     {/* ── Profile Tab ── */}

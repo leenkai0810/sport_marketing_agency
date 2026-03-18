@@ -25,7 +25,6 @@ const Contract = () => {
         { title: t('contract.clause5Title'), desc: t('contract.clause5Desc') },
         { title: t('contract.clause6Title'), desc: t('contract.clause6Desc') },
         { title: t('contract.clause7Title'), desc: t('contract.clause7Desc') },
-        { title: t('contract.clause8Title'), desc: t('contract.clause8Desc') },
     ];
 
     const handleDownloadPDF = () => {
